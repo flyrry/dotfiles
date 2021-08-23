@@ -4,13 +4,21 @@ source $HOME/.config/nvim/config/settings.vim
 source $HOME/.config/nvim/config/mappings.vim
 
 " plugin configs
-source $HOME/.config/nvim/config/plugin/airline.vim
-source $HOME/.config/nvim/config/plugin/tmuxline.vim
-source $HOME/.config/nvim/config/plugin/goyo-limelight.vim
-source $HOME/.config/nvim/config/plugin/fugitive.vim
+source  $HOME/.config/nvim/config/plugin/airline.vim
+"source $HOME/.config/nvim/config/plugin/clap.vim
+source  $HOME/.config/nvim/config/plugin/fugitive.vim
 "source $HOME/.config/nvim/config/plugin/fzf.vim
-luafile $HOME/.config/nvim/config/plugin/treesitter.lua
 luafile $HOME/.config/nvim/config/plugin/gitsigns.lua
+source  $HOME/.config/nvim/config/plugin/goyo-limelight.vim
+luafile $HOME/.config/nvim/config/plugin/lspconfig.lua
+luafile $HOME/.config/nvim/config/plugin/lspsaga.lua
+"source $HOME/.config/nvim/config/plugin/lsputils.vim
+source  $HOME/.config/nvim/config/plugin/nerdtree.vim
+"source $HOME/.config/nvim/config/plugin/nvimtree.vim
+source  $HOME/.config/nvim/config/plugin/startify.vim
+luafile $HOME/.config/nvim/config/plugin/telescope.lua
+source  $HOME/.config/nvim/config/plugin/tmuxline.vim
+luafile $HOME/.config/nvim/config/plugin/treesitter.lua
 luafile $HOME/.config/nvim/config/plugin/whichkey.lua
 
 "{{{
@@ -33,8 +41,5 @@ luafile $HOME/.config/nvim/config/plugin/whichkey.lua
 " ,tl # list TODOs in location window (:lcl closes it)
 "
 "}}}
-
-" ctrl-p like fuzzy search (should be faster)
-"set rtp+=/usr/local/opt/fzf
 
 " vim: foldmethod=marker:foldenable:

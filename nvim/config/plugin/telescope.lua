@@ -1,15 +1,15 @@
-if !exists('g:loaded_telescope') | finish | endif
+require("which-key").register({
+    ["<leader>f"] = {
+        b = {':Telescope buffers<CR>', "Buffers"},
+        o = {':Telescope oldfiles<CR>', "History"},
+        m = {':Telescope git_status<CR>', "Git Changes"},
+        s = {':Telescope live_grep<CR>', "Find String"},
+        w = {':Telescope grep_string<CR>', "Find Word"},
+    },
+    ["<C-p>"] = {':Telescope find_files<CR>', "Find Files"},
+    ["gr"] = {':Telescope lsp_references<CR>', "Find References"},
+})
 
-nnoremap <silent><leader>fb :Telescope buffers<CR>
-nnoremap <silent><leader>fo :Telescope oldfiles<CR>
-nnoremap <silent><leader>fm :Telescope git_status<CR>
-nnoremap <silent><C-p> :Telescope find_files<CR>
-
-nnoremap <silent>gr :Telescope lsp_references<CR>
-nnoremap <silent><leader>fs :Telescope live_grep<CR>
-nnoremap <silent><leader>fw :Telescope grep_string<CR>
-
-lua << EOF
 local actions = require('telescope.actions')
 require('telescope').setup{
   defaults = {
@@ -49,4 +49,3 @@ require('telescope').setup{
     }
   }
 }
-EOF
