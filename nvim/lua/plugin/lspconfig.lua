@@ -1,6 +1,3 @@
-if !exists('g:lspconfig') | finish | endif
-
-lua << EOF
 --vim.lsp.set_log_level("debug")
 local nvim_lsp = require('lspconfig')
 local protocol = require'vim.lsp.protocol'
@@ -39,9 +36,6 @@ local on_attach = function(client, bufnr)
     --     vim.api.nvim_command [[autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_seq_sync()]]
     --     vim.api.nvim_command [[augroup END]]
     -- end
-
-    -- Enable completion
-    require'completion'.on_attach(client, bufnr)
 end
 
 nvim_lsp.tsserver.setup {
@@ -108,6 +102,4 @@ vim.lsp.handlers["textDocument/publishDiagnostics"] = vim.lsp.with(
         update_in_insert = true,
     }
 )
-EOF
-" always show column for signs
-set signcolumn=yes
+vim.opt.signcolumn = "yes"

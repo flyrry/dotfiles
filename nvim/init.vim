@@ -1,18 +1,7 @@
 " always source these
-"source $HOME/.config/nvim/config/plugins.vim
 luafile $HOME/.config/nvim/lua/plugins.lua
 source $HOME/.config/nvim/config/settings.vim
 source $HOME/.config/nvim/config/mappings.vim
-
-" plugin configs
-" source $HOME/.config/nvim/config/plugin/airline.vim
-" source $HOME/.config/nvim/config/plugin/tmuxline.vim
-" source $HOME/.config/nvim/config/plugin/goyo-limelight.vim
-" source $HOME/.config/nvim/config/plugin/fugitive.vim
-" "source $HOME/.config/nvim/config/plugin/fzf.vim
-" luafile $HOME/.config/nvim/config/plugin/treesitter.lua
-" luafile $HOME/.config/nvim/config/plugin/gitsigns.lua
-" luafile $HOME/.config/nvim/config/plugin/whichkey.lua
 
 "{{{
 " === CHEAT SHEET ===
@@ -36,6 +25,6 @@ source $HOME/.config/nvim/config/mappings.vim
 "}}}
 
 " ctrl-p like fuzzy search (should be faster)
-set rtp+=/usr/local/opt/fzf
+"set rtp+=/usr/local/opt/fzf
 
 " vim: foldmethod=marker:foldenable:

@@ -1,25 +1,26 @@
-if !exists('g:loaded_tree') | finish | endif
+require("which-key").register({
+    ["<leader>n"] = {
+        t = {':NvimTreeToggle<CR>', "Toggle NvimTree"},
+        r = {':NvimTreeRefresh<CR>', "Refresh NvimTree"},
+        f = {':NvimTreeFindFile<CR>', "Find in NvimTree"},
+    }
+})
 
-nnoremap <silent><leader>nt :NvimTreeToggle<CR>
-nnoremap <silent><leader>nr :NvimTreeRefresh<CR>
-nnoremap <silent><leader>nf :NvimTreeFindFile<CR>
+vim.g.nvim_tree_width = 42
+vim.g.nvim_tree_auto_close = true
+vim.g.nvim_tree_ignore = {'.git', 'node_modules', '.cache'}
+vim.g.nvim_tree_gitignore = true
+--vim.g.nvim_tree_show_icons = {
+--    ["git"] = false,
+--    ["folders"] = true,
+--    ["files"] = true,
+--    ["folder_arrows"] = true,
+--}
 
-let g:nvim_tree_width = 42
-"let g:nvim_tree_auto_close = 1 "0 by default, closes the tree when it's the last window
-au WinClosed * lua require'nvim-tree'.on_leave()
-let g:nvim_tree_ignore = [ '.git', 'node_modules', '.cache' ] "empty by default
-let g:nvim_tree_gitignore = 1
-let g:nvim_tree_show_icons = {
-    \ 'git': 0,
-    \ 'folders': 1,
-    \ 'files': 1,
-    \ 'folder_arrows': 1,
-    \ }
+--vim.cmd([[au WinClosed * lua require'nvim-tree'.on_leave()]])
+--  local tree_cb = require'nvim-tree.config'.nvim_tree_callback
 
-lua <<EOF
-  local tree_cb = require'nvim-tree.config'.nvim_tree_callback
-
-  vim.g.nvim_tree_bindings = {
+--  vim.g.nvim_tree_bindings = {
 --    { key = {"<CR>", "o"}, cb = tree_cb("edit") },
 --    { key = {"<C-]>"},     cb = tree_cb("cd") },
 --    { key = "<C-v>",       cb = tree_cb("vsplit") },
@@ -51,5 +52,4 @@ lua <<EOF
 --    { key = "-",           cb = tree_cb("dir_up") },
 --    { key = "q",           cb = tree_cb("close") },
 --    { key = "g?",          cb = tree_cb("toggle_help") },
-  }
-EOF
+--  }
