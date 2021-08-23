@@ -13,8 +13,8 @@ source  $HOME/.config/nvim/config/plugin/goyo-limelight.vim
 luafile $HOME/.config/nvim/config/plugin/lspconfig.lua
 luafile $HOME/.config/nvim/config/plugin/lspsaga.lua
 "source $HOME/.config/nvim/config/plugin/lsputils.vim
-source  $HOME/.config/nvim/config/plugin/nerdtree.vim
-"source $HOME/.config/nvim/config/plugin/nvimtree.vim
+"source  $HOME/.config/nvim/config/plugin/nerdtree.vim
+source $HOME/.config/nvim/config/plugin/nvimtree.vim
 source  $HOME/.config/nvim/config/plugin/startify.vim
 luafile $HOME/.config/nvim/config/plugin/telescope.lua
 source  $HOME/.config/nvim/config/plugin/tmuxline.vim

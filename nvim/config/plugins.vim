@@ -19,8 +19,7 @@ Plug 'folke/which-key.nvim'
 Plug 'neovim/nvim-lspconfig'
 Plug 'glepnir/lspsaga.nvim'
 Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
-Plug 'scrooloose/nerdtree', {'on': ['NERDTreeToggle', 'NERDTreeFind'] }
-Plug 'scrooloose/nerdtree'
+"Plug 'scrooloose/nerdtree', {'on': ['NERDTreeToggle', 'NERDTreeFind'] }
 Plug 'tpope/vim-fugitive'
 Plug 'tpope/vim-rhubarb'
 "Plug 'junegunn/fzf.vim'
@@ -40,8 +39,8 @@ Plug 'lewis6991/gitsigns.nvim'
 "Plug 'RishabhRD/popfix'
 "Plug 'RishabhRD/nvim-lsputils'
 "
-"Plug 'kyazdani42/nvim-web-devicons' " for file icons
-"Plug 'kyazdani42/nvim-tree.lua'
+Plug 'kyazdani42/nvim-web-devicons' " for file icons
+Plug 'kyazdani42/nvim-tree.lua'
 "
 Plug 'mhinz/vim-startify'
 

@@ -1,5 +1,3 @@
-if !exists('g:loaded_tree') | finish | endif
-
 nnoremap <silent><leader>nt :NvimTreeToggle<CR>
 nnoremap <silent><leader>nr :NvimTreeRefresh<CR>
 nnoremap <silent><leader>nf :NvimTreeFindFile<CR>
