@@ -3,18 +3,22 @@ local nvim_lsp = require('lspconfig')
 local protocol = require'vim.lsp.protocol'
 
 local on_attach = function(client, bufnr)
-    local function buf_set_keymap(...) vim.api.nvim_buf_set_keymap(bufnr, ...) end
-    local function buf_set_option(...) vim.api.nvim_buf_set_option(bufnr, ...) end
 
-    -- Mappings.
-    local opts = { noremap=true, silent=true }
+    require("which-key").register({
+        g = {
+            d = {':lua vim.lsp.buf.definition()<CR>', 'Definition'},
+            D = {':lua vim.lsp.buf.declaration()<CR>', 'Declaration'},
+            t = {':lua vim.lsp.buf.type_definition()<CR>', 'Type definition'},
+            i = {':lua vim.lsp.buf.implementation()<CR>', 'Implementation'},
+            -- using Lspsaga or Telescope for these
+            --r = {':lua vim.lsp.buf.references()<CR>', 'References'},
+            --buf_set_keymap("n", "<space>f", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
+        }
+    }, {
+        buffer = bufnr
+    })
 
     -- See `:help vim.lsp.*` for documentation on any of the below functions
-    buf_set_keymap('n', 'gd', '<cmd>lua vim.lsp.buf.definition()<CR>', opts)
-    buf_set_keymap('n', 'gD', '<Cmd>lua vim.lsp.buf.declaration()<CR>', opts)
-    buf_set_keymap('n', 'gy', '<cmd>lua vim.lsp.buf.type_definition()<CR>', opts)
-    buf_set_keymap('n', 'gi', '<cmd>lua vim.lsp.buf.implementation()<CR>', opts)
-    buf_set_keymap("n", "<space>f", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
     --buf_set_keymap('n', '<space>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
     --buf_set_keymap('n', '<space>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
     --buf_set_keymap('n', '<space>wl', '<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>', opts)
@@ -39,7 +43,7 @@ local on_attach = function(client, bufnr)
 end
 
 nvim_lsp.tsserver.setup {
-    filetypes = { "typescript", "typescriptreact", "typescript.tsx" },
+    --filetypes = { "typescript", "typescriptreact", "typescript.tsx" },
     on_attach = function(client, bufnr)
         client.resolved_capabilities.document_formatting = false
         on_attach(client, bufnr)
