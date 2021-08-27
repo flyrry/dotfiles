@@ -77,6 +77,7 @@ require('packer').startup(function(use)
         'mhinz/vim-startify',
         config = function() require('plugin.startify') end
     }
+    use 'plasticboy/vim-markdown'
 
 -- themes
     use 'sainnhe/sonokai'
