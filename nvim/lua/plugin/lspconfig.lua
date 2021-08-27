@@ -18,6 +18,10 @@ local on_attach = function(client, bufnr)
         buffer = bufnr
     })
 
+    require("lsp_signature").on_attach({
+        hint_prefix = '',
+    })
+
     -- See `:help vim.lsp.*` for documentation on any of the below functions
     --buf_set_keymap('n', '<space>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
     --buf_set_keymap('n', '<space>wr', '<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>', opts)
@@ -32,18 +36,13 @@ local on_attach = function(client, bufnr)
     --buf_set_keymap('n', '<leader>do', '<cmd>lua vim.lsp.buf.code_action()<CR>', opts)
     --buf_set_keymap('n', 'K', '<cmd>lua vim.lsp.buf.hover()<CR>', opts)
     --buf_set_keymap('i', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
-
-    -- formatting
-    -- if client.resolved_capabilities.document_formatting then
-    --     vim.api.nvim_command [[augroup Format]]
-    --     vim.api.nvim_command [[autocmd! * <buffer>]]
-    --     vim.api.nvim_command [[autocmd BufWritePre <buffer> lua vim.lsp.buf.formatting_seq_sync()]]
-    --     vim.api.nvim_command [[augroup END]]
-    -- end
 end
 
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
+
 nvim_lsp.tsserver.setup {
-    --filetypes = { "typescript", "typescriptreact", "typescript.tsx" },
+    capabilities = capabilities,
     on_attach = function(client, bufnr)
         client.resolved_capabilities.document_formatting = false
         on_attach(client, bufnr)

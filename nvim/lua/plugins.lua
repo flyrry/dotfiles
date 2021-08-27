@@ -30,6 +30,16 @@ require('packer').startup(function(use)
         config = function() require('plugin.lspsaga') end
     }
     use {
+        'hrsh7th/nvim-cmp',
+        requires = {
+            'hrsh7th/cmp-buffer',
+            'hrsh7th/cmp-nvim-lsp',
+            'hrsh7th/cmp-nvim-lua'
+        },
+        config = function() require('plugin.nvim-cmp') end
+    }
+    use 'ray-x/lsp_signature.nvim'
+    use {
         'nvim-treesitter/nvim-treesitter',
         run = ':TSUpdate',
         config = function() require('plugin.treesitter') end
