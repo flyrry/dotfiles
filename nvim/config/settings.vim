@@ -110,3 +110,5 @@ set showmatch
 
 set backspace=indent,eol,start
 set cinoptions=l1,g0
+
+set grepprg=rg\ --vimgrep
