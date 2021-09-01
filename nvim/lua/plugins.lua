@@ -34,7 +34,8 @@ require('packer').startup(function(use)
         requires = {
             'hrsh7th/cmp-buffer',
             'hrsh7th/cmp-nvim-lsp',
-            'hrsh7th/cmp-nvim-lua'
+            'hrsh7th/cmp-nvim-lua',
+            'hrsh7th/cmp-path'
         },
         config = function() require('plugin.nvim-cmp') end
     }
@@ -78,6 +79,10 @@ require('packer').startup(function(use)
         config = function() require('plugin.startify') end
     }
     use 'plasticboy/vim-markdown'
+    use {
+        'kristijanhusak/orgmode.nvim',
+        config = function() require('plugin.orgmode') end
+    }
 
 -- themes
     use 'sainnhe/sonokai'
