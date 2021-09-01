@@ -70,11 +70,6 @@ require('packer').startup(function(use)
         config = function() require('plugin.telescope') end
     }
     use {
-        'lewis6991/gitsigns.nvim',
-        requires = {'nvim-lua/plenary.nvim'},
-        config = function() require('gitsigns').setup({current_line_blame = true}) end
-    }
-    use {
         'mhinz/vim-startify',
         config = function() require('plugin.startify') end
     }
@@ -94,6 +89,11 @@ require('packer').startup(function(use)
     --use 'tpope/vim-dispatch'
 
 -- retired
+    --use {
+    --    'lewis6991/gitsigns.nvim',
+    --    requires = {'nvim-lua/plenary.nvim'},
+    --    config = function() require('gitsigns').setup({current_line_blame = true}) end
+    --}
     --use {
     --    'junegunn/fzf.vim',
     --    config = function() require('plugin.fzf') end
