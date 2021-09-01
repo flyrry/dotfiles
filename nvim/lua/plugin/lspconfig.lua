@@ -12,8 +12,8 @@ local on_attach = function(client, bufnr)
             i = {':lua vim.lsp.buf.implementation()<CR>', 'Implementation'},
             -- using Lspsaga or Telescope for these
             --r = {':lua vim.lsp.buf.references()<CR>', 'References'},
-            --buf_set_keymap("n", "<space>f", "<cmd>lua vim.lsp.buf.formatting()<CR>", opts)
-        }
+        },
+        ["<space>f"] = {':lua vim.lsp.buf.formatting()<CR>', 'Format document'},
     }, {
         buffer = bufnr
     })
@@ -75,11 +75,19 @@ local linters = {
     }
 }
 local formatters = {
+    eslint = {command = "eslint_d", args = {"--stdin", "--stdin-filename", "%filename", "--fix-to-stdout"}},
     prettier = {command = "prettier", args = {"--stdin-filepath", "%filepath"}}
 }
 local formatFiletypes = {
-    typescript = "prettier",
-    typescriptreact = "prettier"
+    css = "prettier",
+    javascript = {"prettier", "eslint"},
+    javascriptreact = {"prettier", "eslint"},
+    json = "prettier",
+    scss = "prettier",
+    less = "prettier",
+    markdown = "prettier",
+    typescript = {"prettier", "eslint"},
+    typescriptreact = {"prettier", "eslint"},
 }
 nvim_lsp.diagnosticls.setup {
     on_attach = on_attach,
