@@ -87,6 +87,8 @@ require('packer').startup(function(use)
 
 -- to try
     --use 'tpope/vim-dispatch'
+    --use 'sindrets/diffview.nvim'
+    --use 'folke/trouble.nvim'
 
 -- retired
     --use {
