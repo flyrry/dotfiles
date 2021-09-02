@@ -1,7 +1,7 @@
 " always source these
 luafile $HOME/.config/nvim/lua/plugins.lua
+luafile $HOME/.config/nvim/lua/mappings.lua
 source $HOME/.config/nvim/config/settings.vim
-source $HOME/.config/nvim/config/mappings.vim
 
 "{{{
 " === CHEAT SHEET ===
