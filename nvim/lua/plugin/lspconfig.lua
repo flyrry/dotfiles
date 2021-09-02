@@ -10,10 +10,10 @@ local on_attach = function(client, bufnr)
             D = {':lua vim.lsp.buf.declaration()<CR>', 'Declaration'},
             t = {':lua vim.lsp.buf.type_definition()<CR>', 'Type definition'},
             i = {':lua vim.lsp.buf.implementation()<CR>', 'Implementation'},
+            f = {':lua vim.lsp.buf.formatting()<CR>', 'Format document'},
             -- using Lspsaga or Telescope for these
             --r = {':lua vim.lsp.buf.references()<CR>', 'References'},
         },
-        ["<space>f"] = {':lua vim.lsp.buf.formatting()<CR>', 'Format document'},
     }, {
         buffer = bufnr
     })
