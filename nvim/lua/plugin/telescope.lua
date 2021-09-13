@@ -42,10 +42,7 @@ require('telescope').setup{
       previewer = false
     },
     lsp_references = {
-      theme = "cursor",
-      layout_config = {
-        width = 0.9
-      }
+      theme = "ivy",
     }
   }
 }

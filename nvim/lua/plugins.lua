@@ -39,16 +39,10 @@ require('packer').startup(function(use)
         },
         config = function() require('plugin.nvim-cmp') end
     }
-    use 'ray-x/lsp_signature.nvim'
     use {
         'nvim-treesitter/nvim-treesitter',
         run = ':TSUpdate',
         config = function() require('plugin.treesitter') end
-    }
-    use {
-        'kyazdani42/nvim-tree.lua',
-        requires = 'kyazdani42/nvim-web-devicons',
-        config = function() require('plugin.nvimtree') end
     }
     use {
         'tpope/vim-fugitive',
@@ -91,6 +85,12 @@ require('packer').startup(function(use)
     --use 'folke/trouble.nvim'
 
 -- retired
+    --use 'ray-x/lsp_signature.nvim'
+    --use {
+    --    'kyazdani42/nvim-tree.lua',
+    --    requires = 'kyazdani42/nvim-web-devicons',
+    --    config = function() require('plugin.nvimtree') end
+    --}
     --use {
     --    'lewis6991/gitsigns.nvim',
     --    requires = {'nvim-lua/plenary.nvim'},

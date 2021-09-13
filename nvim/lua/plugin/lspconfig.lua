@@ -18,9 +18,9 @@ local on_attach = function(client, bufnr)
         buffer = bufnr
     })
 
-    require("lsp_signature").on_attach({
-        hint_prefix = '',
-    })
+    --require("lsp_signature").on_attach({
+    --    hint_prefix = '',
+    --})
 
     -- See `:help vim.lsp.*` for documentation on any of the below functions
     --buf_set_keymap('n', '<space>wa', '<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>', opts)
