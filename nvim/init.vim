@@ -28,3 +28,7 @@ source $HOME/.config/nvim/config/settings.vim
 "set rtp+=/usr/local/opt/fzf
 
 " vim: foldmethod=marker:foldenable:
+" split shortcuts
+nnoremap <silent><leader>v :vsplit<CR>
+nnoremap <silent><leader>s :split<CR>
+

@@ -5,15 +5,12 @@ require('which-key').register({
 
         ['/'] = {':nohlsearch<CR>', "Clear highlighted search terms"},
 
-        v = {':vsplit<CR>'},
-        s = {':split<CR>'},
-
         t = {
             l = {':lvim /\\CTODO/ % | lw<CR>', "List TODOs"},
             t = {':lvim /\\CTHEN/ % | lw<CR>', "List THENs"},
             f = {':exec ":lvim /".input("Search string: ")."/ % | lw"<CR>', "Find in buffer"},
-            c = {':s /- [TODO]/+/<CR>', "Mark TODO complete"},
-            C = {':s /- [TODO]/+/<CR>dd/DONE<CR>p', "Mark TODO complete and archive"},
+            c = {':s /- \\[TODO\\]/+/<CR>', "Mark TODO complete"},
+            C = {':s /- \\[TODO\\]/+/<CR>dd/DONE<CR>p', "Mark TODO complete and archive"},
         },
 
         i = {
@@ -29,4 +26,4 @@ require('which-key').register({
     ['<C-h>'] = {'<C-w>h'},
     ['<C-l>'] = {'<C-w>l'},
     S = {'"_diwP', "Replace"},
-})
+}, {silent=false})
