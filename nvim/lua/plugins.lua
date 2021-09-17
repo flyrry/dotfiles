@@ -30,19 +30,14 @@ require('packer').startup(function(use)
         config = function() require('plugin.lspsaga') end
     }
     use {
-        'hrsh7th/nvim-cmp',
-        requires = {
-            'hrsh7th/cmp-buffer',
-            'hrsh7th/cmp-nvim-lsp',
-            'hrsh7th/cmp-nvim-lua',
-            'hrsh7th/cmp-path'
-        },
-        config = function() require('plugin.nvim-cmp') end
-    }
-    use {
         'nvim-treesitter/nvim-treesitter',
         run = ':TSUpdate',
         config = function() require('plugin.treesitter') end
+    }
+    use {
+        'kyazdani42/nvim-tree.lua',
+        requires = 'kyazdani42/nvim-web-devicons',
+        config = function() require('plugin.nvimtree') end
     }
     use {
         'tpope/vim-fugitive',
@@ -87,9 +82,14 @@ require('packer').startup(function(use)
 -- retired
     --use 'ray-x/lsp_signature.nvim'
     --use {
-    --    'kyazdani42/nvim-tree.lua',
-    --    requires = 'kyazdani42/nvim-web-devicons',
-    --    config = function() require('plugin.nvimtree') end
+    --    'hrsh7th/nvim-cmp',
+    --    requires = {
+    --        'hrsh7th/cmp-nvim-lsp',
+    --        'hrsh7th/cmp-path'
+    --        --'hrsh7th/cmp-buffer',
+    --        --'hrsh7th/cmp-nvim-lua',
+    --    },
+    --    config = function() require('plugin.nvim-cmp') end
     --}
     --use {
     --    'lewis6991/gitsigns.nvim',

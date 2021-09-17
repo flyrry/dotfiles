@@ -39,7 +39,7 @@ local on_attach = function(client, bufnr)
 end
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
+--capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 
 nvim_lsp.tsserver.setup {
     capabilities = capabilities,
@@ -49,7 +49,10 @@ nvim_lsp.tsserver.setup {
     end
 }
 
-nvim_lsp.rust_analyzer.setup({ on_attach=on_attach })
+nvim_lsp.rust_analyzer.setup({
+    capabilities = capabilities,
+    on_attach=on_attach
+})
 
 local filetypes = {
     typescript = "eslint",
