@@ -84,7 +84,12 @@ require('packer').startup(function(use)
     --use 'folke/trouble.nvim'
 
 -- retired
+    ---- pop-up gets stuck sometimes
     --use 'ray-x/lsp_signature.nvim'
+
+    ---- multiple issues:
+    ---- 1. snippets error when trying to complete; I don't even have snippets
+    ---- 2. complete erases text or replaces with '0'
     --use {
     --    'hrsh7th/nvim-cmp',
     --    requires = {
@@ -95,11 +100,21 @@ require('packer').startup(function(use)
     --    },
     --    config = function() require('plugin.nvim-cmp') end
     --}
+
+    ---- errors in non-git controlled directories
     --use {
     --    'lewis6991/gitsigns.nvim',
     --    requires = {'nvim-lua/plenary.nvim'},
     --    config = function() require('gitsigns').setup({current_line_blame = true}) end
     --}
+
+    ---- feels incomplete for now, external binaries
+    --use {'liuchengxu/vim-clap', run = ':Clap install-binary'}
+    --use 'goolord/nvim-clap-lsp'
+
+    ---- no issues with these
+    --use 'RishabhRD/popfix'
+    --use 'RishabhRD/nvim-lsputils'
     --use {
     --    'junegunn/fzf.vim',
     --    config = function() require('plugin.fzf') end
@@ -115,10 +130,6 @@ require('packer').startup(function(use)
     --        f = {':NERDTreeFind<Bar>wincmd p<CR>', 'Find In Tree'}
     --    }
     --})
-    --use {'liuchengxu/vim-clap', run = ':Clap install-binary'}
-    --use 'goolord/nvim-clap-lsp'
-    --use 'RishabhRD/popfix'
-    --use 'RishabhRD/nvim-lsputils'
 end)
 
 --vim.cmd([[autocmd BufWritePost plugins.lua | PackerCompile]])
