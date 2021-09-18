@@ -67,6 +67,10 @@ require('packer').startup(function(use)
         'kristijanhusak/orgmode.nvim',
         config = function() require('plugin.orgmode') end
     }
+    use {
+        'phaazon/hop.nvim',
+        config = function() require('plugin.hop') end
+    }
 
 -- themes
     use 'sainnhe/sonokai'
