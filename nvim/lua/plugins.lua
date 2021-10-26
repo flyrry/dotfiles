@@ -26,7 +26,7 @@ require('packer').startup(function(use)
         config = function() require('plugin.lspconfig') end
     }
     use {
-        'glepnir/lspsaga.nvim',
+        'tami5/lspsaga.nvim',
         config = function() require('plugin.lspsaga') end
     }
     use {
@@ -82,6 +82,7 @@ require('packer').startup(function(use)
     --use 'tpope/vim-dispatch'
     --use 'sindrets/diffview.nvim'
     --use 'folke/trouble.nvim'
+    --use 'pwntester/octo.nvim'
 
 -- retired
     ---- pop-up gets stuck sometimes
