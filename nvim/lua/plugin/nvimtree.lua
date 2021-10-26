@@ -6,11 +6,16 @@ require("which-key").register({
     }
 })
 
-vim.g.nvim_tree_width = 42
-vim.g.nvim_tree_auto_close = 1
 vim.g.nvim_tree_ignore = {'.git', 'node_modules', '.cache'}
 vim.g.nvim_tree_hide_dotfiles = 1
 vim.g.nvim_tree_gitignore = 1
+require'nvim-tree'.setup {
+    auto_close = true,
+    view = {
+        side = 'left',
+        width = 42
+    }
+}
 --vim.g.nvim_tree_show_icons = {
 --    ["git"] = false,
 --    ["folders"] = true,
