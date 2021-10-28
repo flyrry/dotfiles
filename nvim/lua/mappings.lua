@@ -19,8 +19,6 @@ require('which-key').register({
             t = {'"=strftime("%H:%M:%S")<CR>P', "Insert time"},
         },
     },
-    j = {'gj'},
-    k = {'gk'},
     ['<C-j>'] = {'<C-w>j'},
     ['<C-k>'] = {'<C-w>k'},
     ['<C-h>'] = {'<C-w>h'},
