@@ -14,7 +14,9 @@ require'nvim-tree'.setup {
     view = {
         side = 'left',
         width = 42
-    }
+    },
+    disable_netrw = false,
+    hijack_netrw = false
 }
 --vim.g.nvim_tree_show_icons = {
 --    ["git"] = false,
