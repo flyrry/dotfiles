@@ -6,8 +6,6 @@ require("which-key").register({
     }
 })
 
-vim.g.nvim_tree_ignore = {'.git', 'node_modules', '.cache'}
-vim.g.nvim_tree_hide_dotfiles = 1
 vim.g.nvim_tree_gitignore = 1
 require'nvim-tree'.setup {
     auto_close = true,
@@ -16,7 +14,11 @@ require'nvim-tree'.setup {
         width = 42
     },
     disable_netrw = false,
-    hijack_netrw = false
+    hijack_netrw = false,
+    filters = {
+        dotfiles = true,
+        ignored = {'.git', 'node_modules', '.cache'}
+    }
 }
 --vim.g.nvim_tree_show_icons = {
 --    ["git"] = false,
