@@ -72,6 +72,16 @@ require('packer').startup(function(use)
         'phaazon/hop.nvim',
         config = function() require('plugin.hop') end
     }
+    use {
+        'hrsh7th/nvim-cmp',
+        requires = {
+            'hrsh7th/cmp-nvim-lsp',
+            'hrsh7th/cmp-path'
+            --'hrsh7th/cmp-buffer',
+            --'hrsh7th/cmp-nvim-lua',
+        },
+        config = function() require('plugin.nvim-cmp') end
+    }
 
 -- themes
     use 'sainnhe/sonokai'

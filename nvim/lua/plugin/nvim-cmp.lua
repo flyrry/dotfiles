@@ -16,9 +16,9 @@ cmp.setup {
 
     -- You should specify your *installed* sources.
     sources = {
-        {name = 'buffer'},
+        --{name = 'buffer'},
         {name = 'nvim_lsp'},
-        {name = 'nvim_lua'},
+        --{name = 'nvim_lua'},
         {name = 'path'},
         {name = 'orgmode'}
     },
