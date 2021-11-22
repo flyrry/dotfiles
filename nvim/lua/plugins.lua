@@ -36,11 +36,6 @@ require('packer').startup(function(use)
         config = function() require('plugin.treesitter') end
     }
     use {
-        'kyazdani42/nvim-tree.lua',
-        requires = 'kyazdani42/nvim-web-devicons',
-        config = function() require('plugin.nvimtree') end
-    }
-    use {
         'tpope/vim-fugitive',
         config = function() require('plugin.fugitive') end
     }
@@ -83,6 +78,17 @@ require('packer').startup(function(use)
         },
         config = function() require('plugin.nvim-cmp') end
     }
+    use {
+        'scrooloose/nerdtree',
+        cmd = {'NERDTreeToggle', 'NERDTreeFind'},
+        config = function() require('plugin.nerdtree') end
+    }
+    require('which-key').register({
+        ["<leader>n"] = {
+            t = {':NERDTreeToggle<Bar>wincmd p<CR>', 'Toggle Tree'},
+            f = {':NERDTreeFind<Bar>wincmd p<CR>', 'Find In Tree'}
+        }
+    })
 
 -- themes
     use 'sainnhe/sonokai'
@@ -97,6 +103,12 @@ require('packer').startup(function(use)
     --use 'pwntester/octo.nvim'
 
 -- retired
+    ---- lags when loading nvim and saving files
+    --use {
+    --    'kyazdani42/nvim-tree.lua',
+    --    requires = 'kyazdani42/nvim-web-devicons',
+    --    config = function() require('plugin.nvimtree') end
+    --}
     ---- pop-up gets stuck sometimes
     --use 'ray-x/lsp_signature.nvim'
 
@@ -132,17 +144,6 @@ require('packer').startup(function(use)
     --    'junegunn/fzf.vim',
     --    config = function() require('plugin.fzf') end
     --}
-    --use {
-    --    'scrooloose/nerdtree',
-    --    cmd = {'NERDTreeToggle', 'NERDTreeFind'},
-    --    config = function() require('plugin.nerdtree') end
-    --}
-    --require('which-key').register({
-    --    ["<leader>n"] = {
-    --        t = {':NERDTreeToggle<Bar>wincmd p<CR>', 'Toggle Tree'},
-    --        f = {':NERDTreeFind<Bar>wincmd p<CR>', 'Find In Tree'}
-    --    }
-    --})
 end)
 
 --vim.cmd([[autocmd BufWritePost plugins.lua | PackerCompile]])
