@@ -1,7 +1,7 @@
 require('which-key').register({
     ['<leader>h'] = {
-        w = {':HopWord<CR>', 'Hop to word'},
-        h = {':HopChar2<CR>', 'Hop to bigram'},
+        h = {':HopWord<CR>', 'Hop to word'},
+        w = {':HopChar2<CR>', 'Hop to bigram'},
         l = {':HopLineStart<CR>', 'Hop to line'},
         ['/'] = {':HopPattern<CR>', 'Hop to pattern'},
     }
