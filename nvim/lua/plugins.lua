@@ -72,9 +72,15 @@ require('packer').startup(function(use)
         'hrsh7th/nvim-cmp',
         requires = {
             'hrsh7th/cmp-nvim-lsp',
-            'hrsh7th/cmp-path'
+            'hrsh7th/cmp-path',
+            'L3MON4D3/LuaSnip',
+            'saadparwaiz1/cmp_luasnip',
+            'onsails/lspkind-nvim',
             --'hrsh7th/cmp-buffer',
             --'hrsh7th/cmp-nvim-lua',
+            --'hrsh7th/cmp-calc',
+            --'hrsh7th/cmp-emoji',
+            --'f3fora/cmp-spell',
         },
         config = function() require('plugin.nvim-cmp') end
     }

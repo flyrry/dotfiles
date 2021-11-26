@@ -1,6 +1,21 @@
 local cmp = require('cmp')
+local lspkind = require('lspkind')
 cmp.setup {
-    -- You can set mappings if you want
+    snippet = {
+        expand = function(args)
+            require('luasnip').lsp_expand(args.body)
+        end,
+    },
+
+    sources = {
+        {name = 'nvim_lsp'},
+        {name = 'path'},
+        {name = 'luasnip'},
+        {name = 'orgmode'},
+        --{name = 'buffer'},
+        --{name = 'nvim_lua'},
+    },
+
     mapping = {
         ['<C-p>'] = cmp.mapping.select_prev_item(),
         ['<C-n>'] = cmp.mapping.select_next_item(),
@@ -9,17 +24,24 @@ cmp.setup {
         ['<C-Space>'] = cmp.mapping.complete(),
         ['<C-e>'] = cmp.mapping.close(),
         ['<CR>'] = cmp.mapping.confirm({
-            behavior = cmp.ConfirmBehavior.Insert,
+            behavior = cmp.ConfirmBehavior.Replace,
             select = true,
         })
     },
 
-    -- You should specify your *installed* sources.
-    sources = {
-        --{name = 'buffer'},
-        {name = 'nvim_lsp'},
-        --{name = 'nvim_lua'},
-        {name = 'path'},
-        {name = 'orgmode'}
+    experimental = {
+        ghost_text = true
     },
+
+    formatting = {
+        format = lspkind.cmp_format({
+            with_text = false,
+            menu = {
+                nvim_lsp = '[lsp]',
+                path = '[pth]',
+                luasnip = '[snp]',
+                orgmode = '[org]'
+            }
+        })
+    }
 }
