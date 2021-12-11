@@ -61,6 +61,7 @@ require('packer').startup(function(use)
     use 'plasticboy/vim-markdown'
     use {
         'kristijanhusak/orgmode.nvim',
+        commit = "65bc2e3272bcd0c61ed916d5cbc2726776ab4eae",
         requires = {'nvim-treesitter/nvim-treesitter'},
         config = function() require('plugin.orgmode') end
     }
