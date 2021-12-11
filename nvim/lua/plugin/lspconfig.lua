@@ -53,7 +53,12 @@ nvim_lsp.tsserver.setup {
 
 nvim_lsp.rust_analyzer.setup({
     capabilities = capabilities,
-    on_attach=on_attach
+    on_attach = on_attach
+})
+
+nvim_lsp.ccls.setup({
+    capabilities = capabilities,
+    on_attach = on_attach
 })
 
 local filetypes = {
