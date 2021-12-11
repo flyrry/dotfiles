@@ -86,6 +86,10 @@ require('packer').startup(function(use)
         config = function() require('plugin.nvim-cmp') end
     }
     use {
+        'L3MON4D3/LuaSnip',
+        config = function() require('plugin.luasnip') end
+    }
+    use {
         'scrooloose/nerdtree',
         cmd = {'NERDTreeToggle', 'NERDTreeFind'},
         config = function() require('plugin.nerdtree') end
