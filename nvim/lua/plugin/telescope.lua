@@ -5,14 +5,21 @@ require("which-key").register({
         m = {':Telescope git_status<CR>', "Git Changes"},
         s = {':Telescope live_grep<CR>', "Find String"},
         w = {':Telescope grep_string<CR>', "Find Word"},
+        f = {':Telescope find_files<CR>', "Find Files"},
     },
-    ["<C-p>"] = {':Telescope find_files<CR>', "Find Files"},
+    ["<C-p>"] = {':Telescope git_files<CR>', "Git Files"},
     ["gr"] = {':Telescope lsp_references<CR>', "Find References"},
 })
 
 local actions = require('telescope.actions')
 require('telescope').setup{
   defaults = {
+    layout_strategy = 'vertical',
+    layout_config = {
+      width = 0.9,
+      height = 0.95,
+      preview_height = 0.75
+    },
     vimgrep_arguments = {
       'rg',
       '--color=never',
@@ -29,14 +36,13 @@ require('telescope').setup{
     mappings = {
       i = {
         ["<C-j>"] = actions.move_selection_next,
-        ["<C-k>"] = actions.move_selection_previous
+        ["<C-k>"] = actions.move_selection_previous,
+        ["<C-h>"] = "which_key",
+        ["<esc>"] = actions.close
       }
     }
   },
   pickers = {
-    find_files = {
-      theme = "ivy"
-    },
     git_status = {
       theme = "dropdown",
       previewer = false
@@ -44,5 +50,5 @@ require('telescope').setup{
     lsp_references = {
       theme = "ivy",
     }
-  }
+  },
 }
