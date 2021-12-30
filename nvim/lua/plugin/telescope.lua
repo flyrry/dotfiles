@@ -5,9 +5,9 @@ require("which-key").register({
         m = {':Telescope git_status<CR>', "Git Changes"},
         s = {':Telescope live_grep<CR>', "Find String"},
         w = {':Telescope grep_string<CR>', "Find Word"},
-        f = {':Telescope find_files<CR>', "Find Files"},
+        f = {':Telescope git_files<CR>', "Find Files"},
     },
-    ["<C-p>"] = {':Telescope git_files<CR>', "Git Files"},
+    ["<C-p>"] = {':Telescope find_files<CR>', "Git Files"},
     ["gr"] = {':Telescope lsp_references<CR>', "Find References"},
 })
 
