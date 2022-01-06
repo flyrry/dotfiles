@@ -19,6 +19,13 @@ require('which-key').register({
             t = {'"=strftime("%H:%M:%S")<CR>P', "Insert time"},
         },
     },
+    -- fzf
+    ["<leader>f"] = {
+        o = {':History<CR>', "History"},
+        m = {':GFiles?<CR>', "Git Changes"},
+        s = {':Rg<CR>', "Find String"},
+        w = {':Rg <C-R><C-W><CR>', "Find Word"},
+    },
     ['<C-j>'] = {'<C-w>j'},
     ['<C-k>'] = {'<C-w>k'},
     ['<C-h>'] = {'<C-w>h'},

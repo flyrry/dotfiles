@@ -16,6 +16,9 @@ cmp.setup {
         --{name = 'nvim_lua'},
     },
 
+    -- only works if source actually triess to preselect anything
+    --preselect = cmp.PreselectMode.None,
+
     mapping = {
         ['<C-p>'] = cmp.mapping.select_prev_item(),
         ['<C-n>'] = cmp.mapping.select_next_item(),

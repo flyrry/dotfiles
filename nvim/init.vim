@@ -33,4 +33,3 @@ nnoremap <silent><leader>v :vsplit<CR>
 nnoremap <silent><leader>s :split<CR>
 nnoremap j gj
 nnoremap k gk
-

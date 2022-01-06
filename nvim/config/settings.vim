@@ -106,6 +106,8 @@ set wildignore+=*.o,*.swp
 " seriously, stop beeping
 set noerrorbells
 
+set completeopt=menu,menuone,noselect,noinsert
+
 set showmatch
 
 set backspace=indent,eol,start

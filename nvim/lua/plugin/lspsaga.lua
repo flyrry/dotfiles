@@ -19,7 +19,7 @@ wk.register({
     ["<leader>"] = {
         ["do"] = {':Lspsaga code_action<CR>', "Do Code Action"},
         ["rn"] = {':Lspsaga rename<CR>', "Rename"},
-        ["hd"] = {':Lspsage preview_definition<CR>', "Preview Definition"},
+        --["hd"] = {':Lspsage preview_definition<CR>', "Preview Definition"},
         e = {
             n = {':Lspsaga diagnostic_jump_next<CR>', "Next Diagnostic"},
             p = {':Lspsaga diagnostic_jump_prev<CR>', "Prev Diagnostic"},
@@ -30,9 +30,4 @@ wk.register({
     ["<C-b>"] = {':lua require("lspsaga.action").smart_scroll_with_saga(-1)<CR>', "Saga Scroll Up"},
     K = {':Lspsaga hover_doc<CR>', "Hover Documentation"},
     ["gh"] = {':Lspsaga lsp_finder<CR>', "LSP Finder"},
-})
-wk.register({
-    ["<C-k>"] = {':Lspsaga signature_help<CR>', "Signature Help"},
-}, {
-    mode = "i"
 })

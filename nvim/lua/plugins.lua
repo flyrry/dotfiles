@@ -13,6 +13,7 @@ require('packer').startup(function(use)
     use 'editorconfig/editorconfig-vim'
     use 'christoomey/vim-tmux-navigator'
     use 'AndrewRadev/splitjoin.vim'
+
     use {
         'vim-airline/vim-airline',
         config = function() vim.cmd([[source $HOME/.config/nvim/config/plugin/airline.vim]]) end
@@ -48,14 +49,6 @@ require('packer').startup(function(use)
         'junegunn/limelight.vim',
         requires = {'junegunn/goyo.vim'},
         config = function() require('plugin.goyo-limelight') end
-    }
-    use {
-        'nvim-telescope/telescope.nvim',
-        requires = {
-            'nvim-lua/popup.nvim',
-            'nvim-lua/plenary.nvim',
-        },
-        config = function() require('plugin.telescope') end
     }
     use {
         'mhinz/vim-startify',
@@ -104,6 +97,25 @@ require('packer').startup(function(use)
         }
     })
 
+-- experimental
+    use {
+        'mfussenegger/nvim-fzy',
+        config = function() require("plugin.fzy") end
+    }
+
+    use {
+        'ibhagwan/fzf-lua',
+        requires = {
+            'kyazdani42/nvim-web-devicons',
+        }
+    }
+
+    use 'junegunn/fzf'
+    use {
+        'junegunn/fzf.vim',
+        config = function() require('plugin.fzf') end
+    }
+
 -- themes
     use 'sainnhe/sonokai'
     -- use 'sainnhe/gruvbox-material'
@@ -117,6 +129,20 @@ require('packer').startup(function(use)
     --use 'pwntester/octo.nvim'
 
 -- retired
+    -- too bloated
+    --use {
+    --    'nvim-telescope/telescope.nvim',
+    --    requires = {
+    --        'nvim-lua/popup.nvim',
+    --        'nvim-lua/plenary.nvim',
+    --    },
+    --    config = function() require('plugin.telescope') end
+    --}
+
+    -- fzf clone, nothing special, broken search for word under cursor
+    --use 'lotabout/skim'
+    --use 'lotabout/skim.vim'
+
     ---- lags when loading nvim and saving files
     --use {
     --    'kyazdani42/nvim-tree.lua',
@@ -125,20 +151,6 @@ require('packer').startup(function(use)
     --}
     ---- pop-up gets stuck sometimes
     --use 'ray-x/lsp_signature.nvim'
-
-    ---- multiple issues:
-    ---- 1. snippets error when trying to complete; I don't even have snippets
-    ---- 2. complete erases text or replaces with '0'
-    --use {
-    --    'hrsh7th/nvim-cmp',
-    --    requires = {
-    --        'hrsh7th/cmp-nvim-lsp',
-    --        'hrsh7th/cmp-path'
-    --        --'hrsh7th/cmp-buffer',
-    --        --'hrsh7th/cmp-nvim-lua',
-    --    },
-    --    config = function() require('plugin.nvim-cmp') end
-    --}
 
     ---- errors in non-git controlled directories
     --use {
@@ -160,7 +172,6 @@ require('packer').startup(function(use)
     --}
 end)
 
---vim.cmd([[autocmd BufWritePost plugins.lua | PackerCompile]])
 vim.cmd(
     [[
     augroup Packer
