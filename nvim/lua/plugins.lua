@@ -116,6 +116,15 @@ require('packer').startup(function(use)
         config = function() require('plugin.fzf') end
     }
 
+    ---- pop-up gets stuck sometimes
+    use {
+        'ray-x/lsp_signature.nvim',
+        config = function() require('lsp_signature').setup({
+            hint_prefix = '❯❯❯ ',
+            toggle_key = '<C-k>',
+        }) end
+    }
+
 -- themes
     use 'sainnhe/sonokai'
     -- use 'sainnhe/gruvbox-material'
@@ -149,8 +158,6 @@ require('packer').startup(function(use)
     --    requires = 'kyazdani42/nvim-web-devicons',
     --    config = function() require('plugin.nvimtree') end
     --}
-    ---- pop-up gets stuck sometimes
-    --use 'ray-x/lsp_signature.nvim'
 
     ---- errors in non-git controlled directories
     --use {
