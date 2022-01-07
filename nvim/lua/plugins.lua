@@ -28,7 +28,7 @@ require('packer').startup(function(use)
     }
     use {
         'tami5/lspsaga.nvim',
-        branch = 'nvim51',
+        branch = 'nvim6.0',
         config = function() require('plugin.lspsaga') end
     }
     use {
