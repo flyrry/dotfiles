@@ -117,5 +117,5 @@ set grepprg=rg\ --vimgrep
 
 set spellfile=~/.vim/spell/overrides.utf-8.add
 autocmd FileType gitcommit setlocal spell
-autocmd FileType markdown setlocal spell
-autocmd FileType org setlocal spell
+"autocmd FileType markdown setlocal spell
+"autocmd FileType org setlocal spell
