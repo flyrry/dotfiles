@@ -9,6 +9,8 @@ parser_config.org = {
     filetype = 'org',
 }
 
+require('orgmode').setup_ts_grammar()
+
 require'nvim-treesitter.configs'.setup {
     highlight = {
         enable = true,
