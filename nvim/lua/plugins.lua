@@ -27,6 +27,10 @@ require('packer').startup(function(use)
         config = function() require('plugin.lspconfig') end
     }
     use {
+        'j-hui/fidget.nvim', -- lsp loading progress indicators
+        config = function() require('fidget').setup() end
+    }
+    use {
         'tami5/lspsaga.nvim',
         branch = 'nvim6.0',
         config = function() require('plugin.lspsaga') end
