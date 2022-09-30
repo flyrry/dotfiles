@@ -46,10 +46,6 @@ require('packer').startup(function(use)
     }
     use 'tpope/vim-rhubarb'
     use {
-        'edkolev/tmuxline.vim',
-        config = function() vim.cmd([[source $HOME/.config/nvim/config/plugin/tmuxline.vim]]) end
-    }
-    use {
         'junegunn/limelight.vim',
         requires = {'junegunn/goyo.vim'},
         config = function() require('plugin.goyo-limelight') end
@@ -61,7 +57,6 @@ require('packer').startup(function(use)
     use 'plasticboy/vim-markdown'
     use {
         'kristijanhusak/orgmode.nvim',
-        --commit = "65bc2e3272bcd0c61ed916d5cbc2726776ab4eae",
         requires = {'nvim-treesitter/nvim-treesitter'},
         config = function() require('plugin.orgmode') end
     }
@@ -142,6 +137,12 @@ require('packer').startup(function(use)
     --use 'pwntester/octo.nvim'
 
 -- retired
+    -- hangs nvim on loading for 3-5 seconds!
+    --use {
+    --    'edkolev/tmuxline.vim',
+    --    config = function() vim.cmd([[source $HOME/.config/nvim/config/plugin/tmuxline.vim]]) end
+    --}
+    --
     -- too bloated
     --use {
     --    'nvim-telescope/telescope.nvim',
