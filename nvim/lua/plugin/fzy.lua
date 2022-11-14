@@ -1,4 +1,3 @@
-require('fzy').setup()
 local wk = require('which-key')
 wk.register({
     ["<leader>f"] = {

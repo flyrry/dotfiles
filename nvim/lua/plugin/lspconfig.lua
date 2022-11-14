@@ -14,7 +14,7 @@ local on_attach = function(client, bufnr)
             --r = {':lua vim.lsp.buf.references()<CR>', 'References'},
         },
         f = {
-            f = {':lua vim.lsp.buf.formatting()<CR>', 'Format document'},
+            f = {':lua vim.lsp.buf.format{async=true}<CR>', 'Format document'},
         }
     }, {
         buffer = bufnr
@@ -46,7 +46,7 @@ local capabilities = vim.lsp.protocol.make_client_capabilities()
 nvim_lsp.tsserver.setup {
     capabilities = capabilities,
     on_attach = function(client, bufnr)
-        client.resolved_capabilities.document_formatting = false
+        client.server_capabilities.documentFormattingProvider = false
         on_attach(client, bufnr)
     end
 }

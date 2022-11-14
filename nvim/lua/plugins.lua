@@ -140,7 +140,7 @@ require('packer').startup(function(use)
     -- hangs nvim on loading for 3-5 seconds!
     --use {
     --    'edkolev/tmuxline.vim',
-    --    config = function() vim.cmd([[source $HOME/.config/nvim/config/plugin/tmuxline.vim]]) end
+    --    setup = function() vim.cmd([[source $HOME/.config/nvim/config/plugin/tmuxline.vim]]) end
     --}
     --
     -- too bloated
