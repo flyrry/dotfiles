@@ -58,6 +58,7 @@ nvim_lsp.rust_analyzer.setup({
 
 nvim_lsp.ccls.setup({
     capabilities = capabilities,
+    filetypes = {"c", "cc", "cxx", "cpp", "objc", "objcpp"},
     on_attach = on_attach
 })
 
