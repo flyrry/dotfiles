@@ -98,6 +98,9 @@ require('packer').startup(function(use)
 
 -- experimental
     use {
+        'gauteh/vim-cppman'
+    }
+    use {
         'mfussenegger/nvim-fzy',
         config = function() require("plugin.fzy") end
     }
