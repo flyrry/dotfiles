@@ -72,6 +72,7 @@ require('packer').startup(function(use)
             'L3MON4D3/LuaSnip',
             'saadparwaiz1/cmp_luasnip',
             'onsails/lspkind-nvim',
+            'saecki/crates.nvim',
             --'hrsh7th/cmp-buffer',
             --'hrsh7th/cmp-nvim-lua',
             --'hrsh7th/cmp-calc',
@@ -95,6 +96,15 @@ require('packer').startup(function(use)
             f = {':NERDTreeFind<Bar>wincmd p<CR>', 'Find In Tree'}
         }
     })
+-- rust
+    use {
+        'saecki/crates.nvim',
+        tag = 'v0.3.0',
+        requires = { 'nvim-lua/plenary.nvim' },
+        config = function()
+            require('crates').setup()
+        end,
+    }
 
 -- experimental
     use {

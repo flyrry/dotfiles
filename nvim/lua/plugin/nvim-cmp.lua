@@ -12,6 +12,7 @@ cmp.setup {
         {name = 'path'},
         {name = 'luasnip'},
         {name = 'orgmode'},
+        {name = 'crates'},
         --{name = 'buffer'},
         --{name = 'nvim_lua'},
     },
