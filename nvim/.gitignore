@@ -1,4 +1,5 @@
 .netrwhist
 plugged/
 spell/
-/plugin/
+plugin/
+lazy-lock.json

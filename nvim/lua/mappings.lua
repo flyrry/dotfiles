@@ -1,7 +1,13 @@
 require('which-key').register({
+    ['<C-j>'] = {'<C-w>j'},
+    ['<C-k>'] = {'<C-w>k'},
+    ['<C-h>'] = {'<C-w>h'},
+    ['<C-l>'] = {'<C-w>l'},
+    j = {'gj'},
+    k = {'gk'},
+    S = {'"_diwP', "Replace"},
     ["<leader>"] = {
-        fed = {':e ~/.config/nvim/init.vim<CR>', "Edit nvim config"},
-        fer = {':so ~/.config/nvim/init.vim<CR>', "Reload nvim config"},
+        fed = {':e ~/.config/nvim/init.lua<CR>', "Edit nvim config"},
 
         ['/'] = {':nohlsearch<CR>', "Clear highlighted search terms"},
 
@@ -18,17 +24,8 @@ require('which-key').register({
             d = {'"=strftime("%d.%m.%Y")<CR>P', "Insert date"},
             t = {'"=strftime("%H:%M:%S")<CR>P', "Insert time"},
         },
+
+        s = {':split<CR>', "horizontal split"},
+        v = {':vsplit<CR>', "vertical split"},
     },
-    -- fzf
-    ["<leader>f"] = {
-        o = {':History<CR>', "History"},
-        m = {':GFiles?<CR>', "Git Changes"},
-        s = {':Rg<CR>', "Find String"},
-        w = {':Rg <C-R><C-W><CR>', "Find Word"},
-    },
-    ['<C-j>'] = {'<C-w>j'},
-    ['<C-k>'] = {'<C-w>k'},
-    ['<C-h>'] = {'<C-w>h'},
-    ['<C-l>'] = {'<C-w>l'},
-    S = {'"_diwP', "Replace"},
-}, {silent=false})
+}, {silent=true})
