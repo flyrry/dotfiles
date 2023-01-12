@@ -114,25 +114,30 @@ return {
     },
     {"folke/which-key.nvim", lazy = true},
     {
-        -- lags when loading nvim and saving files
-        'kyazdani42/nvim-tree.lua',
-        enabled = false,
-        dependencies = {'kyazdani42/nvim-web-devicons'},
+        'plasticboy/vim-markdown',
+        ft = 'markdown',
     },
     {
         -- errors in non-git controlled directories
         'lewis6991/gitsigns.nvim',
-        enabled = false,
+        --enabled = false,
         dependencies = {'nvim-lua/plenary.nvim'},
         config = function() require('gitsigns').setup({current_line_blame = true}) end
     },
+
     {
-        -- hangs nvim on loading for 3-5 seconds!
+        -- lags when loading nvim and saving files
+        'kyazdani42/nvim-tree.lua',
+        enabled = false,
+        dependencies = {'kyazdani42/nvim-web-devicons'},
+        config = function() require('nvim-tree').setup() end
+    },
+    {
+        -- does not seem to work anymore
         'edkolev/tmuxline.vim',
         enabled = false,
         setup = function() vim.cmd([[source $HOME/.config/nvim/config/plugin/tmuxline.vim]]) end
     },
-    --'plasticboy/vim-markdown',
     --'RishabhRD/popfix',
     --'RishabhRD/nvim-lsputils'
 }
