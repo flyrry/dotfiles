@@ -5,7 +5,7 @@ require('which-key').register({
     ['<C-l>'] = {'<C-w>l'},
     j = {'gj'},
     k = {'gk'},
-    S = {'"_diwP', "Replace"},
+    --S = {'"_diwP', "Replace"},
     ["<leader>"] = {
         fed = {':e ~/.config/nvim/init.lua<CR>', "Edit nvim config"},
 

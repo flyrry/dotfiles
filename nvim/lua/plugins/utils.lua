@@ -210,16 +210,15 @@ return {
         },
     },
     {
-        'phaazon/hop.nvim',
+        'ggandor/leap.nvim',
         lazy = true,
         keys = {
-            {'<leader>hh', ':HopWord<CR>', desc = 'Hop to word', silent = true},
-            {'<leader>hw', ':HopChar2<CR>', desc = 'Hop to bigram', silent = true},
-            {'<leader>hl', ':HopLineStart<CR>', desc = 'Hop to line', silent = true},
-            {'<leader>h/', ':HopPattern<CR>', desc = 'Hop to pattern', silent = true},
+            {'s', '<Plug>(leap-forward-to)', desc = 'Leap forward', silent = true},
+            {'S', '<Plug>(leap-backward-to)', desc = 'Leap backward', silent = true},
+            {'gs', '<Plug>(leap-cross-window)', desc = 'Leap across', silent = true},
         },
         config = function()
-            require('hop').setup()
+            require('leap').add_default_mappings()
         end
     },
     {
@@ -264,6 +263,21 @@ return {
     },
     {'tpope/vim-rhubarb', lazy = true},
 
+    -- replaced by 'leap'
+    {
+        'phaazon/hop.nvim',
+        lazy = true,
+        enabled = false,
+        keys = {
+            {'<leader>hh', ':HopWord<CR>', desc = 'Hop to word', silent = true},
+            {'<leader>hw', ':HopChar2<CR>', desc = 'Hop to bigram', silent = true},
+            {'<leader>hl', ':HopLineStart<CR>', desc = 'Hop to line', silent = true},
+            {'<leader>h/', ':HopPattern<CR>', desc = 'Hop to pattern', silent = true},
+        },
+        config = function()
+            require('hop').setup()
+        end
+    },
     -- maybe later...
     {
         'ibhagwan/fzf-lua',
