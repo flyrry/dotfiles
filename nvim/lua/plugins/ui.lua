@@ -128,6 +128,15 @@ return {
                     'typescript',
                 },
             }
+
+            vim.o.foldmethod='expr'
+            vim.o.foldexpr='nvim_treesitter#foldexpr()'
+        end
+    },
+    {
+        'chentoast/marks.nvim',
+        config = function()
+            require('marks').setup()
         end
     },
 

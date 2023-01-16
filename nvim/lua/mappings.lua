@@ -3,8 +3,8 @@ require('which-key').register({
     ['<C-k>'] = {'<C-w>k'},
     ['<C-h>'] = {'<C-w>h'},
     ['<C-l>'] = {'<C-w>l'},
-    j = {'gj'},
-    k = {'gk'},
+    --j = {'gj'},
+    --k = {'gk'},
     --S = {'"_diwP', "Replace"},
     ["<leader>"] = {
         fed = {':e ~/.config/nvim/init.lua<CR>', "Edit nvim config"},

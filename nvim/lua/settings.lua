@@ -44,19 +44,16 @@ vim.o.autoread=true
 -- automatically save when switching between buffers
 --set autowrite
 -- folds expanded on file load
-vim.o.nofoldenable=true
+vim.o.foldenable=false
+vim.o.foldmethod='syntax'
 -- enable true color support
 vim.o.termguicolors=true
 -- better history
 vim.o.history=10000
 -- disable swapfiles
 vim.o.swapfile=false
--- backup
-vim.o.backupdir='~/.local/share/nvim/backup' -- don't put backups in current dir
-vim.o.backup=true
 -- change terminal's title
 --vim.o.title
-vim.o.foldmethod='syntax'
 -- show distance from current line to other lines
 vim.o.relativenumber=true
 -- always show what mode we are currently editing in
@@ -65,8 +62,6 @@ vim.o.showmode=true
 vim.o.mouse=''
 -- keep 4 lines off the edges of the screen when scrolling
 vim.o.scrolloff=4
--- always set autoindenting on
-vim.o.autoindent=true
 -- do smart autoindenting when starting a new line
 vim.o.smartindent=true
 -- always show status line
