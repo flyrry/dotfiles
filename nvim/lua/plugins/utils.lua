@@ -27,8 +27,8 @@ return {
                         ['do'] = {':lua vim.lsp.buf.code_action()<CR>', 'Code action'},
                         ['rn'] = {':lua vim.lsp.buf.rename()<CR>', 'Rename symbol'},
                         e = {
-                            n = {':lua vim.lsp.diagnostic.goto_prev()<CR>', 'Next diagnostic'},
-                            p = {':lua vim.lsp.diagnostic.goto_next()<CR>', 'Prev diagnostic'},
+                            n = {':lua vim.diagnostic.goto_next()<CR>', 'Next diagnostic'},
+                            p = {':lua vim.diagnostic.goto_prev()<CR>', 'Prev diagnostic'},
                             e = {':lua vim.diagnostic.open_float()<CR>', 'Show diagnostic'},
                         },
                     },
