@@ -287,6 +287,7 @@ return {
         end
     },
     {'tpope/vim-rhubarb', lazy = true},
+    {'godlygeek/tabular', lazy = true},
 
     -- replaced by 'leap'
     {
