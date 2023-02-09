@@ -6,4 +6,7 @@ return {
 --    'nvim-neorg/neorg', -- ordmode replacement?
 --    'stevearc/dressing.nvim',
 --    'cshuaimin/ssr.nvim',
+
+--    'RishabhRD/popfix',
+--    'RishabhRD/nvim-lsputils'
 }

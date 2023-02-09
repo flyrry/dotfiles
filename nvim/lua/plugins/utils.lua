@@ -2,7 +2,6 @@ return {
     'tpope/vim-surround',
     'AndrewRadev/splitjoin.vim',
     'editorconfig/editorconfig-vim',
-
     {
         'neovim/nvim-lspconfig',
         config = function()
@@ -228,6 +227,18 @@ return {
         end
     },
     {
+        'kristijanhusak/orgmode.nvim',
+        dependencies = {'nvim-treesitter/nvim-treesitter'},
+        config = function()
+            require('orgmode').setup({
+                org_agenda_files = '~/Documents/org/*',
+                org_default_notes_file = '~/Documents/org/todo.org',
+                --org_hide_leading_stars = true,
+            })
+        end
+    },
+
+    {
         'tpope/vim-fugitive',
         lazy = true,
         keys = {
@@ -244,17 +255,6 @@ return {
         },
         config = function()
             require('leap').add_default_mappings()
-        end
-    },
-    {
-        'kristijanhusak/orgmode.nvim',
-        dependencies = {'nvim-treesitter/nvim-treesitter'},
-        config = function()
-            require('orgmode').setup({
-                org_agenda_files = '~/Documents/org/*',
-                org_default_notes_file = '~/Documents/org/todo.org',
-                --org_hide_leading_stars = true,
-            })
         end
     },
     {
@@ -289,21 +289,6 @@ return {
     {'tpope/vim-rhubarb', lazy = true},
     {'godlygeek/tabular', lazy = true},
 
-    -- replaced by 'leap'
-    {
-        'phaazon/hop.nvim',
-        lazy = true,
-        enabled = false,
-        keys = {
-            {'<leader>hh', ':HopWord<CR>', desc = 'Hop to word', silent = true},
-            {'<leader>hw', ':HopChar2<CR>', desc = 'Hop to bigram', silent = true},
-            {'<leader>hl', ':HopLineStart<CR>', desc = 'Hop to line', silent = true},
-            {'<leader>h/', ':HopPattern<CR>', desc = 'Hop to pattern', silent = true},
-        },
-        config = function()
-            require('hop').setup()
-        end
-    },
     -- maybe later...
     {
         'ibhagwan/fzf-lua',

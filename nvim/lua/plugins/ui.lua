@@ -82,6 +82,11 @@ return {
             require('marks').setup()
         end
     },
+    {
+        'lewis6991/gitsigns.nvim',
+        dependencies = {'nvim-lua/plenary.nvim'},
+        config = function() require('gitsigns').setup({current_line_blame = true}) end
+    },
 
     {
         'folke/zen-mode.nvim',
@@ -105,6 +110,28 @@ return {
         },
     },
     {
+        'nvim-tree/nvim-tree.lua',
+        lazy = true,
+        keys = {
+            {'<leader>nt', ':NvimTreeToggle<CR>', desc = 'Toggle Tree', silent = true},
+            {'<leader>nf', ':NvimTreeFindFile<CR>', desc = 'Find In Tree', silent = true}
+        },
+        dependencies = {'nvim-tree/nvim-web-devicons'},
+        config = function()
+            require('nvim-tree').setup({
+                filters = {
+                    custom = {'.DS_Store', '.*.js', '.*.d.ts'}
+                }
+            })
+        end
+    },
+    {'folke/which-key.nvim', lazy = true},
+    {
+        'plasticboy/vim-markdown',
+        ft = 'markdown',
+    },
+
+    {
         'scrooloose/nerdtree',
         enabled = false,
         lazy = true,
@@ -126,35 +153,6 @@ return {
         end
     },
     {
-        'nvim-tree/nvim-tree.lua',
-        lazy = true,
-        keys = {
-            {'<leader>nt', ':NvimTreeToggle<CR>', desc = 'Toggle Tree', silent = true},
-            {'<leader>nf', ':NvimTreeFindFile<CR>', desc = 'Find In Tree', silent = true}
-        },
-        dependencies = {'nvim-tree/nvim-web-devicons'},
-        config = function()
-            require('nvim-tree').setup({
-                filters = {
-                    custom = {'.DS_Store', '.*.js', '.*.d.ts'}
-                }
-            })
-        end
-    },
-    {"folke/which-key.nvim", lazy = true},
-    {
-        'plasticboy/vim-markdown',
-        ft = 'markdown',
-    },
-    {
-        -- errors in non-git controlled directories
-        'lewis6991/gitsigns.nvim',
-        --enabled = false,
-        dependencies = {'nvim-lua/plenary.nvim'},
-        config = function() require('gitsigns').setup({current_line_blame = true}) end
-    },
-
-    {
         -- does not seem to work anymore
         'edkolev/tmuxline.vim',
         enabled = false,
@@ -167,62 +165,4 @@ return {
             vim.cmd([[source $HOME/.config/nvim/config/plugin/airline.vim]])
         end
     },
-    {
-        enabled = false,
-        'stevearc/dressing.nvim',
-    },
-    {
-        'tami5/lspsaga.nvim',
-        name = "altsaga",
-        branch = 'nvim6.0',
-        enabled = false,
-        keys = {
-            --{'<leader>do', ':Lspsaga code_action<CR>', desc = 'Do Code Action', silent = true},
-            --{'<leader>rn', ':Lspsaga rename<CR>', desc = 'Rename', silent = true},
-            --{'<leader>en', ':Lspsaga diagnostic_jump_next<CR>', desc = 'Next Diagnostic', silent = true},
-            --{'<leader>ep', ':Lspsaga diagnostic_jump_prev<CR>', desc = 'Prev Diagnostic', silent = true},
-            --{'<leader>ee', ':Lspsaga show_line_diagnostics<CR>', desc = 'Show Diagnostic', silent = true},
-            {'<C-f>', ':lua require("lspsaga.action").smart_scroll_with_saga(1)<CR>', desc = 'Saga Scroll Down', silent = true},
-            {'<C-b>', ':lua require("lspsaga.action").smart_scroll_with_saga(-1)<CR>', desc = 'Saga Scroll Up', silent = true},
-            --{'K', ':Lspsaga hover_doc<CR>', desc = 'Hover Documentation', silent = true},
-            {'gh', ':Lspsaga lsp_finder<CR>', desc = 'LSP Finder', silent = true},
-        },
-        config = function()
-            require('lspsaga').init_lsp_saga({
-                error_sign = '',
-                warn_sign = '',
-                hint_sign = '',
-                infor_sign = '',
-                border_style = "round",
-                code_action_prompt = {
-                    enable = false
-                },
-                code_action_keys = {
-                    quit = '<ESC>'
-                },
-                rename_action_keys = {
-                    quit = '<ESC>'
-                }
-            })
-
-            --require("which-key").register({
-            --    ["<leader>"] = {
-            --        ["do"] = {':Lspsaga code_action<CR>', "Do Code Action"},
-            --        ["rn"] = {':Lspsaga rename<CR>', "Rename"},
-            --        --["hd"] = {':Lspsage preview_definition<CR>', "Preview Definition"},
-            --        e = {
-            --            n = {':Lspsaga diagnostic_jump_next<CR>', "Next Diagnostic"},
-            --            p = {':Lspsaga diagnostic_jump_prev<CR>', "Prev Diagnostic"},
-            --            e = {':Lspsaga show_line_diagnostics<CR>', "Show Diagnostic"},
-            --        },
-            --    },
-            --    ["<C-f>"] = {':lua require("lspsaga.action").smart_scroll_with_saga(1)<CR>', "Saga Scroll Down"},
-            --    ["<C-b>"] = {':lua require("lspsaga.action").smart_scroll_with_saga(-1)<CR>', "Saga Scroll Up"},
-            --    K = {':Lspsaga hover_doc<CR>', "Hover Documentation"},
-            --    ["gh"] = {':Lspsaga lsp_finder<CR>', "LSP Finder"},
-            --})
-        end
-    },
-    --'RishabhRD/popfix',
-    --'RishabhRD/nvim-lsputils'
 }
