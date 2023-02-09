@@ -1,6 +1,7 @@
 return {
     'ntpeters/vim-better-whitespace',
     'christoomey/vim-tmux-navigator',
+    'folke/lsp-colors.nvim', -- remove if it doesn't improve colorschemes
     'machakann/vim-highlightedyank',
     {
     -- pop-up gets stuck sometimes
