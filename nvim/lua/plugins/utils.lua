@@ -267,7 +267,7 @@ return {
             {'<leader>fw', ':Rg <C-R><C-W><CR>', desc = 'Find Word', silent = true},
         },
         dependencies = {'junegunn/fzf'},
-        setup = function()
+        config = function()
             vim.cmd([[set rtp+=/usr/local/opt/fzf]])
         end
     },

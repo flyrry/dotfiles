@@ -157,7 +157,7 @@ return {
         -- does not seem to work anymore
         'edkolev/tmuxline.vim',
         enabled = false,
-        setup = function() vim.cmd([[source $HOME/.config/nvim/config/plugin/tmuxline.vim]]) end
+        config = function() vim.cmd([[source $HOME/.config/nvim/config/plugin/tmuxline.vim]]) end
     },
     {
         'vim-airline/vim-airline',
