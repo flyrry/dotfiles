@@ -83,16 +83,25 @@ return {
     },
 
     {
-        'junegunn/limelight.vim',
+        'folke/zen-mode.nvim',
         lazy = true,
-        dependencies = {'junegunn/goyo.vim'},
         keys = {
-            {'go', ':Goyo<CR>', desc = 'Toggle Focus Mode'},
+            {'<leader>go', ':ZenMode<CR>', desc = 'Toggle Zen Mode', silent = true},
         },
         config = function()
-            vim.cmd([[autocmd! User GoyoEnter Limelight]])
-            vim.cmd([[autocmd! User GoyoLeave Limelight!]])
+            require('zen-mode').setup({
+                plugins = {
+                    twilight = {enabled = false},
+                },
+            })
         end
+    },
+    {
+        'folke/twilight.nvim',
+        lazy = true,
+        keys = {
+            {'<leader>gf', ':Twilight<CR>', desc = 'Toggle Focus Mode', silent = true},
+        },
     },
     {
         'scrooloose/nerdtree',
@@ -127,13 +136,6 @@ return {
         config = function() require('gitsigns').setup({current_line_blame = true}) end
     },
 
-    {
-        -- lags when loading nvim and saving files
-        'kyazdani42/nvim-tree.lua',
-        enabled = false,
-        dependencies = {'kyazdani42/nvim-web-devicons'},
-        config = function() require('nvim-tree').setup() end
-    },
     {
         -- does not seem to work anymore
         'edkolev/tmuxline.vim',

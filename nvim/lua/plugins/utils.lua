@@ -309,7 +309,7 @@ return {
         'ibhagwan/fzf-lua',
         lazy = true,
         enabled = false,
-        dependencies = {'kyazdani42/nvim-web-devicons'},
+        dependencies = {'nvim-tree/nvim-web-devicons'},
         init = function()
             require('which-key').register({
                 ['<C-p>'] = {':lua require("fzf-lua").files()<CR>', 'FZF Find Files'},
