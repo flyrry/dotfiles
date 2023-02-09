@@ -105,10 +105,11 @@ return {
     },
     {
         'scrooloose/nerdtree',
+        enabled = false,
         lazy = true,
         keys = {
-            {'<leader>nt', ':NERDTreeToggle<Bar>wincmd p<CR>', desc = 'Toggle Tree', silent = true},
-            {'<leader>nf', ':NERDTreeFind<Bar>wincmd p<CR>', desc = 'Find In Tree', silent = true}
+            {'<leader>vt', ':NERDTreeToggle<Bar>wincmd p<CR>', desc = 'Toggle Tree', silent = true},
+            {'<leader>vf', ':NERDTreeFind<Bar>wincmd p<CR>', desc = 'Find In Tree', silent = true}
         },
         config = function()
             vim.g['NERDTreeWinSize'] = 42
@@ -121,6 +122,22 @@ return {
                 autocmd! BufEnter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
             ]])
 
+        end
+    },
+    {
+        'nvim-tree/nvim-tree.lua',
+        lazy = true,
+        keys = {
+            {'<leader>nt', ':NvimTreeToggle<CR>', desc = 'Toggle Tree', silent = true},
+            {'<leader>nf', ':NvimTreeFindFile<CR>', desc = 'Find In Tree', silent = true}
+        },
+        dependencies = {'nvim-tree/nvim-web-devicons'},
+        config = function()
+            require('nvim-tree').setup({
+                filters = {
+                    custom = {'.DS_Store', '.*.js', '.*.d.ts'}
+                }
+            })
         end
     },
     {"folke/which-key.nvim", lazy = true},
