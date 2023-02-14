@@ -23,4 +23,9 @@ return {
         'folke/tokyonight.nvim',
         lazy = true,
     },
+    {
+        'bluz71/vim-moonfly-colors',
+        name = 'moonfly',
+        lazy = true,
+    }
 }
