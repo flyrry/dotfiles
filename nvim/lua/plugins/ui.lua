@@ -153,16 +153,35 @@ return {
         end
     },
     {
-        -- does not seem to work anymore
         'edkolev/tmuxline.vim',
-        enabled = false,
-        config = function() vim.cmd([[source $HOME/.config/nvim/config/plugin/tmuxline.vim]]) end
+        lazy = true,
+        config = function()
+            vim.cmd([[
+            let g:tmuxline_powerline_separators = 0
+            let g:tmuxline_preset = {
+                \ 'c': '#S', 'cwin': ['#I', '#W'], 'win': ['#I', '#W'],
+                \ 'x': '%R %d-%m-%Y',
+                \ 'options': {'status-justify': 'left'}
+                \}
+            ]])
+        end
     },
     {
         'vim-airline/vim-airline',
-        enabled = false,
+        lazy = true,
         config = function()
-            vim.cmd([[source $HOME/.config/nvim/config/plugin/airline.vim]])
+            vim.cmd([[
+                " disable git branch info
+                let g:airline_section_b = ""
+
+                " don't care about filetype
+                let g:airline_section_x = ""
+
+                " don't care about file encoding
+                let g:airline_section_y = ""
+
+                let g:airline_section_z = "%p%% %{g:airline_symbols.linenr} %#__accent_bold#%l/%L%#__restore__# : %v/%{strlen(getline('.'))}"
+            ]])
         end
     },
 }

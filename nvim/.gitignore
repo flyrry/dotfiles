@@ -1,5 +1,4 @@
 .netrwhist
-plugged/
-spell/
-plugin/
+/spell/
+/plugin/
 lazy-lock.json
