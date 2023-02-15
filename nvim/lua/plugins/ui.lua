@@ -166,20 +166,25 @@ return {
             ]])
         end
     },
-    {
-        'vim-airline/vim-airline',
-        lazy = true,
+    { -- really fast to load
+        'itchyny/lightline.vim',
+        enabled = false,
         config = function()
             vim.cmd([[
-                " disable git branch info
-                let g:airline_section_b = ""
+                let g:lightline = {
+                    \ 'colorscheme': 'sonokai',
+                    \ }
+            ]])
+        end
+    },
 
-                " don't care about filetype
-                let g:airline_section_x = ""
-
-                " don't care about file encoding
-                let g:airline_section_y = ""
-
+    {
+        'vim-airline/vim-airline',
+        config = function()
+            vim.cmd([[
+                let g:airline_section_b = "" " disable git branch info
+                let g:airline_section_x = "" " don't care about filetype
+                let g:airline_section_y = "" " don't care about file encoding
                 let g:airline_section_z = "%p%% %{g:airline_symbols.linenr} %#__accent_bold#%l/%L%#__restore__# : %v/%{strlen(getline('.'))}"
             ]])
         end
