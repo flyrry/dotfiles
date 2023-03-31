@@ -2,6 +2,7 @@ return {
     'tpope/vim-surround',
     'AndrewRadev/splitjoin.vim',
     'editorconfig/editorconfig-vim',
+    'github/copilot.vim',
     {
         'neovim/nvim-lspconfig',
         config = function()
