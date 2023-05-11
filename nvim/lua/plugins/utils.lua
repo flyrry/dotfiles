@@ -264,10 +264,36 @@ return {
             require('leap').add_default_mappings()
         end
     },
+    {'tpope/vim-rhubarb', lazy = true},
+    {'godlygeek/tabular', lazy = true},
+    {
+        'ibhagwan/fzf-lua',
+        lazy = true,
+        --enabled = true,
+        dependencies = {'nvim-tree/nvim-web-devicons'},
+        init = function()
+            require('which-key').register({
+                ['<C-p>'] = {':lua require("fzf-lua").files()<CR>', 'FZF Find Files'},
+                ['<leader>f'] = {
+                    g = {':lua require("fzf-lua").git_status()<CR>', 'FZF Find Git Files'},
+                    q = {':lua require("fzf-lua").quickfix()<CR>', 'Quickfix'},
+                    o = {':lua require("fzf-lua").oldfiles()<CR>', 'Old files'},
+                    b = {':lua require("fzf-lua").buffers()<CR>', 'Buffers'},
+                    w = {':lua require("fzf-lua").grep_cWORD()<CR>', 'Grep WORD'},
+                    W = {':lua require("fzf-lua").grep_cword()<CR>', 'Grep word'},
+                    s = {':lua require("fzf-lua").grep_project()<CR>', 'Grep'},
+                },
+            })
+        end
+    },
+
+    -- maybe later...
     {
         'junegunn/fzf.vim',
         lazy = true,
+        enabled = false,
         keys = {
+            {'<leader>fb', ':Buffers<CR>', desc = 'Buffers', silent = true},
             {'<leader>fo', ':History<CR>', desc = 'History', silent = true},
             {'<leader>fm', ':GFiles?<CR>', desc = 'Git Changes', silent = true},
             {'<leader>fs', ':Rg<CR>', desc = 'Find String', silent = true},
@@ -281,30 +307,15 @@ return {
     {
         'mfussenegger/nvim-fzy',
         lazy = true,
+        enabled = false,
         init = function()
             require('which-key').register({
                 ['<leader>f'] = {
-                    b = {':lua require("fzy").actions.buffers()<CR>', 'Buffers'},
                     f = {':lua require("fzy").execute("fd", require("fzy").sinks.edit_file)<CR>', 'Find Files'},
                     g = {':lua require("fzy").execute("git ls-files", require("fzy").sinks.edit_file)<CR>', 'Git Files'},
                     q = {':lua require("fzy").actions.quickfix()<CR>', 'Quickfix'},
                 },
                 ['<C-p>'] = {':lua require("fzy").execute("fd", require("fzy").sinks.edit_file)<CR>', 'Find Files'},
-            })
-        end
-    },
-    {'tpope/vim-rhubarb', lazy = true},
-    {'godlygeek/tabular', lazy = true},
-
-    -- maybe later...
-    {
-        'ibhagwan/fzf-lua',
-        lazy = true,
-        enabled = false,
-        dependencies = {'nvim-tree/nvim-web-devicons'},
-        init = function()
-            require('which-key').register({
-                ['<C-p>'] = {':lua require("fzf-lua").files()<CR>', 'FZF Find Files'},
             })
         end
     },
