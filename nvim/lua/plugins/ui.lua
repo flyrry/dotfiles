@@ -114,22 +114,6 @@ return {
             {'<leader>gf', ':Twilight<CR>', desc = 'Toggle Focus Mode', silent = true},
         },
     },
-    {
-        'nvim-tree/nvim-tree.lua',
-        lazy = true,
-        keys = {
-            {'<leader>nt', ':NvimTreeToggle<CR>', desc = 'Toggle Tree', silent = true},
-            {'<leader>nf', ':NvimTreeFindFile<CR>', desc = 'Find In Tree', silent = true}
-        },
-        dependencies = {'nvim-tree/nvim-web-devicons'},
-        config = function()
-            require('nvim-tree').setup({
-                filters = {
-                    custom = {'.DS_Store', '.*.js', '.*.d.ts'}
-                }
-            })
-        end
-    },
     {'folke/which-key.nvim', lazy = true},
     {
         'plasticboy/vim-markdown',
@@ -138,11 +122,11 @@ return {
 
     {
         'scrooloose/nerdtree',
-        enabled = false,
+        enabled = true,
         lazy = true,
         keys = {
-            {'<leader>vt', ':NERDTreeToggle<Bar>wincmd p<CR>', desc = 'Toggle Tree', silent = true},
-            {'<leader>vf', ':NERDTreeFind<Bar>wincmd p<CR>', desc = 'Find In Tree', silent = true}
+            {'<leader>nt', ':NERDTreeToggle<Bar>wincmd p<CR>', desc = 'Toggle Tree', silent = true},
+            {'<leader>nf', ':NERDTreeFind<Bar>wincmd p<CR>', desc = 'Find In Tree', silent = true}
         },
         config = function()
             vim.g['NERDTreeWinSize'] = 42
@@ -192,6 +176,24 @@ return {
                 let g:airline_section_y = "" " don't care about file encoding
                 let g:airline_section_z = "%p%% %{g:airline_symbols.linenr} %#__accent_bold#%l/%L%#__restore__# : %v/%{strlen(getline('.'))}"
             ]])
+        end
+    },
+    -- constant issues with files not visible in tree
+    {
+        'nvim-tree/nvim-tree.lua',
+        enabled = false,
+        lazy = true,
+        keys = {
+            {'<leader>nt', ':NvimTreeToggle<CR>', desc = 'Toggle Tree', silent = true},
+            {'<leader>nf', ':NvimTreeFindFile<CR>', desc = 'Find In Tree', silent = true}
+        },
+        dependencies = {'nvim-tree/nvim-web-devicons'},
+        config = function()
+            require('nvim-tree').setup({
+                filters = {
+                    custom = {'.DS_Store', '.*.js', '.*.d.ts'}
+                }
+            })
         end
     },
 }
