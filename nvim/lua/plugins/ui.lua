@@ -85,7 +85,12 @@ return {
     {
         'lewis6991/gitsigns.nvim',
         dependencies = {'nvim-lua/plenary.nvim'},
-        config = function() require('gitsigns').setup({current_line_blame = true}) end
+        config = function()
+            require('gitsigns').setup({current_line_blame = true})
+            require('which-key').register({
+                ['<leader>gb'] = {':Gitsigns toggle_current_line_blame<CR>', 'Toggle inline git-blame'},
+            })
+        end
     },
 
     {
