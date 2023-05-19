@@ -267,9 +267,37 @@ return {
     {'tpope/vim-rhubarb', lazy = true},
     {'godlygeek/tabular', lazy = true},
     {
+        'nvim-telescope/telescope.nvim',
+        lazy = true,
+        tag = '0.1.1',
+        dependencies = {
+            'nvim-lua/plenary.nvim',
+            'nvim-tree/nvim-web-devicons',
+            {'nvim-telescope/telescope-fzf-native.nvim', build = 'make'},
+        },
+        init = function()
+            require('which-key').register({
+                ['<C-p>'] = {':lua require("telescope.builtin").find_files()<CR>', 'Find Files'},
+                ['<leader>f'] = {
+                    g = {':lua require("telescope.builtin").git_files()<CR>', 'Find Git Files'},
+                    q = {':lua require("telescope.builtin").quickfix()<CR>', 'Quickfix'},
+                    o = {':lua require("telescope.builtin").oldfiles()<CR>', 'Old files'},
+                    b = {':lua require("telescope.builtin").buffers()<CR>', 'Buffers'},
+                    s = {':lua require("telescope.builtin").live_grep()<CR>', 'Live Grep'},
+                    w = {':lua require("telescope.builtin").grep_string()<CR>', 'Grep Word'},
+                },
+            })
+        end,
+        config = function()
+            require('telescope').load_extension('fzf')
+        end,
+    },
+
+    -- maybe later...
+    {
         'ibhagwan/fzf-lua',
         lazy = true,
-        --enabled = true,
+        enabled = false,
         dependencies = {'nvim-tree/nvim-web-devicons'},
         init = function()
             require('which-key').register({
@@ -286,8 +314,6 @@ return {
             })
         end
     },
-
-    -- maybe later...
     {
         'junegunn/fzf.vim',
         lazy = true,
