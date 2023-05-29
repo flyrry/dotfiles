@@ -5,158 +5,211 @@ return {
     'github/copilot.vim',
     {
         'neovim/nvim-lspconfig',
-        config = function()
-            local nvim_lsp = require('lspconfig')
-            local protocol = require'vim.lsp.protocol'
+        dependencies = {
+            -- Automatically install LSPs to stdpath for neovim
+            {'williamboman/mason.nvim', config = true},
+            {
+                'williamboman/mason-lspconfig.nvim',
+                config = function()
 
-            local on_attach = function(client, bufnr)
-                require('which-key').register({
-                    g = {
-                        d = {':lua vim.lsp.buf.definition()<CR>', 'Definition'},
-                        D = {':lua vim.lsp.buf.declaration()<CR>', 'Declaration'},
-                        t = {':lua vim.lsp.buf.type_definition()<CR>', 'Type definition'},
-                        i = {':lua vim.lsp.buf.implementation()<CR>', 'Implementation'},
-                        r = {':lua vim.lsp.buf.references()<CR>', 'References'},
-                        c = {':lua vim.lsp.buf.incoming_calls()<CR>', 'Incoming calls'},
-                        s = {':lua vim.lsp.buf.signature_help()<CR>', 'Signature help'},
-                    },
-                    f = {
-                        f = {':lua vim.lsp.buf.format{async=true}<CR>', 'Format document'},
-                    },
-                    ['<leader>'] = {
-                        ['do'] = {':lua vim.lsp.buf.code_action()<CR>', 'Code action'},
-                        ['rn'] = {':lua vim.lsp.buf.rename()<CR>', 'Rename symbol'},
-                        e = {
-                            n = {':lua vim.diagnostic.goto_next()<CR>', 'Next diagnostic'},
-                            p = {':lua vim.diagnostic.goto_prev()<CR>', 'Prev diagnostic'},
-                            e = {':lua vim.diagnostic.open_float()<CR>', 'Show diagnostic'},
-                        },
-                    },
-                    K = {':lua vim.lsp.buf.hover()<CR>', 'Hover documentation'},
-                }, {
-                    buffer = bufnr
-                })
+                    local on_attach = function(client, bufnr)
+                        if client.name == "tsserver" then
+                            client.server_capabilities.documentFormattingProvider = false
+                        end
 
-                --require('lsp_signature').on_attach({
-                --    hint_prefix = '',
-                --})
-
-                -- See `:help vim.lsp.*` for documentation on any of the below functions
-                --buf_set_keymap('n', '<space>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
-                -- using Lspsaga or Telescope for these
-                --buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
-                --buf_set_keymap('i', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
-            end
-
-            local capabilities = vim.lsp.protocol.make_client_capabilities()
-
-            nvim_lsp.tsserver.setup({
-                capabilities = capabilities,
-                on_attach = function(client, bufnr)
-                    client.server_capabilities.documentFormattingProvider = false
-                    on_attach(client, bufnr)
-                end
-            })
-
-            nvim_lsp.rust_analyzer.setup({
-                capabilities = capabilities,
-                on_attach=on_attach,
-                settings = {
-                    ['rust-analyzer'] = {
-                        imports = {
-                            granularity = {
-                                group = 'module',
+                        require('which-key').register({
+                            g = {
+                                d = {':lua vim.lsp.buf.definition()<CR>', 'Definition'},
+                                D = {':lua vim.lsp.buf.declaration()<CR>', 'Declaration'},
+                                t = {':lua vim.lsp.buf.type_definition()<CR>', 'Type definition'},
+                                i = {':lua vim.lsp.buf.implementation()<CR>', 'Implementation'},
+                                r = {':lua vim.lsp.buf.references()<CR>', 'References'},
+                                c = {':lua vim.lsp.buf.incoming_calls()<CR>', 'Incoming calls'},
+                                s = {':lua vim.lsp.buf.signature_help()<CR>', 'Signature help'},
                             },
-                            prefix = 'self',
-                        },
-                        cargo = {
-                            buildScripts = {
-                                enable = true,
+                            f = {
+                                f = {':lua vim.lsp.buf.format{async=true}<CR>', 'Format document'},
                             },
-                        },
-                        procMacro = {
-                            enable = true
-                        },
-                    }
-                }
-            })
+                            ['<leader>'] = {
+                                ['do'] = {':lua vim.lsp.buf.code_action()<CR>', 'Code action'},
+                                ['rn'] = {':lua vim.lsp.buf.rename()<CR>', 'Rename symbol'},
+                                e = {
+                                    n = {':lua vim.diagnostic.goto_next()<CR>', 'Next diagnostic'},
+                                    p = {':lua vim.diagnostic.goto_prev()<CR>', 'Prev diagnostic'},
+                                    e = {':lua vim.diagnostic.open_float()<CR>', 'Show diagnostic'},
+                                },
+                            },
+                            K = {':lua vim.lsp.buf.hover()<CR>', 'Hover documentation'},
+                        }, {
+                            buffer = bufnr
+                        })
 
-            nvim_lsp.ccls.setup({
-                capabilities = capabilities,
-                filetypes = {'c', 'cc', 'cxx', 'cpp', 'objc', 'objcpp'},
-                on_attach = on_attach
-            })
+                        --require('lsp_signature').on_attach({
+                            --    hint_prefix = '',
+                            --})
 
-            local filetypes = {
-                typescript = 'eslint',
-                typescriptreact = 'eslint',
-            }
-            local linters = {
-                eslint = {
-                    sourceName = 'eslint',
-                    command = 'eslint_d',
-                    rootPatterns = {'.eslintrc.js', 'package.json'},
-                    debounce = 100,
-                    args = {'--stdin', '--stdin-filename', '%filepath', '--format', 'json'},
-                    parseJson = {
-                        errorsRoot = '[0].messages',
-                        line = 'line',
-                        column = 'column',
-                        endLine = 'endLine',
-                        endColumn = 'endColumn',
-                        message = '${message} [${ruleId}]',
-                        security = 'severity'
-                    },
-                    securities = {[2] = 'error', [1] = 'warning'}
-                }
-            }
-            local formatters = {
-                eslint = {command = 'eslint_d', args = {'--stdin', '--stdin-filename', '%filename', '--fix-to-stdout'}},
-                prettier = {command = 'prettier', args = {'--stdin-filepath', '%filepath'}}
-            }
-            local formatFiletypes = {
-                css = 'prettier',
-                javascript = {'prettier', 'eslint'},
-                javascriptreact = {'prettier', 'eslint'},
-                json = 'prettier',
-                scss = 'prettier',
-                less = 'prettier',
-                markdown = 'prettier',
-                typescript = {'prettier', 'eslint'},
-                typescriptreact = {'prettier', 'eslint'},
-            }
-            nvim_lsp.diagnosticls.setup {
-                on_attach = on_attach,
-                filetypes = vim.tbl_keys(filetypes),
-                init_options = {
-                    filetypes = filetypes,
-                    linters = linters,
-                    formatters = formatters,
-                    formatFiletypes = formatFiletypes
-                }
-            }
+                            -- See `:help vim.lsp.*` for documentation on any of the below functions
+                            --buf_set_keymap('n', '<space>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
+                            -- using Lspsaga or Telescope for these
+                            --buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
+                            --buf_set_keymap('i', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
+                        end
 
-            vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(
-                vim.lsp.handlers.hover, {
-                    border = 'single'
-                }
-            )
+-- Enable the following language servers
+-- Feel free to add/remove any LSPs that you want here. They will automatically be installed.
+--
+--  Add any additional override configuration in the following tables. They will be passed to
+--  the `settings` field of the server config. You must look up that documentation yourself.
+                        local servers = {
+                            clangd = {},
+                            rust_analyzer = {
+                                -- ['rust-analyzer'] = {
+                                --     imports = {
+                                --         granularity = {
+                                --             group = 'module',
+                                --         },
+                                --         prefix = 'self',
+                                --     },
+                                --     cargo = {
+                                --         buildScripts = {
+                                --             enable = true,
+                                --         },
+                                --     },
+                                --     procMacro = {
+                                --         enable = true
+                                --     },
+                                -- }
+                            },
+                            tsserver = {},
+                            diagnosticls = {
+                                filetypes = {
+                                    -- "css",
+                                    -- "dockerfile",
+                                    -- "fish",
+                                    -- "go",
+                                    "javascript",
+                                    "javascriptreact",
+                                    -- "json",
+                                    -- "lua",
+                                    -- "markdown",
+                                    -- "python",
+                                    -- "scss",
+                                    -- "sh",
+                                    -- "sql",
+                                    "typescript",
+                                    "typescriptreact",
+                                    -- "vim",
+                                    -- "yaml",
+                                    -- "yaml.ansible",
+                                },
+                                init_options = {
+                                    linters = {
+                                        eslint = {
+                                            sourceName = "eslint",
+                                            command = "eslint_d",
+                                            rootPatterns = {".eslintrc.js", "package.json"},
+                                            debounce = 100,
+                                            args = {"--stdin", "--stdin-filename", "%filepath", "--format", "json"},
+                                            parseJson = {
+                                                errorsRoot = "[0].messages",
+                                                line = "line",
+                                                column = "column",
+                                                endLine = "endLine",
+                                                endColumn = "endColumn",
+                                                message = "${message} [${ruleId}]",
+                                                security = "severity"
+                                            },
+                                            securities = {[2] = "error", [1] = "warning"}
+                                        }
+                                    },
+                                    formatters = {
+                                        eslint = {command = "eslint_d", args = {"--stdin", "--stdin-filename", "%filename", "--fix-to-stdout"}},
+                                        prettier = {command = "prettier", args = {"--stdin", "--stdin-filepath", "%filepath"}}
+                                    },
+                                    filetypes = {
+                                        javascript = "eslint",
+                                        javascriptreact = "eslint",
+                                        typescript = "eslint",
+                                        typescriptreact = "eslint",
+                                    },
+                                    formatFiletypes = {
+                                        css = "prettier",
+                                        javascript = {"prettier", "eslint"},
+                                        javascriptreact = {"prettier", "eslint"},
+                                        json = "prettier",
+                                        scss = "prettier",
+                                        less = "prettier",
+                                        markdown = "prettier",
+                                        typescript = {"prettier", "eslint"},
+                                        typescriptreact = {"prettier", "eslint"},
+                                    },
+                                },
+                            },
+                            lua_ls = {
+                                Lua = {
+                                    diagnostics = {
+                                        -- Get the language server to recognize the `vim` global
+                                        globals = {'vim'},
+                                    },
+                                    workspace = {
+                                        -- Make the server aware of Neovim runtime files
+                                        library = vim.api.nvim_get_runtime_file("", true),
+                                    },
+                                    telemetry = {enable = false},
+                                },
+                            },
+                        }
+
+                        local capabilities = vim.lsp.protocol.make_client_capabilities()
+                        local mason_lspconfig = require('mason-lspconfig')
+
+                        mason_lspconfig.setup {
+                            ensure_installed = vim.tbl_keys(servers),
+                        }
+
+                        mason_lspconfig.setup_handlers {
+                            function(server_name)
+                                if server_name == "diagnosticls" then
+                                    require('lspconfig')[server_name].setup(servers[server_name])
+                                else
+                                    require('lspconfig')[server_name].setup {
+                                        capabilities = capabilities,
+                                        on_attach = on_attach,
+                                        settings = servers[server_name],
+                                    }
+                                end
+                            end,
+                        }
+
+
+            -- vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(
+            --     vim.lsp.handlers.hover, {
+            --         border = 'single'
+            --     }
+            -- )
 
             -- Enable diagnostics
             vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(
-            vim.lsp.diagnostic.on_publish_diagnostics, {
+                vim.lsp.diagnostic.on_publish_diagnostics, {
                 --underline = true,
                 --virtual_text = {
-                --spacing = 4,
-                --prefix = ''
-                --},
-                virtual_text = true,
-                --signs = true,
-                update_in_insert = true,
-            }
+                    --spacing = 4,
+                    --prefix = ''
+                    --},
+                    virtual_text = true,
+                    --signs = true,
+                    update_in_insert = true,
+                }
             )
             vim.opt.signcolumn = 'yes'
-        end
+
+            end,
+            },
+            -- lsp loading progress indicators
+            {'j-hui/fidget.nvim', opts = {}},
+            -- lua lsp automatic configuration
+            {'folke/neodev.nvim', opts = {}},
+        },
     },
     {
         'hrsh7th/nvim-cmp',

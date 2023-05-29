@@ -29,10 +29,6 @@ return {
         end
     },
     {
-        'j-hui/fidget.nvim', -- lsp loading progress indicators
-        config = function() require('fidget').setup() end
-    },
-    {
         'nvim-treesitter/nvim-treesitter',
         build = ':TSUpdate',
         config = function()
