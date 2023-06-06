@@ -1,0 +1,71 @@
+return {
+    'tpope/vim-surround',
+    'AndrewRadev/splitjoin.vim',
+    {
+        'kristijanhusak/orgmode.nvim',
+        dependencies = {'nvim-treesitter/nvim-treesitter'},
+        config = function()
+            require('orgmode').setup({
+                org_agenda_files = '~/Documents/org/*',
+                org_default_notes_file = '~/Documents/org/todo.org',
+                --org_hide_leading_stars = true,
+            })
+        end
+    },
+    {
+        'numToStr/Comment.nvim',
+        config = function()
+            require('Comment').setup()
+        end
+    },
+    'ntpeters/vim-better-whitespace',
+    'christoomey/vim-tmux-navigator',
+    {
+        'chentoast/marks.nvim',
+        config = function()
+            require('marks').setup()
+        end
+    },
+    {
+        'vim-airline/vim-airline',
+        config = function()
+            vim.cmd([[
+                let g:airline_section_b = "" " disable git branch info
+                let g:airline_section_x = "" " don't care about filetype
+                let g:airline_section_y = "" " don't care about file encoding
+                let g:airline_section_z = "%p%% %{g:airline_symbols.linenr} %#__accent_bold#%l/%L%#__restore__# : %v/%{strlen(getline('.'))}"
+            ]])
+        end
+    },
+    {
+        'edkolev/tmuxline.vim',
+        lazy = true,
+        config = function()
+            vim.cmd([[
+            let g:tmuxline_powerline_separators = 0
+            let g:tmuxline_preset = {
+                \ 'c': '#S', 'cwin': ['#I', '#W'], 'win': ['#I', '#W'],
+                \ 'x': '%R %d-%m-%Y',
+                \ 'options': {'status-justify': 'left'}
+                \}
+            ]])
+        end
+    },
+    {
+        'lewis6991/gitsigns.nvim',
+        dependencies = {'nvim-lua/plenary.nvim'},
+        config = function()
+            require('gitsigns').setup({current_line_blame = true})
+            require('which-key').register({
+                ['<leader>gb'] = {':Gitsigns toggle_current_line_blame<CR>', 'Toggle inline git-blame'},
+            })
+        end
+    },
+    'junegunn/gv.vim',
+    'folke/todo-comments.nvim',
+    'tpope/vim-dispatch',
+    'sindrets/diffview.nvim',
+    'folke/trouble.nvim',
+    'pwntester/octo.nvim',
+    'nvim-neorg/neorg', -- orgmode replacement?
+}
