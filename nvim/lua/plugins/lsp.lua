@@ -1,6 +1,10 @@
 return {
     { 'neovim/nvim-lspconfig' },
-    { 'j-hui/fidget.nvim',       opts = {} },
+    {
+        'j-hui/fidget.nvim',
+        opts = {},
+        tag = "legacy"
+    },
     { 'williamboman/mason.nvim', config = true },
     {
         'williamboman/mason-lspconfig.nvim',
