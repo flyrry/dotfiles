@@ -12,7 +12,7 @@ return {
                 width = 42
             },
             filters = {
-                custom = { '\\.DS_Store$', '\\.js$', '\\.d\\.ts$' }
+                custom = { '\\.DS_Store$', '\\.js$', '\\.d\\.ts$', '\\.d\\.ts\\.map$' }
             }
         }
     },
