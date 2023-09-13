@@ -27,17 +27,6 @@ return {
         end
     },
     {
-        'vim-airline/vim-airline',
-        config = function()
-            vim.cmd([[
-                let g:airline_section_b = "" " disable git branch info
-                let g:airline_section_x = "" " don't care about filetype
-                let g:airline_section_y = "" " don't care about file encoding
-                let g:airline_section_z = "%p%% %{g:airline_symbols.linenr} %#__accent_bold#%l/%L%#__restore__# : %v/%{strlen(getline('.'))}"
-            ]])
-        end
-    },
-    {
         'edkolev/tmuxline.vim',
         lazy = true,
         config = function()
@@ -68,4 +57,7 @@ return {
     'folke/trouble.nvim',
     'pwntester/octo.nvim',
     'nvim-neorg/neorg', -- orgmode replacement?
+    'wellle/targets.vim', -- more vim-like targets to operate on
+    'leap-spooky.nvim',
 }
+
