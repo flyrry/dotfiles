@@ -80,4 +80,8 @@ return {
         },
     },
     { 'echasnovski/mini.indentscope', opts = {} },
+    {
+        'chentoast/marks.nvim',
+        config = true,
+    }
 }
