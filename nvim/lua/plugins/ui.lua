@@ -37,10 +37,11 @@ return {
                         end
                     end,
                     icon = '',
-                }, 'encoding' },
-                lualine_y = { 'progress' },
-                lualine_z = { 'location' },
+                } },
+                lualine_y = { 'encoding', 'progress', 'location' },
+                lualine_z = {},
             },
+            extensions = { 'quickfix', 'fugitive', 'nvim-tree' },
         },
     },
     {
