@@ -1,6 +1,4 @@
 return {
-    'tpope/vim-surround',
-    'AndrewRadev/splitjoin.vim',
     {
         'kristijanhusak/orgmode.nvim',
         dependencies = {'nvim-treesitter/nvim-treesitter'},
@@ -10,20 +8,6 @@ return {
                 org_default_notes_file = '~/Documents/org/todo.org',
                 --org_hide_leading_stars = true,
             })
-        end
-    },
-    {
-        'numToStr/Comment.nvim',
-        config = function()
-            require('Comment').setup()
-        end
-    },
-    'ntpeters/vim-better-whitespace',
-    'christoomey/vim-tmux-navigator',
-    {
-        'chentoast/marks.nvim',
-        config = function()
-            require('marks').setup()
         end
     },
     {
@@ -50,6 +34,10 @@ return {
             })
         end
     },
+    'tpope/vim-surround',
+    'AndrewRadev/splitjoin.vim',
+    'ntpeters/vim-better-whitespace',
+    'christoomey/vim-tmux-navigator',
     'junegunn/gv.vim',
     'folke/todo-comments.nvim',
     'tpope/vim-dispatch',
