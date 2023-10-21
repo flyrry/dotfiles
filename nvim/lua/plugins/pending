@@ -38,5 +38,6 @@ return {
     'leap-spooky.nvim',
     'nvim-dap', 'nvim-dap-ui', -- debug adaptor protocol
     'overseer', -- running tasks from nvim, including custom ones like 'yarn install'
+    'artempyanykh/marksman', -- markdown LSP
 }
 

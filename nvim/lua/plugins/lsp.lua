@@ -78,6 +78,7 @@ return {
                     --     },
                     -- }
                 },
+                zk = {},
                 diagnosticls = {
                     filetypes = {
                         -- "css",
@@ -88,7 +89,7 @@ return {
                         "javascriptreact",
                         -- "json",
                         -- "lua",
-                        -- "markdown",
+                        "markdown",
                         -- "python",
                         -- "scss",
                         -- "sh",
