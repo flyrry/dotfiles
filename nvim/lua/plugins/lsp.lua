@@ -15,15 +15,15 @@ return {
                 end
 
                 require('which-key').register({
-                    g = {
-                        d = { ':lua vim.lsp.buf.definition()<CR>', 'Definition' },
-                        D = { ':lua vim.lsp.buf.declaration()<CR>', 'Declaration' },
-                        t = { ':lua vim.lsp.buf.type_definition()<CR>', 'Type definition' },
-                        i = { ':lua vim.lsp.buf.implementation()<CR>', 'Implementation' },
-                        r = { ':lua vim.lsp.buf.references()<CR>', 'References' },
-                        c = { ':lua vim.lsp.buf.incoming_calls()<CR>', 'Incoming calls' },
-                        --s = { ':lua vim.lsp.buf.signature_help()<CR>', 'Signature help' },
-                    },
+                    -- g = {
+                    --     -- d = { ':lua vim.lsp.buf.definition()<CR>', 'Definition' },
+                    --     -- D = { ':lua vim.lsp.buf.declaration()<CR>', 'Declaration' },
+                    --     -- t = { ':lua vim.lsp.buf.type_definition()<CR>', 'Type definition' },
+                    --     -- i = { ':lua vim.lsp.buf.implementation()<CR>', 'Implementation' },
+                    --     -- r = { ':lua vim.lsp.buf.references()<CR>', 'References' },
+                    --     -- c = { ':lua vim.lsp.buf.incoming_calls()<CR>', 'Incoming calls' },
+                    --     -- s = { ':lua vim.lsp.buf.signature_help()<CR>', 'Signature help' },
+                    -- },
                     f = {
                         f = { ':lua vim.lsp.buf.format{async=true}<CR>', 'Format document' },
                     },
@@ -41,13 +41,8 @@ return {
                     buffer = bufnr
                 })
 
-                --require('lsp_signature').on_attach({
-                --    hint_prefix = '',
-                --})
-
                 -- See `:help vim.lsp.*` for documentation on any of the below functions
                 --buf_set_keymap('n', '<space>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
-                -- using Lspsaga or Telescope for these
                 --buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
                 --buf_set_keymap('i', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
             end

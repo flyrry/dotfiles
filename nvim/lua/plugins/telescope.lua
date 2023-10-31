@@ -21,6 +21,16 @@ return {
                     S = { ':lua require("telescope").extensions.dir.live_grep()<CR>', '[S]earch Grep in <DIR>' },
                     w = { ':lua require("telescope.builtin").grep_string()<CR>', '[W]ord Grep' },
                 },
+                g = {
+                    d = { ':lua require("telescope.builtin").lsp_definitions()<CR>', '[D]efinitions' },
+                    t = { ':lua require("telescope.builtin").lsp_type_definitions()<CR>', '[T]ype definitions' },
+                    i = { ':lua require("telescope.builtin").lsp_implementations()<CR>', '[I]mplementations' },
+                    r = { ':lua require("telescope.builtin").lsp_references()<CR>', '[R]eferences' },
+                    s = { ':lua require("telescope.builtin").lsp_document_symbols()<CR>', 'Show document [s]ymbols' },
+                    ic = { ':lua require("telescope.builtin").lsp_incoming_calls()<CR>', '[I]ncoming [c]alls' },
+                    oc = { ':lua require("telescope.builtin").lsp_outgoing_calls()<CR>', '[O]utgoing [c]alls' },
+                    D = { ':lua require("telescope.builtin").diagnostics()<CR>', 'Dia[g]nostics' },
+                },
             })
         end,
         config = function()
