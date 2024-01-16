@@ -21,6 +21,7 @@ vim.o.autowrite = true          -- automatically save when switching between buf
 vim.o.clipboard = 'unnamedplus' -- use system clipboard
 vim.o.undofile = true
 vim.o.completeopt = 'menu,menuone,noselect,noinsert'
+vim.o.swapfile = false
 
 vim.o.re = 0 -- turn off old regexp engine
 vim.o.mouse = ''
@@ -31,7 +32,8 @@ vim.o.shiftwidth = 4
 vim.o.softtabstop = 4
 -- folds expanded on file load
 vim.o.foldenable = false
-vim.o.foldmethod = 'syntax'
+vim.o.foldmethod = 'expr'
+vim.o.foldexpr = 'nvim_treesitter#foldexpr()'
 -- always show what mode we are currently editing in
 vim.o.showmode = true
 -- do smart autoindenting when starting a new line
