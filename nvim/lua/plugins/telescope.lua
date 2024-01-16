@@ -2,7 +2,6 @@ return {
     {
         'nvim-telescope/telescope.nvim',
         lazy = true,
-        tag = '0.1.1',
         dependencies = {
             'nvim-lua/plenary.nvim',
             'nvim-tree/nvim-web-devicons',
@@ -20,6 +19,7 @@ return {
                     s = { ':lua require("telescope.builtin").live_grep()<CR>', '[S]earch Grep' },
                     S = { ':lua require("telescope").extensions.dir.live_grep()<CR>', '[S]earch Grep in <DIR>' },
                     w = { ':lua require("telescope.builtin").grep_string()<CR>', '[W]ord Grep' },
+                    c = { ':lua require("telescope.builtin").find_files({ search_dirs = { vim.fn.expand("%:p:h") } })<CR>', 'Find [C]urrent File' },
                 },
                 g = {
                     d = { ':lua require("telescope.builtin").lsp_definitions()<CR>', '[D]efinitions' },
@@ -36,6 +36,17 @@ return {
         config = function()
             require('telescope').setup({
                 defaults = {
+                    dynamic_preview_title = true,
+                    vimgrep_arguments = {
+                        "rg",
+                        "--color=never",
+                        "--no-heading",
+                        "--with-filename",
+                        "--line-number",
+                        "--column",
+                        "--smart-case",
+                        "--trim" -- add this value
+                    },
                     mappings = {
                         i = {
                             ['<Down>'] = require('telescope.actions').move_selection_next,
@@ -62,7 +73,6 @@ return {
                             ['<C-l>'] = require('telescope.actions').smart_send_to_loclist + require('telescope.actions').open_loclist,
                         },
                     },
-                    dynamic_preview_title = true,
                 }
             })
 
