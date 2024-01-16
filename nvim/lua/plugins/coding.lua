@@ -9,4 +9,15 @@ return {
         event = "VeryLazy",
         config = true
     },
+    {
+        "bolteu/goto-api-definition.nvim",
+        config = true
+    },
+    {
+        'bolteu/goto-api-endpoint.nvim',
+        dependencies = {
+            'nvim-telescope/telescope.nvim',
+        },
+        config = true
+    }
 }
