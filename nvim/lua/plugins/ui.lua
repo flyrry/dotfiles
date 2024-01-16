@@ -45,6 +45,20 @@ return {
         },
     },
     {
+        'edkolev/tmuxline.vim',
+        lazy = true,
+        config = function()
+            vim.cmd([[
+            let g:tmuxline_powerline_separators = 0
+            let g:tmuxline_preset = {
+                \ 'c': '#S', 'cwin': ['#I', '#W'], 'win': ['#I', '#W'],
+                \ 'x': '%R %d-%m-%Y',
+                \ 'options': {'status-justify': 'left'}
+                \}
+            ]])
+        end
+    },
+    {
         'mhinz/vim-startify',
         config = function()
             vim.g.startify_change_to_dir = false

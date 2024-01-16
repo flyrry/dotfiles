@@ -46,4 +46,5 @@ return {
       { 'gs', '<Plug>(leap-cross-window)', desc = 'Leap across',   silent = true },
     },
   },
+  'christoomey/vim-tmux-navigator',
 }
