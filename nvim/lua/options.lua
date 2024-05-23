@@ -42,7 +42,7 @@ vim.o.smartindent = true
 vim.o.laststatus = 3
 vim.o.encoding = 'utf-8'
 -- seriously, stop beeping
-vim.o.noerrorbells = true
+vim.o.errorbells = false
 vim.o.showmatch = true
 vim.o.backspace = 'indent,eol,start'
 vim.o.grepprg = 'rg --vimgrep'

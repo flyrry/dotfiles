@@ -1,5 +1,4 @@
 return {
-    { 'echasnovski/mini.comment',   opts = {} },
     { 'echasnovski/mini.splitjoin', opts = {} },
     { 'tpope/vim-fugitive' },
     { 'tpope/vim-rhubarb' },

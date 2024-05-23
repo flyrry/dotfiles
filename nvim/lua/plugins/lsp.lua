@@ -30,16 +30,20 @@ return {
                     ['<leader>'] = {
                         ['do'] = { ':lua vim.lsp.buf.code_action()<CR>', 'Code action' },
                         ['rn'] = { ':lua vim.lsp.buf.rename()<CR>', 'Rename symbol' },
+                        ['ih'] = { function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = bufnr })) end, 'Toggle [i]nlay [h]ints' },
                         e = {
                             n = { ':lua vim.diagnostic.goto_next()<CR>', 'Next diagnostic' },
                             p = { ':lua vim.diagnostic.goto_prev()<CR>', 'Prev diagnostic' },
                             e = { ':lua vim.diagnostic.open_float()<CR>', 'Show diagnostic' },
                         },
                     },
-                    K = { ':lua vim.lsp.buf.hover()<CR>', 'Hover documentation' },
                 }, {
                     buffer = bufnr
                 })
+
+                if client.server_capabilities.inlayHintProvider then
+                    vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
+                end
 
                 -- See `:help vim.lsp.*` for documentation on any of the below functions
                 --buf_set_keymap('n', '<space>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
@@ -54,7 +58,19 @@ return {
             --  the `settings` field of the server config. You must look up that documentation yourself.
             local servers = {
                 clangd = {},
-                tsserver = {},
+                tsserver = {
+                    typescript = {
+                        inlayHints = {
+                            includeInlayEnumMemberValueHints = true,
+                            includeInlayFunctionLikeReturnTypeHints = true,
+                            includeInlayFunctionParameterTypeHints = true,
+                            includeInlayParameterNameHints = "all", -- 'none' | 'literals' | 'all';
+                            includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+                            includeInlayPropertyDeclarationTypeHints = true,
+                            includeInlayVariableTypeHints = false,
+                        },
+                    },
+                },
                 rust_analyzer = {
                     -- ['rust-analyzer'] = {
                     --     imports = {
