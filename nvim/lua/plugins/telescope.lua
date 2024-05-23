@@ -10,7 +10,7 @@ return {
         },
         init = function()
             require('which-key').register({
-                ['<C-p>'] = { ':lua require("telescope.builtin").find_files()<CR>', 'Find Files' },
+                ['<leader>p'] = { ':lua require("telescope.builtin").find_files()<CR>', 'Find Files' },
                 ['<leader>f'] = {
                     g = { ':lua require("telescope.builtin").git_files()<CR>', 'Find [G]it Files' },
                     q = { ':lua require("telescope.builtin").quickfix()<CR>', '[Q]uickfix' },
@@ -20,6 +20,7 @@ return {
                     S = { ':lua require("telescope").extensions.dir.live_grep()<CR>', '[S]earch Grep in <DIR>' },
                     w = { ':lua require("telescope.builtin").grep_string()<CR>', '[W]ord Grep' },
                     c = { ':lua require("telescope.builtin").find_files({ search_dirs = { vim.fn.expand("%:p:h") } })<CR>', 'Find [C]urrent File' },
+                    f = { ':lua require("telescope").extensions.file_browser.file_browser({path="%:p:h"})<CR>', 'File [F]inder' },
                 },
                 g = {
                     d = { ':lua require("telescope.builtin").lsp_definitions()<CR>', '[D]efinitions' },
@@ -59,6 +60,7 @@ return {
 
                             ['<C-f>'] = require('telescope.actions').smart_send_to_qflist + require('telescope.actions').open_qflist,
                             ['<C-l>'] = require('telescope.actions').smart_send_to_loclist + require('telescope.actions').open_loclist,
+                            ['<C-h>'] = "which_key",
                         },
                         n = {
                             ['<Down>'] = require('telescope.actions').move_selection_next,
@@ -73,11 +75,25 @@ return {
                             ['<C-l>'] = require('telescope.actions').smart_send_to_loclist + require('telescope.actions').open_loclist,
                         },
                     },
-                }
+                },
+                extensions = {
+                    -- fzf = {
+                    --     override_generic_sorter = false,
+                    --     override_file_sorter = true,
+                    -- },
+                },
             })
 
             require('telescope').load_extension('fzf')
             require('telescope').load_extension('dir')
+            require('telescope').load_extension('file_browser')
         end,
     },
+    {
+        'nvim-telescope/telescope-file-browser.nvim',
+        dependencies = {
+            'nvim-lua/plenary.nvim',
+            'nvim-telescope/telescope.nvim',
+        },
+    }
 }

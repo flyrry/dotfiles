@@ -2,6 +2,7 @@ return {
     { 'echasnovski/mini.splitjoin', opts = {} },
     { 'tpope/vim-fugitive' },
     { 'tpope/vim-rhubarb' },
+    'sindrets/diffview.nvim',
     { 'tpope/vim-sleuth' }, -- auto-adjust 'shiftwidth' and 'expandtab'
     {
         "kylechui/nvim-surround",

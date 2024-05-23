@@ -47,4 +47,42 @@ return {
     },
   },
   'christoomey/vim-tmux-navigator',
+  {
+    'junegunn/fzf.vim',
+    dependencies = { 'junegunn/fzf' },
+    keys = {
+      { '<C-p>', ':Files<CR>', desc = 'Find Files' },
+      -- {'<leader>f', ':Rg<CR>', desc = 'Search Grep'},
+      -- {'<leader>g', ':GFiles<CR>', desc = 'Find [G]it Files'},
+      -- {'<leader>q', ':Quickfix<CR>', desc = '[Q]uickfix'},
+      -- {'<leader>o', ':History<CR>', desc = '[O]ld files'},
+      -- {'<leader>b', ':Buffers<CR>', desc = '[B]uffers'},
+      -- {'<leader>s', ':Rg<CR>', desc = '[S]earch Grep'},
+      -- {'<leader>S', ':Files<CR>', desc = '[S]earch Grep in <DIR>'},
+      -- {'<leader>w', ':Rg<CR>', desc = '[W]ord Grep'},
+      -- {'<leader>c', ':Files<CR>', desc = 'Find [C]urrent File'},
+    },
+    config = function()
+      vim.g.fzf_layout = { window = { width = 0.9, height = 0.75 } }
+      vim.g.fzf_preview_window = { 'right,50%,<70(up,50%)', 'ctrl-/' }
+    end
+  },
+  {
+    'camspiers/snap',
+    config = function()
+      local snap = require('snap')
+      snap.maps({
+        { "<leader>o", snap.config.file { producer = "ripgrep.file", consumer = "fzf" } },
+        -- {"<leader>f", snap.config.vimgrep {}},
+        -- {"<leader>g", snap.config.vimgrep { input = vim.fn.expand("<cword>") }},
+        -- {"<leader>q", snap.config.qf {}},
+        -- {"<leader>o", snap.config.oldfile {}},
+        -- {"<leader>b", snap.config.file { producer = "vim.buffer" }},
+        -- {"<leader>s", snap.config.vimgrep { input = vim.fn.expand("<cword>") }},
+        -- {"<leader>S", snap.config.file { producer = "vim.buffer" }},
+        -- {"<leader>w", snap.config.vimgrep { input = vim.fn.expand("<cword>") }},
+        -- {"<leader>c", snap.config.file { producer = "vim.buffer" }},
+      })
+    end,
+  }
 }

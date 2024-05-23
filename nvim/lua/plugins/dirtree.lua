@@ -11,6 +11,9 @@ return {
             view = {
                 width = 42
             },
+            git = {
+                enable = false
+            },
             filters = {
                 custom = { '\\.DS_Store$', '\\.js$', '\\.d\\.ts$', '\\.d\\.ts\\.map$' }
             }
