@@ -12,7 +12,6 @@ return {
     'tpope/vim-surround',
     'AndrewRadev/splitjoin.vim',
     'ntpeters/vim-better-whitespace',
-    'junegunn/gv.vim',
     'folke/todo-comments.nvim',
     'tpope/vim-dispatch',
     'sindrets/diffview.nvim',
