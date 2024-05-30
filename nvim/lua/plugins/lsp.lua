@@ -41,10 +41,10 @@ return {
                     buffer = bufnr
                 })
 
-                if client.server_capabilities.inlayHintProvider then
-                    vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
-                end
-
+                -- if client.server_capabilities.inlayHintProvider then
+                --     vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
+                -- end
+                --
                 -- See `:help vim.lsp.*` for documentation on any of the below functions
                 --buf_set_keymap('n', '<space>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
                 --buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
