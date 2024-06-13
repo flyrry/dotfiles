@@ -49,7 +49,7 @@ return {
   'christoomey/vim-tmux-navigator',
   {
     'junegunn/fzf.vim',
-    dependencies = { 'junegunn/fzf' },
+    dependencies = { 'junegunn/fzf', build = './install --all'},
     keys = {
       { '<C-p>', ':Files<CR>', desc = 'Find Files' },
       -- {'<leader>f', ':Rg<CR>', desc = 'Search Grep'},
