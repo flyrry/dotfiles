@@ -1,0 +1,63 @@
+[user]
+    ; name = Name Name
+    ; email = Email
+[alias]
+    amend = commit --amend --reuse-message=HEAD
+    b = branch
+    ; cm = commit -m
+    cma = commit -a -m
+    co = checkout
+    cob = checkout -b
+    p = pull
+    pf = push --force-with-lease
+    ; rd = rebase origin/develop
+    ; rc = rebase --continue
+    ; s = status -s
+    l = log --oneline -n 10
+    ll = log --oneline
+    ; files = show --stat --oneline
+    ; remotes = remote -v
+    cleanup = "!git branch --merged | grep  -v '\\*\\|master\\|\\+\\|develop' | xargs -n 1 git branch -d"
+    branch-name = "!git rev-parse --abbrev-ref HEAD"
+    publish = "!git push -u origin $(git branch-name)"
+    stashread = "!f() { git stash show -p stash@{$1};}; f"
+    coc = "!f() { \
+        [ ${#} -ne 1 ] && { echo \"Please provide branch suffix\" ; exit 1 ; };\
+        git checkout -b \"feature/TAP-${1}\";\
+        }; f"
+    sco = "!f() { \
+        [ ${#} -ne 1 ] && { echo \"Please provide one search string\" ; exit 1 ; };\
+        MATCHES=( $(git branch -a --color=never | grep -v remotes | grep -v '*' | grep $1) );\
+        case ${#MATCHES[@]} in\
+        ( 0 ) echo \"No branches matched '${1}'\"; exit 1 ;;\
+        ( 1 ) git checkout \"${MATCHES[0]}\"     ; exit $? ;;\
+        esac;\
+        echo \"Ambiguous search '${1}'; returned ${#MATCHES[@]} matches:\";\
+        for ITEM in \"${MATCHES[@]}\" ; do\
+        echo \"  ${ITEM}\";\
+        done;\
+        exit 1;\
+        }; f"
+    rsco = "!f() { \
+        [ ${#} -ne 1 ] && { echo \"Please provide one search string\" ; exit 1 ; };\
+        MATCHES=( $(git branch -a --color=never | grep remotes | grep $1) );\
+        case ${#MATCHES[@]} in\
+        ( 0 ) echo \"No branches matched '${1}'\"; exit 1 ;;\
+        ( 1 ) git checkout -t \"${MATCHES[0]}\"     ; exit $? ;;\
+        esac;\
+        echo \"Ambiguous search '${1}'; returned ${#MATCHES[@]} matches:\";\
+        for ITEM in \"${MATCHES[@]}\" ; do\
+        echo \"  ${ITEM}\";\
+        done;\
+        exit 1;\
+        }; f"
+[push]
+    autoSetupRemote = true
+[difftool]
+    prompt = true
+[diff]
+    tool = nvimdiff
+[difftool "nvimdiff"]
+    cmd = nvim -d \"$LOCAL\" \"$REMOTE\"
+[url "git@github.com:"]
+	insteadOf = https://github.com/
