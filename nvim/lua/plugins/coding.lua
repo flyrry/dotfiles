@@ -16,7 +16,7 @@ return {
     {
         'bolteu/goto-api-endpoint.nvim',
         dependencies = {
-            'nvim-telescope/telescope.nvim',
+            { 'nvim-telescope/telescope.nvim', branch = '0.1.x' }
         },
         config = true
     }

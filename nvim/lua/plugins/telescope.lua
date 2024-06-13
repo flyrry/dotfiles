@@ -1,6 +1,7 @@
 return {
     {
         'nvim-telescope/telescope.nvim',
+        branch = '0.1.x',
         lazy = true,
         dependencies = {
             'nvim-lua/plenary.nvim',
@@ -26,7 +27,7 @@ return {
                     d = { ':lua require("telescope.builtin").lsp_definitions()<CR>', '[D]efinitions' },
                     t = { ':lua require("telescope.builtin").lsp_type_definitions()<CR>', '[T]ype definitions' },
                     i = { ':lua require("telescope.builtin").lsp_implementations()<CR>', '[I]mplementations' },
-                    r = { ':lua require("telescope.builtin").lsp_references()<CR>', '[R]eferences' },
+                    r = { ':lua require("telescope.builtin").lsp_references({include_current_line=true})<CR>', '[R]eferences' },
                     s = { ':lua require("telescope.builtin").lsp_document_symbols()<CR>', 'Show document [s]ymbols' },
                     ic = { ':lua require("telescope.builtin").lsp_incoming_calls()<CR>', '[I]ncoming [c]alls' },
                     oc = { ':lua require("telescope.builtin").lsp_outgoing_calls()<CR>', '[O]utgoing [c]alls' },
@@ -37,6 +38,13 @@ return {
         config = function()
             require('telescope').setup({
                 defaults = {
+                    layout_strategy = 'flex',
+                    layout_config = {
+                        width = 0.9,
+                        height = 0.9,
+                        prompt_position = 'top',
+                        flip_columns = 160,
+                    },
                     dynamic_preview_title = true,
                     vimgrep_arguments = {
                         "rg",
@@ -58,8 +66,10 @@ return {
                             ['<C-k>'] = require('telescope.actions').move_selection_previous,
                             ['<C-p>'] = require('telescope.actions').move_selection_previous,
 
-                            ['<C-f>'] = require('telescope.actions').smart_send_to_qflist + require('telescope.actions').open_qflist,
-                            ['<C-l>'] = require('telescope.actions').smart_send_to_loclist + require('telescope.actions').open_loclist,
+                            ['<C-f>'] = require('telescope.actions').smart_send_to_qflist +
+                            require('telescope.actions').open_qflist,
+                            ['<C-l>'] = require('telescope.actions').smart_send_to_loclist +
+                            require('telescope.actions').open_loclist,
                             ['<C-h>'] = "which_key",
                         },
                         n = {
@@ -71,8 +81,10 @@ return {
                             ['k'] = require('telescope.actions').move_selection_previous,
                             ['p'] = require('telescope.actions').move_selection_previous,
 
-                            ['<C-f>'] = require('telescope.actions').smart_send_to_qflist + require('telescope.actions').open_qflist,
-                            ['<C-l>'] = require('telescope.actions').smart_send_to_loclist + require('telescope.actions').open_loclist,
+                            ['<C-f>'] = require('telescope.actions').smart_send_to_qflist +
+                            require('telescope.actions').open_qflist,
+                            ['<C-l>'] = require('telescope.actions').smart_send_to_loclist +
+                            require('telescope.actions').open_loclist,
                         },
                     },
                 },
@@ -93,7 +105,7 @@ return {
         'nvim-telescope/telescope-file-browser.nvim',
         dependencies = {
             'nvim-lua/plenary.nvim',
-            'nvim-telescope/telescope.nvim',
+            { 'nvim-telescope/telescope.nvim', branch = '0.1.x' }
         },
     }
 }
