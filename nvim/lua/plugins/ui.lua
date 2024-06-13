@@ -41,7 +41,8 @@ return {
                 lualine_y = { 'encoding', 'progress', 'location' },
                 lualine_z = {},
             },
-            extensions = { 'quickfix', 'fugitive', 'nvim-tree' },
+            extensions = { 'quickfix', 'fugitive' },
+            -- extensions = { 'quickfix', 'fugitive', 'nvim-tree' },
         },
     },
     {
