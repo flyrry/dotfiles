@@ -7,8 +7,9 @@ return {
             --vim.cmd[[let g:sonokai_style = 'andromeda']]
             --vim.cmd[[let g:sonokai_style = 'shusia']]
             --vim.cmd[[let g:sonokai_style = 'maia']]
-            vim.cmd([[colorscheme sonokai]])
+            --vim.cmd[[let g:sonokai_style = 'espresso']]
             vim.cmd([[let g:sonokai_enable_italic=1]])
+            vim.cmd([[colorscheme sonokai]])
         end
     },
     {
