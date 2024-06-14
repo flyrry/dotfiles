@@ -49,7 +49,7 @@ return {
   'christoomey/vim-tmux-navigator',
   {
     'junegunn/fzf.vim',
-    dependencies = { 'junegunn/fzf', build = './install --all'},
+    dependencies = { 'junegunn/fzf', build = './install --all' },
     keys = {
       { '<C-p>', ':Files<CR>', desc = 'Find Files' },
       -- {'<leader>f', ':Rg<CR>', desc = 'Search Grep'},
@@ -67,22 +67,4 @@ return {
       vim.g.fzf_preview_window = { 'right,50%,<70(up,50%)', 'ctrl-/' }
     end
   },
-  {
-    'camspiers/snap',
-    config = function()
-      local snap = require('snap')
-      snap.maps({
-        { "<leader>o", snap.config.file { producer = "ripgrep.file", consumer = "fzf" } },
-        -- {"<leader>f", snap.config.vimgrep {}},
-        -- {"<leader>g", snap.config.vimgrep { input = vim.fn.expand("<cword>") }},
-        -- {"<leader>q", snap.config.qf {}},
-        -- {"<leader>o", snap.config.oldfile {}},
-        -- {"<leader>b", snap.config.file { producer = "vim.buffer" }},
-        -- {"<leader>s", snap.config.vimgrep { input = vim.fn.expand("<cword>") }},
-        -- {"<leader>S", snap.config.file { producer = "vim.buffer" }},
-        -- {"<leader>w", snap.config.vimgrep { input = vim.fn.expand("<cword>") }},
-        -- {"<leader>c", snap.config.file { producer = "vim.buffer" }},
-      })
-    end,
-  }
 }
