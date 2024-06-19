@@ -23,6 +23,9 @@ return {
                     c = { ':lua require("telescope.builtin").find_files({ search_dirs = { vim.fn.expand("%:p:h") } })<CR>', 'Find [C]urrent File' },
                     f = { ':lua require("telescope").extensions.file_browser.file_browser({path="%:p:h"})<CR>', 'File [F]inder' },
                 },
+                ['<leader>b'] = {
+                    c = { ':lua require("telescope.builtin").git_bcommits()<CR>', 'Git [C]ommits' },
+                },
                 g = {
                     d = { ':lua require("telescope.builtin").lsp_definitions()<CR>', '[D]efinitions' },
                     t = { ':lua require("telescope.builtin").lsp_type_definitions()<CR>', '[T]ype definitions' },
