@@ -14,29 +14,15 @@ return {
                     client.server_capabilities.documentFormattingProvider = false
                 end
 
-                require('which-key').register({
-                    -- g = {
-                    --     -- d = { ':lua vim.lsp.buf.definition()<CR>', 'Definition' },
-                    --     -- D = { ':lua vim.lsp.buf.declaration()<CR>', 'Declaration' },
-                    --     -- t = { ':lua vim.lsp.buf.type_definition()<CR>', 'Type definition' },
-                    --     -- i = { ':lua vim.lsp.buf.implementation()<CR>', 'Implementation' },
-                    --     -- r = { ':lua vim.lsp.buf.references()<CR>', 'References' },
-                    --     -- c = { ':lua vim.lsp.buf.incoming_calls()<CR>', 'Incoming calls' },
-                    --     -- s = { ':lua vim.lsp.buf.signature_help()<CR>', 'Signature help' },
-                    -- },
-                    f = {
-                        f = { ':lua vim.lsp.buf.format{async=true}<CR>', 'Format document' },
-                    },
-                    ['<leader>'] = {
-                        ['do'] = { ':lua vim.lsp.buf.code_action()<CR>', 'Code action' },
-                        ['rn'] = { ':lua vim.lsp.buf.rename()<CR>', 'Rename symbol' },
-                        ['ih'] = { function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = bufnr })) end, 'Toggle [i]nlay [h]ints' },
-                        e = {
-                            n = { ':lua vim.diagnostic.goto_next()<CR>', 'Next diagnostic' },
-                            p = { ':lua vim.diagnostic.goto_prev()<CR>', 'Prev diagnostic' },
-                            e = { ':lua vim.diagnostic.open_float()<CR>', 'Show diagnostic' },
-                        },
-                    },
+                require('which-key').add({
+                    { 'ff',         ':lua vim.lsp.buf.format{async=true}<CR>',                                                      desc = 'Format document' },
+                    { '<leader>do', ':lua vim.lsp.buf.code_action()<CR>',                                                           desc = 'Code action' },
+                    { '<leader>rn', ':lua vim.lsp.buf.rename()<CR>',                                                                desc = 'Rename symbol' },
+                    { '<leader>ih', function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr =
+                        bufnr })) end,                                                                                              desc = 'Toggle [i]nlay [h]ints' },
+                    { '<leader>en', ':lua vim.diagnostic.goto_next()<CR>',                                                          desc = 'Next diagnostic' },
+                    { '<leader>ep', ':lua vim.diagnostic.goto_prev()<CR>',                                                          desc = 'Prev diagnostic' },
+                    { '<leader>ee', ':lua vim.diagnostic.open_float()<CR>',                                                         desc = 'Show diagnostic' },
                 }, {
                     buffer = bufnr
                 })

@@ -11,25 +11,25 @@ return {
         },
         init = function()
             require('which-key').add({
-                {'<leader>p', ':lua require("telescope.builtin").find_files()<CR>', desc = 'Find Files' },
-                {'<leader>fg', ':lua require("telescope.builtin").git_files()<CR>', desc = 'Find [G]it Files' },
-                {'<leader>fq', ':lua require("telescope.builtin").quickfix()<CR>', desc = '[Q]uickfix' },
-                {'<leader>fo', ':lua require("telescope.builtin").oldfiles()<CR>', desc = '[O]ld files' },
-                {'<leader>fb', ':lua require("telescope.builtin").buffers()<CR>', desc = '[B]uffers' },
-                {'<leader>fs', ':lua require("telescope.builtin").live_grep()<CR>', desc = '[S]earch Grep' },
-                {'<leader>fS', ':lua require("telescope").extensions.dir.live_grep()<CR>', desc = '[S]earch Grep in <DIR>' },
-                {'<leader>fw', ':lua require("telescope.builtin").grep_string()<CR>', desc = '[W]ord Grep' },
-                {'<leader>fc', ':lua require("telescope.builtin").find_files({ search_dirs = { vim.fn.expand("%:p:h") } })<CR>', desc = 'Find [C]urrent File' },
-                {'<leader>ff', ':lua require("telescope").extensions.file_browser.file_browser({path="%:p:h"})<CR>', desc = 'File [F]inder' },
-                {'<leader>bc', ':lua require("telescope.builtin").git_bcommits()<CR>', desc = 'Git [C]ommits' },
-                {'<leader>gd', ':lua require("telescope.builtin").lsp_definitions()<CR>', desc = '[D]efinitions' },
-                {'<leader>gt', ':lua require("telescope.builtin").lsp_type_definitions()<CR>', desc = '[T]ype definitions' },
-                {'<leader>gi', ':lua require("telescope.builtin").lsp_implementations()<CR>', desc = '[I]mplementations' },
-                {'<leader>gr', ':lua require("telescope.builtin").lsp_references({include_current_line=true})<CR>', desc = '[R]eferences' },
-                {'<leader>gs', ':lua require("telescope.builtin").lsp_document_symbols()<CR>', desc = 'Show document [s]ymbols' },
-                {'<leader>gic', ':lua require("telescope.builtin").lsp_incoming_calls()<CR>', desc = '[I]ncoming [c]alls' },
-                {'<leader>goc', ':lua require("telescope.builtin").lsp_outgoing_calls()<CR>', desc = '[O]utgoing [c]alls' },
-                {'<leader>gD', ':lua require("telescope.builtin").diagnostics()<CR>', desc = 'Dia[g]nostics' },
+                { '<leader>p',  ':lua require("telescope.builtin").find_files()<CR>',                                             desc = 'Find Files' },
+                { '<leader>fg', ':lua require("telescope.builtin").git_files()<CR>',                                              desc = 'Find [G]it Files' },
+                { '<leader>fq', ':lua require("telescope.builtin").quickfix()<CR>',                                               desc = '[Q]uickfix' },
+                { '<leader>fo', ':lua require("telescope.builtin").oldfiles()<CR>',                                               desc = '[O]ld files' },
+                { '<leader>fb', ':lua require("telescope.builtin").buffers()<CR>',                                                desc = '[B]uffers' },
+                { '<leader>fs', ':lua require("telescope.builtin").live_grep()<CR>',                                              desc = '[S]earch Grep' },
+                { '<leader>fS', ':lua require("telescope").extensions.dir.live_grep()<CR>',                                       desc = '[S]earch Grep in <DIR>' },
+                { '<leader>fw', ':lua require("telescope.builtin").grep_string()<CR>',                                            desc = '[W]ord Grep' },
+                { '<leader>fc', ':lua require("telescope.builtin").find_files({ search_dirs = { vim.fn.expand("%:p:h") } })<CR>', desc = 'Find [C]urrent File' },
+                { '<leader>ff', ':lua require("telescope").extensions.file_browser.file_browser({path="%:p:h"})<CR>',             desc = 'File [F]inder' },
+                { '<leader>bc', ':lua require("telescope.builtin").git_bcommits()<CR>',                                           desc = 'Git [C]ommits' },
+                { 'gd',         ':lua require("telescope.builtin").lsp_definitions()<CR>',                                        desc = '[D]efinitions' },
+                { 'gt',         ':lua require("telescope.builtin").lsp_type_definitions()<CR>',                                   desc = '[T]ype definitions' },
+                { 'gi',         ':lua require("telescope.builtin").lsp_implementations()<CR>',                                    desc = '[I]mplementations' },
+                { 'gr',         ':lua require("telescope.builtin").lsp_references({include_current_line=true})<CR>',              desc = '[R]eferences' },
+                { 'gs',         ':lua require("telescope.builtin").lsp_document_symbols()<CR>',                                   desc = 'Show document [s]ymbols' },
+                { 'gic',        ':lua require("telescope.builtin").lsp_incoming_calls()<CR>',                                     desc = '[I]ncoming [c]alls' },
+                { 'goc',        ':lua require("telescope.builtin").lsp_outgoing_calls()<CR>',                                     desc = '[O]utgoing [c]alls' },
+                { 'gD',         ':lua require("telescope.builtin").diagnostics()<CR>',                                            desc = 'Dia[g]nostics' },
             })
         end,
         config = function()
@@ -64,9 +64,9 @@ return {
                             ['<C-p>'] = require('telescope.actions').move_selection_previous,
 
                             ['<C-f>'] = require('telescope.actions').smart_send_to_qflist +
-                            require('telescope.actions').open_qflist,
+                                require('telescope.actions').open_qflist,
                             ['<C-l>'] = require('telescope.actions').smart_send_to_loclist +
-                            require('telescope.actions').open_loclist,
+                                require('telescope.actions').open_loclist,
                             ['<C-h>'] = "which_key",
                         },
                         n = {
@@ -79,9 +79,9 @@ return {
                             ['p'] = require('telescope.actions').move_selection_previous,
 
                             ['<C-f>'] = require('telescope.actions').smart_send_to_qflist +
-                            require('telescope.actions').open_qflist,
+                                require('telescope.actions').open_qflist,
                             ['<C-l>'] = require('telescope.actions').smart_send_to_loclist +
-                            require('telescope.actions').open_loclist,
+                                require('telescope.actions').open_loclist,
                         },
                     },
                 },
