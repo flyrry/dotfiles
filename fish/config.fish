@@ -33,7 +33,7 @@ if status is-interactive
     abbr -a gs 'git status --short'
     abbr -a gco 'git checkout'
     abbr -a gcd 'git checkout develop'
-    abbr -a gcob 'git checkout -b feature/TAP-'
+    abbr -a gcob --set-cursor 'git checkout -b feature/TAP-%'
     abbr -a gcoc 'git coc'
     abbr -a gcm --set-cursor 'git commit -m "%"'
     abbr -a gsc 'git sco'
