@@ -40,7 +40,7 @@ return {
                         width = 0.9,
                         height = 0.9,
                         prompt_position = 'top',
-                        flip_columns = 160,
+                        flex = { flip_columns = 160 },
                     },
                     dynamic_preview_title = true,
                     vimgrep_arguments = {

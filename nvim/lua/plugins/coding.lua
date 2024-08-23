@@ -19,5 +19,10 @@ return {
             { 'nvim-telescope/telescope.nvim', branch = '0.1.x' }
         },
         config = true
-    }
+    },
+    {
+        'bolteu/bolt.nvim',
+        opts = { key = '<Leader>gs' },
+        dependencies = { 'nvim-telescope/telescope.nvim' }
+    },
 }
