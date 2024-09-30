@@ -10,7 +10,7 @@ return {
         'williamboman/mason-lspconfig.nvim',
         config = function()
             local on_attach = function(client, bufnr)
-                if client.name == "tsserver" then
+                if client.name == "ts_ls" then
                     client.server_capabilities.documentFormattingProvider = false
                 end
 
@@ -44,7 +44,7 @@ return {
             --  the `settings` field of the server config. You must look up that documentation yourself.
             local servers = {
                 clangd = {},
-                tsserver = {
+                ts_ls = {
                     typescript = {
                         inlayHints = {
                             includeInlayEnumMemberValueHints = true,
