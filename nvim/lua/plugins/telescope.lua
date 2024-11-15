@@ -8,8 +8,12 @@ return {
             'nvim-tree/nvim-web-devicons',
             { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
             'princejoogie/dir-telescope.nvim',
+            'bolteu/bolt.nvim',
         },
         init = function()
+            local current_bolt_scope = function()
+                return { search_dirs = { require("bolt.util").find_parent_subdir("main") } }
+            end
             require('which-key').add({
                 { '<leader>p',  ':lua require("telescope.builtin").find_files()<CR>',                                             desc = 'Find Files' },
                 { '<leader>fg', ':lua require("telescope.builtin").git_files()<CR>',                                              desc = 'Find [G]it Files' },
@@ -17,9 +21,10 @@ return {
                 { '<leader>fo', ':lua require("telescope.builtin").oldfiles()<CR>',                                               desc = '[O]ld files' },
                 { '<leader>fb', ':lua require("telescope.builtin").buffers()<CR>',                                                desc = '[B]uffers' },
                 { '<leader>fs', ':lua require("telescope.builtin").live_grep()<CR>',                                              desc = '[S]earch Grep' },
+                { '<leader>Fs', function() require("telescope.builtin").live_grep(current_bolt_scope()) end,                      desc = '[S]earch Grep in scope' },
                 { '<leader>fS', ':lua require("telescope").extensions.dir.live_grep()<CR>',                                       desc = '[S]earch Grep in <DIR>' },
+                { '<leader>Fw', function() require("telescope.builtin").grep_string(current_bolt_scope()) end,                    desc = '[W]ord Grep in scope' },
                 { '<leader>fw', ':lua require("telescope.builtin").grep_string()<CR>',                                            desc = '[W]ord Grep' },
-                { '<leader>fc', ':lua require("telescope.builtin").find_files({ search_dirs = { vim.fn.expand("%:p:h") } })<CR>', desc = 'Find [C]urrent File' },
                 { '<leader>ff', ':lua require("telescope").extensions.file_browser.file_browser({path="%:p:h"})<CR>',             desc = 'File [F]inder' },
                 { '<leader>bc', ':lua require("telescope.builtin").git_bcommits()<CR>',                                           desc = 'Git [C]ommits' },
                 { 'gd',         ':lua require("telescope.builtin").lsp_definitions()<CR>',                                        desc = '[D]efinitions' },

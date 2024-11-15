@@ -22,7 +22,13 @@ return {
     },
     {
         'bolteu/bolt.nvim',
-        opts = { bootstrap = '<Leader>gs', db = '<Leader>gd' },
+        opts = {
+            bootstrap = '<Leader>gs',
+            db = '<Leader>gd',
+            comp = '<Leader>gc',
+            find_files_service = '<Leader>fp',
+            grep_service = '<Leader>fis'
+        },
         dependencies = { 'nvim-telescope/telescope.nvim' }
     },
 }
