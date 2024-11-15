@@ -95,7 +95,18 @@ return {
             { '<leader>gf', ':Twilight<CR>', desc = 'Toggle Focus Mode', silent = true },
         },
     },
-    { 'echasnovski/mini.indentscope', opts = {} },
+    {
+        'echasnovski/mini.indentscope',
+        config = function()
+            require('mini.indentscope').setup({
+                draw = {
+                    animation = require('mini.indentscope').gen_animation.linear({
+                        duration = 5,
+                    }),
+                }
+            })
+        end
+    },
     {
         'chentoast/marks.nvim',
         config = true,
