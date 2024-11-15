@@ -52,4 +52,5 @@ return {
       vim.g.fzf_preview_window = { 'right,50%,<70(up,50%)', 'ctrl-/' }
     end
   },
+  'preservim/vim-markdown'
 }
