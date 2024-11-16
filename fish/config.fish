@@ -39,9 +39,7 @@ if status is-interactive
     abbr -a gsc 'git sco'
 end
 
-#starship init fish | source
-
-#nvm use default --silent
+nvm use v20.14.0 --silent
 
 # pnpm
 set -gx PNPM_HOME "/Users/sergei/Library/pnpm"
