@@ -5,6 +5,7 @@ return {
             options = {
                 component_separators = '',
                 section_separators = '',
+                disabled_filetypes = { 'startify' },
             },
             sections = {
                 lualine_a = { 'mode' },
@@ -12,34 +13,26 @@ return {
                 lualine_c = { { 'filename', path = 1 } },
                 lualine_x = { {
                     function()
-                        local msg = ''
-                        local buf_ft = vim.api.nvim_buf_get_option(0, 'filetype')
-                        local clients = vim.lsp.get_active_clients()
-                        if next(clients) == nil then
-                            return msg
-                        end
-                        local lspList = {}
+                        local clients = vim.lsp.get_clients({ bufnr = 0 })
+                        local servers = {}
                         for _, client in ipairs(clients) do
-                            local filetypes = client.config.filetypes
-                            if filetypes and vim.fn.index(filetypes, buf_ft) ~= -1 then
-                                lspList[client.name] = true
-                            end
+                            table.insert(servers, client.name)
                         end
-                        if next(lspList) ~= nil then
-                            local servers = {}
-                            for k, _ in pairs(lspList) do
-                                table.insert(servers, k)
-                            end
-                            table.sort(servers)
-                            return table.concat(servers, '  ')
-                        else
-                            return msg
-                        end
+                        table.sort(servers)
+                        return table.concat(servers, '  ')
                     end,
                     icon = '',
                 } },
                 lualine_y = { 'encoding', 'progress', 'location' },
                 lualine_z = {},
+            },
+            winbar = {
+                lualine_x = { { 'filename' } },
+                lualine_y = { 'progress' },
+            },
+            inactive_winbar = {
+                lualine_x = { { 'filename' } },
+                lualine_y = { 'progress' },
             },
             extensions = { 'quickfix', 'fugitive' },
             -- extensions = { 'quickfix', 'fugitive', 'nvim-tree' },
