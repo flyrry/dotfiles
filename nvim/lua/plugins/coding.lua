@@ -30,5 +30,5 @@ return {
             grep_service = '<Leader>fis'
         },
         dependencies = { 'nvim-telescope/telescope.nvim' }
-    },
+    }
 }
