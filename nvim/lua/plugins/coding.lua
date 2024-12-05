@@ -26,7 +26,7 @@ return {
             bootstrap = '<Leader>gs',
             db = '<Leader>gd',
             comp = '<Leader>gc',
-            find_files_service = '<Leader>fp',
+            find_files_service = '<Leader>p',
             grep_service = '<Leader>fis'
         },
         dependencies = { 'nvim-telescope/telescope.nvim' }

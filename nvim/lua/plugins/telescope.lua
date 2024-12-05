@@ -15,7 +15,7 @@ return {
                 return { search_dirs = { require("bolt.util").find_parent_subdir("main") } }
             end
             require('which-key').add({
-                { '<leader>p',  ':lua require("telescope.builtin").find_files()<CR>',                                 desc = 'Find Files' },
+                -- { '<leader>p',  ':lua require("telescope.builtin").find_files()<CR>',                                 desc = 'Find Files' },
                 { '<leader>fg', ':lua require("telescope.builtin").git_files()<CR>',                                  desc = 'Find [G]it Files' },
                 { '<leader>fq', ':lua require("telescope.builtin").quickfix()<CR>',                                   desc = '[Q]uickfix' },
                 { '<leader>fo', ':lua require("telescope.builtin").oldfiles()<CR>',                                   desc = '[O]ld files' },
