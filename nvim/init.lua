@@ -15,5 +15,8 @@ require('options')
 require('autocmds')
 require('lazy').setup(
     'plugins',
-    { change_detection = { notify = false } }
+    {
+        change_detection = { notify = false },
+        rocks = { enabled = false }
+    }
 )

@@ -15,12 +15,53 @@ return {
                 return { search_dirs = { require("bolt.util").find_parent_subdir("main") } }
             end
             require('which-key').add({
-                -- { '<leader>p',  ':lua require("telescope.builtin").find_files()<CR>',                                 desc = 'Find Files' },
-                { '<leader>fg', ':lua require("telescope.builtin").git_files()<CR>',                                  desc = 'Find [G]it Files' },
-                { '<leader>fq', ':lua require("telescope.builtin").quickfix()<CR>',                                   desc = '[Q]uickfix' },
-                { '<leader>fo', ':lua require("telescope.builtin").oldfiles()<CR>',                                   desc = '[O]ld files' },
-                { '<leader>fb', ':lua require("telescope.builtin").buffers()<CR>',                                    desc = '[B]uffers' },
-                { '<leader>fs', ':lua require("telescope.builtin").live_grep()<CR>',                                  desc = '[S]earch Grep' },
+                { '<leader>P',  ':lua require("telescope.builtin").find_files()<CR>', desc = 'Find Files' },
+                {
+                    '<leader>mp',
+                    function()
+                        require("telescope.builtin").find_files({
+                            ---@diagnostic disable-next-line: param-type-mismatch
+                            cwd = vim.fs.joinpath(vim.fn.stdpath("data"), "lazy")
+                        })
+                    end,
+                    desc = 'Find [M]odule files'
+                },
+                { '<leader>fh', ':Telescope help_tags<CR>',                           desc = '[F]ind [H]elp' },
+                { '<leader>fg', ':lua require("telescope.builtin").git_files()<CR>',  desc = 'Find [G]it Files' },
+                { '<leader>fq', ':lua require("telescope.builtin").quickfix()<CR>',   desc = '[Q]uickfix' },
+                { '<leader>fo', ':lua require("telescope.builtin").oldfiles()<CR>',   desc = '[O]ld files' },
+                { '<leader>fb', ':lua require("telescope.builtin").buffers()<CR>',    desc = '[B]uffers' },
+                {
+                    '<leader>fs',
+                    function()
+                        require("telescope.builtin").live_grep({
+                            attach_mappings = function(_, map)
+                                map("i", "<space><space>", require("telescope.actions").to_fuzzy_refine)
+                                map("i", "<leader>c", function(prompt_bufnr)
+                                    require("telescope.actions").to_fuzzy_refine(prompt_bufnr)
+                                    vim.api.nvim_put({ "!gen !comp" }, "c", true, true)
+                                end)
+                                map("i", "<leader>e", function(prompt_bufnr)
+                                    local sorter = require("telescope.config").values.generic_sorter {}
+                                    local action_state = require("telescope.actions.state")
+                                    local current_picker = action_state.get_current_picker(prompt_bufnr)
+                                    if current_picker.prompt_border then
+                                        current_picker.prompt_border:change_title(string.format("Find Word!: (%s)",
+                                            action_state.get_current_line()))
+                                    end
+                                    current_picker.sorter:_destroy()
+                                    current_picker.sorter = sorter
+                                    current_picker.sorter:_init()
+                                    vim.api.nvim_put({ "!gen !comp" }, "c", true, true)
+                                end)
+                                -- needs to return true if you want to map default_mappings and
+                                -- false if not
+                                return true
+                            end,
+                        })
+                    end,
+                    desc = '[S]earch Grep'
+                },
                 { '<leader>Fs', function() require("telescope.builtin").live_grep(current_bolt_scope()) end,          desc = '[S]earch Grep in scope' },
                 { '<leader>fS', ':lua require("telescope").extensions.dir.live_grep()<CR>',                           desc = '[S]earch Grep in <DIR>' },
                 { '<leader>Fw', function() require("telescope.builtin").grep_string(current_bolt_scope()) end,        desc = '[W]ord Grep in scope' },
@@ -44,7 +85,7 @@ return {
                     layout_config = {
                         width = 0.9,
                         height = 0.9,
-                        prompt_position = 'top',
+                        prompt_position = 'bottom',
                         flex = { flip_columns = 160 },
                     },
                     dynamic_preview_title = true,
@@ -92,8 +133,8 @@ return {
                 },
                 extensions = {
                     -- fzf = {
-                    --     override_generic_sorter = false,
-                    --     override_file_sorter = true,
+                    -- --     override_generic_sorter = false,
+                    -- --     override_file_sorter = true,
                     -- },
                 },
             })
