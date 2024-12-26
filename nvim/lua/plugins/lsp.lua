@@ -1,5 +1,4 @@
 return {
-    { 'neovim/nvim-lspconfig' },
     {
         'j-hui/fidget.nvim',
         opts = {},
@@ -8,6 +7,10 @@ return {
     { 'williamboman/mason.nvim', config = true },
     {
         'williamboman/mason-lspconfig.nvim',
+        dependencies = {
+            'neovim/nvim-lspconfig',
+            'saghen/blink.cmp',
+        },
         config = function()
             local on_attach = function(client, bufnr)
                 if client.name == "ts_ls" then
@@ -15,14 +18,22 @@ return {
                 end
 
                 require('which-key').add({
-                    { 'ff',         ':lua vim.lsp.buf.format{async=true}<CR>',                                                      desc = 'Format document' },
-                    { '<leader>do', ':lua vim.lsp.buf.code_action()<CR>',                                                           desc = 'Code action' },
-                    { '<leader>rn', ':lua vim.lsp.buf.rename()<CR>',                                                                desc = 'Rename symbol' },
-                    { '<leader>ih', function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr =
-                        bufnr })) end,                                                                                              desc = 'Toggle [i]nlay [h]ints' },
-                    { '<leader>en', ':lua vim.diagnostic.goto_next()<CR>',                                                          desc = 'Next diagnostic' },
-                    { '<leader>ep', ':lua vim.diagnostic.goto_prev()<CR>',                                                          desc = 'Prev diagnostic' },
-                    { '<leader>ee', ':lua vim.diagnostic.open_float()<CR>',                                                         desc = 'Show diagnostic' },
+                    { 'ff',         ':lua vim.lsp.buf.format{async=true}<CR>', desc = 'Format document' },
+                    { '<leader>do', ':lua vim.lsp.buf.code_action()<CR>',      desc = 'Code action' },
+                    { '<leader>rn', ':lua vim.lsp.buf.rename()<CR>',           desc = 'Rename symbol' },
+                    {
+                        '<leader>ih',
+                        function()
+                            vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({
+                                bufnr =
+                                    bufnr
+                            }))
+                        end,
+                        desc = 'Toggle [i]nlay [h]ints'
+                    },
+                    { '<leader>en', ':lua vim.diagnostic.goto_next()<CR>',  desc = 'Next diagnostic' },
+                    { '<leader>ep', ':lua vim.diagnostic.goto_prev()<CR>',  desc = 'Prev diagnostic' },
+                    { '<leader>ee', ':lua vim.diagnostic.open_float()<CR>', desc = 'Show diagnostic' },
                 }, {
                     buffer = bufnr
                 })
@@ -159,11 +170,11 @@ return {
                 },
             }
 
-            local capabilities = vim.lsp.protocol.make_client_capabilities()
             local mason_lspconfig = require('mason-lspconfig')
 
             mason_lspconfig.setup {
                 ensure_installed = vim.tbl_keys(servers),
+                automatic_installation = false
             }
 
             mason_lspconfig.setup_handlers {
@@ -171,8 +182,9 @@ return {
                     if server_name == "diagnosticls" then
                         require('lspconfig')[server_name].setup(servers[server_name])
                     else
+                        local capabilities = vim.lsp.protocol.make_client_capabilities()
                         require('lspconfig')[server_name].setup {
-                            capabilities = capabilities,
+                            capabilities = require('blink.cmp').get_lsp_capabilities(capabilities),
                             on_attach = on_attach,
                             settings = servers[server_name],
                         }
@@ -202,72 +214,5 @@ return {
             )
             vim.opt.signcolumn = 'yes'
         end,
-    },
-    {
-        'hrsh7th/nvim-cmp',
-        dependencies = {
-            'hrsh7th/cmp-nvim-lsp',
-            'hrsh7th/cmp-path',
-            'saecki/crates.nvim',
-            'onsails/lspkind-nvim',
-            --'L3MON4D3/LuaSnip',
-            --'saadparwaiz1/cmp_luasnip',
-            --'hrsh7th/cmp-buffer',
-            --'hrsh7th/cmp-nvim-lua',
-            --'hrsh7th/cmp-calc',
-            --'hrsh7th/cmp-emoji',
-            --'f3fora/cmp-spell',
-        },
-        config = function()
-            local cmp = require('cmp')
-            local lspkind = require('lspkind')
-            cmp.setup {
-                --snippet = {
-                --    expand = function(args)
-                --        require('luasnip').lsp_expand(args.body)
-                --    end,
-                --},
-
-                sources = {
-                    { name = 'nvim_lsp' },
-                    { name = 'path' },
-                    { name = 'luasnip' },
-                    { name = 'crates' },
-                    --{name = 'nvim_lua'},
-                    --{name = 'buffer'},
-                },
-
-                -- only works if source actually triess to preselect anything
-                --preselect = cmp.PreselectMode.None,
-
-                mapping = {
-                    ['<C-p>'] = cmp.mapping.select_prev_item(),
-                    ['<C-n>'] = cmp.mapping.select_next_item(),
-                    ['<C-d>'] = cmp.mapping.scroll_docs(-4),
-                    ['<C-f>'] = cmp.mapping.scroll_docs(4),
-                    ['<C-Space>'] = cmp.mapping.complete(),
-                    ['<C-e>'] = cmp.mapping.close(),
-                    ['<CR>'] = cmp.mapping.confirm({
-                        behavior = cmp.ConfirmBehavior.Replace,
-                        select = true,
-                    })
-                },
-
-                experimental = {
-                    ghost_text = true
-                },
-
-                formatting = {
-                    format = lspkind.cmp_format({
-                        with_text = false,
-                        menu = {
-                            nvim_lsp = '[lsp]',
-                            path = '[pth]',
-                            luasnip = '[snp]',
-                        }
-                    })
-                }
-            }
-        end
     },
 }
