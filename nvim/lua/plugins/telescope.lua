@@ -9,6 +9,7 @@ return {
             { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
             'princejoogie/dir-telescope.nvim',
             'bolteu/bolt.nvim',
+            'nvim-telescope/telescope-ui-select.nvim'
         },
         init = function()
             local current_bolt_scope = function()
@@ -85,7 +86,6 @@ return {
                     layout_config = {
                         width = 0.9,
                         height = 0.9,
-                        prompt_position = 'bottom',
                         flex = { flip_columns = 160 },
                     },
                     dynamic_preview_title = true,
@@ -136,12 +136,16 @@ return {
                     -- --     override_generic_sorter = false,
                     -- --     override_file_sorter = true,
                     -- },
+                    ["ui-select"] = {
+                        require("telescope.themes").get_dropdown({})
+                    },
                 },
             })
 
             require('telescope').load_extension('fzf')
             require('telescope').load_extension('dir')
             require('telescope').load_extension('file_browser')
+            require('telescope').load_extension('ui-select')
         end,
     },
     {
