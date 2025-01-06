@@ -15,10 +15,14 @@ vim.o.splitbelow = true
 vim.o.expandtab = true
 vim.o.cursorline = true
 vim.o.cursorlineopt = 'number'
-vim.o.signcolumn = "yes"
-vim.o.autoread = true           -- automatically read file when changed outside vim
-vim.o.autowrite = true          -- automatically save when switching between buffers
-vim.o.clipboard = 'unnamedplus' -- use system clipboard
+vim.o.signcolumn = 'yes'
+vim.o.autoread = true -- automatically read file when changed outside vim
+
+--  Schedule the setting after `UiEnter` because it can increase startup-time.
+vim.schedule(function()
+	vim.o.clipboard = 'unnamedplus' -- use system clipboard
+end)
+
 vim.o.undofile = true
 vim.o.completeopt = 'menu,menuone,noselect,noinsert'
 vim.o.swapfile = false
@@ -34,8 +38,8 @@ vim.o.softtabstop = 4
 vim.o.foldenable = false
 vim.o.foldmethod = 'expr'
 vim.o.foldexpr = 'nvim_treesitter#foldexpr()'
--- always show what mode we are currently editing in
-vim.o.showmode = true
+-- don't show the mode, since it's already in the status line
+vim.o.showmode = false
 -- do smart autoindenting when starting a new line
 vim.o.smartindent = true
 -- always show status line
@@ -46,6 +50,8 @@ vim.o.errorbells = false
 vim.o.showmatch = true
 vim.o.backspace = 'indent,eol,start'
 vim.o.grepprg = 'rg --vimgrep'
+vim.o.breakindent = true
+vim.o.inccommand = 'split'
 
 vim.keymap.set('n', '<C-h>', '<C-w>h')
 vim.keymap.set('n', '<C-j>', '<C-w>j')
