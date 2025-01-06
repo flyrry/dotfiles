@@ -1,4 +1,7 @@
 fish_variables
 completions/
 functions/*
+!functions/git_pull_install.fish
+!functions/openjira.fish
+!/functions/multicd.fish
 conf.d/

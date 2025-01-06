@@ -24,8 +24,7 @@ if status is-interactive
 
     abbr -a gam 'git commit --amend --reuse-message=HEAD'
     abbr -a gp 'git pull'
-    abbr -a gpy 'git pull && yarn install'
-    abbr -a gpp 'git pull && pnpm install'
+    abbr -a gpi 'git_pull_install'
     abbr -a gpf 'git push --force-with-lease'
     abbr -a gr 'git fetch origin develop:develop && git rebase develop'
     abbr -a gra 'git rebase --abort'
