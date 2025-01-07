@@ -4,6 +4,12 @@ return {
     { 'tpope/vim-rhubarb' },
     { 'tpope/vim-sleuth' }, -- auto-adjust 'shiftwidth' and 'expandtab'
     {
+        'folke/todo-comments.nvim',
+        event = 'VimEnter',
+        dependencies = { 'nvim-lua/plenary.nvim' },
+        opts = { signs = false }
+    },
+    {
         "kylechui/nvim-surround",
         event = "VeryLazy",
         config = true
