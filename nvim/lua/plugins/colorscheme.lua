@@ -13,34 +13,26 @@ return {
         end
     },
     {
-        'sainnhe/edge',
-        lazy = true,
-    },
-    {
         'sainnhe/gruvbox-material',
         lazy = true,
     },
     {
-        'sainnhe/everforest',
+        'neanias/everforest-nvim',
         lazy = true,
-    },
-    {
-        'bluz71/vim-moonfly-colors',
-        name = 'moonfly',
-        lazy = true,
-    },
-    {
-        "catppuccin/nvim",
-        name = "catppuccin",
-        lazy = true,
+        priority = 1000,
         config = function()
-            vim.cmd.colorscheme "catppuccin"
-        end,
+            require('everforest').setup({ background = 'hard' })
+            require('everforest').load()
+        end
     },
     {
         "folke/tokyonight.nvim",
-        name = "tokyonight",
-        opts = { style = "moon" },
         lazy = true,
+        name = "tokyonight",
+        priority = 1000,
+        -- opts = { style = "moon" },
+        config = function()
+            require('tokyonight').load({ style = 'moon' })
+        end,
     },
 }

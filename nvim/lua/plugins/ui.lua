@@ -6,6 +6,7 @@ return {
                 component_separators = '',
                 section_separators = '',
                 disabled_filetypes = { 'startify' },
+                -- theme = 'tokyonight',
             },
             sections = {
                 lualine_a = { 'mode' },
