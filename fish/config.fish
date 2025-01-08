@@ -14,6 +14,7 @@ if status is-interactive
     alias gl="GITHUB_TOKEN=(security find-generic-password -s hub -a sergei -w) gh"
     alias e=nvim
     alias jj="yarn jenkins-job"
+    alias ke="NVIM_APPNAME='kickstart-nvim' nvim"
     # alias s="kitty +kitten ssh"
 
     # abbr -a e nvim
