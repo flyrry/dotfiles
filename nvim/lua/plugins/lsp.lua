@@ -63,6 +63,12 @@ return {
                         end,
                     })
                 end
+
+                vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(
+                    vim.lsp.handlers.hover, {
+                        border = 'rounded',
+                    }
+                )
             end
 
             -- Enable the following language servers
@@ -208,7 +214,7 @@ return {
             }
 
             -- this plugin uses dedicated event loop to talk to tsserver directly
-            -- avoiding extra layer of typescript-language-server 
+            -- avoiding extra layer of typescript-language-server
             require('typescript-tools').setup {
                 on_attach = function(client, bufnr)
                     client.server_capabilities.documentFormattingProvider = false

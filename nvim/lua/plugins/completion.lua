@@ -31,7 +31,11 @@ return {
             },
             signature = {
                 -- Enable signature help
-                enabled = true
+                enabled = true,
+                window = {
+                    border = 'rounded',
+                    treesitter_highlighting = true
+                }
             },
 
             -- Default list of enabled providers defined so that you can extend it
