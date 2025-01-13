@@ -1,6 +1,7 @@
 return {
     {
         'sainnhe/sonokai',
+        lazy = true,
         priority = 1000,
         config = function()
             --vim.cmd[[let g:sonokai_style = 'atlantis']]
@@ -27,12 +28,13 @@ return {
     },
     {
         "folke/tokyonight.nvim",
-        lazy = true,
         name = "tokyonight",
         priority = 1000,
-        -- opts = { style = "moon" },
         config = function()
-            require('tokyonight').load({ style = 'moon' })
+            require('tokyonight').load({
+                style = 'storm',
+                -- dim_inactive = true,
+            })
         end,
     },
 }
