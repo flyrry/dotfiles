@@ -52,6 +52,7 @@ vim.o.backspace = 'indent,eol,start'
 vim.o.grepprg = 'rg --vimgrep'
 vim.o.breakindent = true
 vim.o.inccommand = 'split'
+vim.o.updatetime = 300
 
 vim.keymap.set('n', '<C-h>', '<C-w>h')
 vim.keymap.set('n', '<C-j>', '<C-w>j')
