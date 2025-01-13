@@ -1,21 +1,22 @@
 return {
     {
-        'j-hui/fidget.nvim',
-        opts = {},
-        tag = "legacy"
-    },
-    { 'williamboman/mason.nvim', config = true },
-    {
-        'williamboman/mason-lspconfig.nvim',
+        'neovim/nvim-lspconfig',
         dependencies = {
-            'neovim/nvim-lspconfig',
+            'nvim-lua/plenary.nvim',
+            { 'williamboman/mason.nvim', config = true },
+            'williamboman/mason-lspconfig.nvim',
+            {
+                'j-hui/fidget.nvim',
+                opts = {},
+            },
             'saghen/blink.cmp',
+            'pmizio/typescript-tools.nvim',
         },
         config = function()
             local on_attach = function(client, bufnr)
-                if client.name == "ts_ls" then
-                    client.server_capabilities.documentFormattingProvider = false
-                end
+                -- if client.name == "ts_ls" then
+                --     client.server_capabilities.documentFormattingProvider = false
+                -- end
 
                 require('which-key').add({
                     { 'ff',         ':lua vim.lsp.buf.format{async=true}<CR>', desc = 'Format document' },
@@ -24,10 +25,7 @@ return {
                     {
                         '<leader>ih',
                         function()
-                            vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({
-                                bufnr =
-                                    bufnr
-                            }))
+                            vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = bufnr }))
                         end,
                         desc = 'Toggle [i]nlay [h]ints'
                     },
@@ -38,14 +36,33 @@ return {
                     buffer = bufnr
                 })
 
-                -- if client.server_capabilities.inlayHintProvider then
-                --     vim.lsp.inlay_hint.enable(true, { bufnr = bufnr })
-                -- end
+                -- The following two autocommands are used to highlight references of the
+                -- word under your cursor when your cursor rests there for a little while.
+                --    See `:help CursorHold` for information about when this is executed
                 --
-                -- See `:help vim.lsp.*` for documentation on any of the below functions
-                --buf_set_keymap('n', '<space>q', '<cmd>lua vim.lsp.diagnostic.set_loclist()<CR>', opts)
-                --buf_set_keymap('n', 'gr', '<cmd>lua vim.lsp.buf.references()<CR>', opts)
-                --buf_set_keymap('i', '<C-k>', '<cmd>lua vim.lsp.buf.signature_help()<CR>', opts)
+                -- When you move your cursor, the highlights will be cleared (the second autocommand).
+                if client and client.supports_method(vim.lsp.protocol.Methods.textDocument_documentHighlight) then
+                    local highlight_augroup = vim.api.nvim_create_augroup('cursor-hold-lsp-highlight', { clear = false })
+                    vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
+                        buffer = bufnr,
+                        group = highlight_augroup,
+                        callback = vim.lsp.buf.document_highlight,
+                    })
+
+                    vim.api.nvim_create_autocmd({ 'CursorMoved', 'CursorMovedI' }, {
+                        buffer = bufnr,
+                        group = highlight_augroup,
+                        callback = vim.lsp.buf.clear_references,
+                    })
+
+                    vim.api.nvim_create_autocmd('LspDetach', {
+                        group = vim.api.nvim_create_augroup('cursor-hold-lsp-detach', { clear = true }),
+                        callback = function(event)
+                            vim.lsp.buf.clear_references()
+                            vim.api.nvim_clear_autocmds { group = 'cursor-hold-lsp-highlight', buffer = event.buf }
+                        end,
+                    })
+                end
             end
 
             -- Enable the following language servers
@@ -55,19 +72,19 @@ return {
             --  the `settings` field of the server config. You must look up that documentation yourself.
             local servers = {
                 clangd = {},
-                ts_ls = {
-                    typescript = {
-                        inlayHints = {
-                            includeInlayEnumMemberValueHints = true,
-                            includeInlayFunctionLikeReturnTypeHints = true,
-                            includeInlayFunctionParameterTypeHints = true,
-                            includeInlayParameterNameHints = "all", -- 'none' | 'literals' | 'all';
-                            includeInlayParameterNameHintsWhenArgumentMatchesName = true,
-                            includeInlayPropertyDeclarationTypeHints = true,
-                            includeInlayVariableTypeHints = false,
-                        },
-                    },
-                },
+                -- ts_ls = {
+                --     typescript = {
+                --         inlayHints = {
+                --             includeInlayEnumMemberValueHints = true,
+                --             includeInlayFunctionLikeReturnTypeHints = true,
+                --             includeInlayFunctionParameterTypeHints = true,
+                --             includeInlayParameterNameHints = "all", -- 'none' | 'literals' | 'all';
+                --             includeInlayParameterNameHintsWhenArgumentMatchesName = true,
+                --             includeInlayPropertyDeclarationTypeHints = true,
+                --             includeInlayVariableTypeHints = false,
+                --         },
+                --     },
+                -- },
                 rust_analyzer = {
                     -- ['rust-analyzer'] = {
                     --     imports = {
@@ -174,30 +191,31 @@ return {
 
             mason_lspconfig.setup {
                 ensure_installed = vim.tbl_keys(servers),
-                automatic_installation = false
-            }
-
-            mason_lspconfig.setup_handlers {
-                function(server_name)
-                    if server_name == "diagnosticls" then
-                        require('lspconfig')[server_name].setup(servers[server_name])
-                    else
+                automatic_installation = false,
+                handlers = {
+                    function(server_name)
                         local capabilities = vim.lsp.protocol.make_client_capabilities()
                         require('lspconfig')[server_name].setup {
                             capabilities = require('blink.cmp').get_lsp_capabilities(capabilities),
                             on_attach = on_attach,
                             settings = servers[server_name],
                         }
-                    end
-                end,
+                    end,
+                    ["diagnosticls"] = function()
+                        require('lspconfig').diagnosticls.setup(servers["diagnosticls"])
+                    end,
+                }
             }
 
-
-            -- vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(
-            --     vim.lsp.handlers.hover, {
-            --         border = 'single'
-            --     }
-            -- )
+            -- this plugin uses dedicated event loop to talk to tsserver directly
+            -- avoiding extra layer of typescript-language-server 
+            require('typescript-tools').setup {
+                on_attach = function(client, bufnr)
+                    client.server_capabilities.documentFormattingProvider = false
+                    on_attach(client, bufnr)
+                end,
+                settings = {}
+            }
 
             -- Enable diagnostics
             vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(
