@@ -8,6 +8,7 @@ return {
             'nvim-tree/nvim-web-devicons',
             { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
             'princejoogie/dir-telescope.nvim',
+            'nvim-telescope/telescope-file-browser.nvim',
             'bolteu/bolt.nvim',
             'nvim-telescope/telescope-ui-select.nvim'
         },
@@ -136,11 +137,4 @@ return {
             require('telescope').load_extension('ui-select')
         end,
     },
-    {
-        'nvim-telescope/telescope-file-browser.nvim',
-        dependencies = {
-            'nvim-lua/plenary.nvim',
-            { 'nvim-telescope/telescope.nvim', branch = '0.1.x' }
-        },
-    }
 }
