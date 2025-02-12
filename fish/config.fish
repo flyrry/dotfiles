@@ -22,6 +22,7 @@ if status is-interactive
     abbr -a s 'kitty +kitten ssh'
     abbr -a dotdot --regex '^\\.\\.+$' --function multicd
     abbr -a jira-issue --regex '[A-Z]{3,5}-[0-9]{1,6}' --function openjira
+    abbr -a test-redirect --regex 'test-[0-9]{6,7}' --function testredirect
 
     abbr -a gam 'git commit --amend --reuse-message=HEAD'
     abbr -a gp 'git pull'
@@ -39,7 +40,7 @@ if status is-interactive
     abbr -a gsc 'git sco'
 end
 
-nvm use v20.14.0 --silent
+nvm use 22 --silent
 
 # pnpm
 set -gx PNPM_HOME "/Users/sergei/Library/pnpm"
