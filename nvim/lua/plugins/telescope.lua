@@ -9,12 +9,12 @@ return {
             { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
             'princejoogie/dir-telescope.nvim',
             'nvim-telescope/telescope-file-browser.nvim',
-            'bolteu/bolt.nvim',
+            'bolteu/bolt-server.nvim',
             'nvim-telescope/telescope-ui-select.nvim'
         },
         init = function()
             local current_bolt_scope = function()
-                return { search_dirs = { require("bolt.util").find_parent_subdir("main") } }
+                return { search_dirs = { require("bolt-server.util").find_parent_subdir("main") } }
             end
             require('which-key').add({
                 { '<leader>P',  ':lua require("telescope.builtin").find_files()<CR>', desc = 'Find Files' },
@@ -41,7 +41,7 @@ return {
                                 map("i", "<space><space>", require("telescope.actions").to_fuzzy_refine)
                                 map("i", "<leader>c", function(prompt_bufnr)
                                     require("telescope.actions").to_fuzzy_refine(prompt_bufnr)
-                                    vim.api.nvim_put({ "!gen !comp" }, "c", true, true)
+                                    vim.api.nvim_put({ "!gen/ !mcomp/ !-comp.ts !-spec.ts" }, "c", true, true)
                                 end)
                                 -- needs to return true if you want to map default_mappings and
                                 -- false if not
