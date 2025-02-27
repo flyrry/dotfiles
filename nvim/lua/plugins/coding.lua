@@ -42,5 +42,25 @@ return {
             vim.keymap.set("n", "<Leader>gad", bolt.goto_api_definition)
             vim.keymap.set("n", "<Leader>gae", bolt.goto_api_endpoint)
         end,
+    },
+    {
+        "bolteu/bolt-admin.nvim",
+        dependencies = {
+            'nvim-treesitter/nvim-treesitter',
+            'nvim-telescope/telescope.nvim',
+        },
+        cond = function()
+            local cwd = vim.fn.getcwd()
+            return cwd == "/Users/sergei/repos/taxify/admin-panel"
+        end,
+        config = function()
+            local bolt = require("bolt-admin")
+            local map = function(key, fn)
+                vim.keymap.set("n", "<Leader>" .. key, fn)
+            end
+            map("gs", bolt.find_module)
+            map("cs", bolt.compile_module)
+            map("p", bolt.find_module_files)
+        end
     }
 }
