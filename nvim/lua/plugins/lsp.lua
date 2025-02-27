@@ -220,7 +220,9 @@ return {
                     client.server_capabilities.documentFormattingProvider = false
                     on_attach(client, bufnr)
                 end,
-                settings = {}
+                settings = {
+                    tsserver_max_memory = 8192,
+                }
             }
 
             -- Enable diagnostics
