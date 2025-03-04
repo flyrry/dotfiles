@@ -14,8 +14,14 @@ return {
             scope = { char = '╎', }
         },
         -- picker = { enabled = true }, -- telescope
-        -- dim, zen -- zenmode
+        zen = {},
+        dim = {},
+        toggle = {},
         quickfile = { enabled = true },
         -- scope = { enabled = true },
     },
+    init = function()
+        require('snacks').toggle.zen():map("<leader>go")
+        require('snacks').toggle.dim():map("<leader>gf")
+    end
 }

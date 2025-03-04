@@ -69,27 +69,6 @@ return {
         end
     },
     {
-        'folke/zen-mode.nvim',
-        lazy = true,
-        keys = {
-            { '<leader>go', ':ZenMode<CR>', desc = 'Toggle Zen Mode', silent = true },
-        },
-        config = function()
-            require('zen-mode').setup({
-                plugins = {
-                    twilight = { enabled = false },
-                },
-            })
-        end
-    },
-    {
-        'folke/twilight.nvim',
-        lazy = true,
-        keys = {
-            { '<leader>gf', ':Twilight<CR>', desc = 'Toggle Focus Mode', silent = true },
-        },
-    },
-    {
         'chentoast/marks.nvim',
         config = true,
     }
