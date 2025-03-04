@@ -90,18 +90,6 @@ return {
         },
     },
     {
-        'echasnovski/mini.indentscope',
-        config = function()
-            require('mini.indentscope').setup({
-                draw = {
-                    animation = require('mini.indentscope').gen_animation.linear({
-                        duration = 5,
-                    }),
-                }
-            })
-        end
-    },
-    {
         'chentoast/marks.nvim',
         config = true,
     }
