@@ -5,7 +5,15 @@ return {
     ---@type snacks.Config
     opts = {
         bigfile = { enabled = true },
-        -- dashboard = { enabled = true }, -- startify
+        dashboard = {
+            -- autokeys = "fhnmday1234567890",
+            sections = {
+                { icon = " ", title = "Recent Files", section = "recent_files", indent = 2, padding = 1 },
+                { icon = " ", title = "Projects", section = "projects", indent = 2, padding = 1 },
+                { icon = " ", key = "q", desc = "Quit", action = ":qa", padding = 1 },
+                { section = "startup" },
+            },
+        },
         -- explorer = { enabled = true }, -- ,ff
         indent = {
             animate = {
@@ -15,7 +23,6 @@ return {
         },
         -- picker = { enabled = true }, -- telescope
         zen = { toggles = { dim = false } },
-        dim = {},
         toggle = { notify = false },
         quickfile = { enabled = true },
         -- scope = { enabled = true },
