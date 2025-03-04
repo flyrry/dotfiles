@@ -4,14 +4,9 @@ return {
     'folke/which-key.nvim',
     config = function()
       require('which-key').add({
-        { "<C-j>",     "<C-w>j" },
-        { "<C-k>",     "<C-w>k" },
-        { "<C-h>",     "<C-w>h" },
-        { "<C-l>",     "<C-w>l" },
-
         { "<leader>/", ':nohlsearch<CR>', desc = "Clear highlighted search terms" },
-        { '<leader>s', ':split<CR>',      desc = "horizontal split" },
-        { '<leader>v', ':vsplit<CR>',     desc = "vertical split" },
+        { '<leader>s', ':split<CR>',      desc = "horizontal [s]plit" },
+        { '<leader>v', ':vsplit<CR>',     desc = "[v]ertical split" },
       })
     end,
   },

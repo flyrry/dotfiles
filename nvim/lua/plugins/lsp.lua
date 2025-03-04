@@ -3,6 +3,7 @@ return {
         'neovim/nvim-lspconfig',
         dependencies = {
             'nvim-lua/plenary.nvim',
+            'folke/which-key.nvim',
             { 'williamboman/mason.nvim', config = true },
             'williamboman/mason-lspconfig.nvim',
             {

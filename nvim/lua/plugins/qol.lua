@@ -14,14 +14,14 @@ return {
             scope = { char = '╎', }
         },
         -- picker = { enabled = true }, -- telescope
-        zen = {},
+        zen = { toggles = { dim = false } },
         dim = {},
-        toggle = {},
+        toggle = { notify = false },
         quickfile = { enabled = true },
         -- scope = { enabled = true },
     },
     init = function()
-        require('snacks').toggle.zen():map("<leader>go")
+        require('snacks').toggle.zoom():map("<leader>go")
         require('snacks').toggle.dim():map("<leader>gf")
     end
 }
