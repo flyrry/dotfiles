@@ -23,6 +23,5 @@ return {
     'wellle/targets.vim', -- more vim-like targets to operate on
     'nvim-dap', 'nvim-dap-ui', -- debug adaptor protocol
     'overseer', -- running tasks from nvim, including custom ones like 'yarn install'
-    'artempyanykh/marksman', -- markdown LSP
 }
 
