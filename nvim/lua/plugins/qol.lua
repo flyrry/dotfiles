@@ -8,9 +8,13 @@ return {
         dashboard = {
             -- autokeys = "fhnmday1234567890",
             sections = {
-                { icon = " ", title = "Recent Files", section = "recent_files", indent = 2, padding = 1 },
-                { icon = " ", title = "Projects", section = "projects", indent = 2, padding = 1 },
-                { icon = " ", key = "q", desc = "Quit", action = ":qa", padding = 1 },
+                { icon = "", title = "MRU", padding = 1 },
+                { section = "recent_files", limit = 8, padding = 1, indent = 2 },
+                { icon = "", title = "MRU ", file = vim.fn.fnamemodify(".", ":~"), padding = 1 },
+                { section = "recent_files", cwd = true, limit = 8, padding = 1, indent = 2 },
+                { icon = "", title = "Projects", section = "projects", indent = 2, padding = 1 },
+                { icon = "󰒲", key = "L", desc = "Lazy", action = ":Lazy", enabled = package.loaded.lazy ~= nil },
+                { icon = "", key = "q", desc = "Quit", action = ":qa", padding = 1 },
                 { section = "startup" },
             },
         },
