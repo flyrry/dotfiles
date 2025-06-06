@@ -10,7 +10,7 @@ vim.o.incsearch = true
 vim.o.hlsearch = true
 vim.o.smartcase = true
 vim.o.ignorecase = true
---vim.o.splitright = true
+vim.o.splitright = true
 vim.o.splitbelow = true
 vim.o.expandtab = true
 vim.o.cursorline = true
@@ -30,6 +30,7 @@ vim.o.swapfile = false
 vim.o.re = 0 -- turn off old regexp engine
 vim.o.mouse = ''
 
+vim.o.winborder = 'rounded'
 -- indentation amount for < and > commands.
 vim.o.shiftwidth = 4
 -- change number of spaces that a <Tab> counts for during editing ops
@@ -61,3 +62,4 @@ vim.keymap.set('n', '<C-h>', '<C-w>h')
 vim.keymap.set('n', '<C-j>', '<C-w>j')
 vim.keymap.set('n', '<C-k>', '<C-w>k')
 vim.keymap.set('n', '<C-l>', '<C-w>l')
+vim.keymap.set('v', 'p', '"_dP', { noremap = true, silent = true }) -- paste without replacing the default register
