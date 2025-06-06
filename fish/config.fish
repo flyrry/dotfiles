@@ -25,9 +25,11 @@ if status is-interactive
     abbr -a test-redirect --regex 'test-[0-9]{6,7}' --function testredirect
 
     abbr -a gam 'git commit --amend --reuse-message=HEAD'
+    abbr -a gpf 'git push --force-with-lease'
+    abbr -a gap 'git commit --amend --reuse-message=HEAD && git push --force-with-lease'
+    # abbr -a gl 'git log --oneline -n 10'
     abbr -a gp 'git pull'
     abbr -a gpi 'git_pull_install'
-    abbr -a gpf 'git push --force-with-lease'
     abbr -a gr 'git fetch origin develop:develop && git rebase develop'
     abbr -a gra 'git rebase --abort'
     abbr -a grc 'git rebase --continue'
