@@ -1,5 +1,4 @@
 return {
-  'github/copilot.vim',
   {
     'folke/which-key.nvim',
     config = function()
