@@ -109,5 +109,10 @@ return {
             require("jump-to-function").setup({})
         end
     },
+    {
+        dir = "~/.config/nvim/lua/find-calls",
+        config = function()
+            require("find-calls").setup()
+        end
     }
 }
