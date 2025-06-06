@@ -25,12 +25,12 @@ return {
       { "<C-g>", mode = { "c" },           function() require("flash").toggle() end,            desc = "Toggle Flash Search" },
     },
   },
-  'christoomey/vim-tmux-navigator',
+  -- 'christoomey/vim-tmux-navigator',
   {
     'junegunn/fzf.vim',
     dependencies = { 'junegunn/fzf', build = './install --all' },
     keys = {
-      { '<C-p>', ':Files<CR>', desc = 'Find Files' },
+      -- { '<C-p>', ':Files<CR>', desc = 'Find Files' },
       -- {'<leader>f', ':Rg<CR>', desc = 'Search Grep'},
       -- {'<leader>g', ':GFiles<CR>', desc = 'Find [G]it Files'},
       -- {'<leader>q', ':Quickfix<CR>', desc = '[Q]uickfix'},

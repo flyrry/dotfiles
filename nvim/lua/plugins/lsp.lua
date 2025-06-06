@@ -42,7 +42,7 @@ return {
                 --    See `:help CursorHold` for information about when this is executed
                 --
                 -- When you move your cursor, the highlights will be cleared (the second autocommand).
-                if client and client.supports_method(vim.lsp.protocol.Methods.textDocument_documentHighlight) then
+                if client and client:supports_method(vim.lsp.protocol.Methods.textDocument_documentHighlight) then
                     local highlight_augroup = vim.api.nvim_create_augroup('cursor-hold-lsp-highlight', { clear = false })
                     vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
                         buffer = bufnr,
@@ -64,12 +64,6 @@ return {
                         end,
                     })
                 end
-
-                vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(
-                    vim.lsp.handlers.hover, {
-                        border = 'rounded',
-                    }
-                )
             end
 
             -- Enable the following language servers
@@ -198,21 +192,22 @@ return {
 
             mason_lspconfig.setup {
                 ensure_installed = vim.tbl_keys(servers),
-                automatic_installation = false,
-                handlers = {
-                    function(server_name)
-                        local capabilities = vim.lsp.protocol.make_client_capabilities()
-                        require('lspconfig')[server_name].setup {
-                            capabilities = require('blink.cmp').get_lsp_capabilities(capabilities),
-                            on_attach = on_attach,
-                            settings = servers[server_name],
-                        }
-                    end,
-                    ["diagnosticls"] = function()
-                        require('lspconfig').diagnosticls.setup(servers["diagnosticls"])
-                    end,
-                }
+                automatic_enable = true,
             }
+
+            local capabilities = vim.lsp.protocol.make_client_capabilities()
+            for server_name, server in pairs(servers) do
+                -- server.capabilities = vim.tbl_deep_extend("force", {}, capabilities, server.capabilities or {})
+                if server_name == "diagnosticls" then
+                    require('lspconfig')[server_name].setup(server)
+                else
+                    require('lspconfig')[server_name].setup {
+                        capabilities = require('blink.cmp').get_lsp_capabilities(capabilities),
+                        on_attach = on_attach,
+                        settings = server,
+                    }
+                end
+            end
 
             -- this plugin uses dedicated event loop to talk to tsserver directly
             -- avoiding extra layer of typescript-language-server
@@ -223,20 +218,33 @@ return {
                 end,
                 settings = {
                     tsserver_max_memory = 8192,
+                    separate_diagnostic_server = false,
+                    tsserver_file_preferences = {
+                        includeInlayEnumMemberValueHints = true,
+                        includeInlayFunctionLikeReturnTypeHints = true,
+                        includeInlayVariableTypeHints = true,
+                    },
+                    -- code_lens = "all",
                 }
             }
 
-            -- Enable diagnostics
-            vim.lsp.handlers['textDocument/publishDiagnostics'] = vim.lsp.with(
-                vim.lsp.diagnostic.on_publish_diagnostics, {
-                    --underline = true,
-                    --virtual_text = {
-                    --spacing = 4,
-                    --prefix = ''
-                    --},
-                    virtual_text = true,
-                    --signs = true,
+            -- configure diagnostics
+            vim.diagnostic.config(
+                {
+                    virtual_text = {
+                        severity = { max = vim.diagnostic.severity.WARN },
+                        source = "if_many",
+                        prefix = ''
+                    },
+                    virtual_lines = {
+                        current_line = true,
+                        severity = { min = vim.diagnostic.severity.ERROR },
+                        source = "if_many",
+                        prefix = ''
+                    },
+                    severity_sort = true,
                     update_in_insert = true,
+                    float = { border = 'rounded' }
                 }
             )
 
