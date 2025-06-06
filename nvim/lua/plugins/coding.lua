@@ -102,5 +102,12 @@ return {
                 { "<leader>p",  bolt.find_module_files, desc = "" },
             })
         end
+    },
+    {
+        dir = "~/.config/nvim/lua/jump-to-function",
+        config = function()
+            require("jump-to-function").setup({})
+        end
+    },
     }
 }
