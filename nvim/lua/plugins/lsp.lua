@@ -199,13 +199,13 @@ return {
             for server_name, server in pairs(servers) do
                 -- server.capabilities = vim.tbl_deep_extend("force", {}, capabilities, server.capabilities or {})
                 if server_name == "diagnosticls" then
-                    require('lspconfig')[server_name].setup(server)
+                    vim.lsp.config(server_name, server)
                 else
-                    require('lspconfig')[server_name].setup {
+                    vim.lsp.config(server_name, {
                         capabilities = require('blink.cmp').get_lsp_capabilities(capabilities),
                         on_attach = on_attach,
                         settings = server,
-                    }
+                    })
                 end
             end
 
