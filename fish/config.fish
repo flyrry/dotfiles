@@ -39,6 +39,7 @@ if status is-interactive
     abbr -a gcob --set-cursor 'git checkout -b feature/TAP-%'
     abbr -a gcoc 'git coc'
     abbr -a gcm --set-cursor 'git commit -m "%"'
+    abbr -a gcw 'git commit -m "wip" -n'
     abbr -a gsc 'git sco'
 end
 
