@@ -20,3 +20,4 @@ require('lazy').setup(
         rocks = { enabled = false },
     }
 )
+require('find-calls.old').setup()

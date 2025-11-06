@@ -115,5 +115,12 @@ return {
         config = function()
             require("find-calls").setup()
         end
-    }
+    },
+    {
+        dir = "~/.config/nvim/lua/api-lens.nvim",
+        dependencies = { "nvim-telescope/telescope.nvim" },
+        config = function()
+            require("api-lens").setup()
+        end,
+    },
 }
