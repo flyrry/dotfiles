@@ -4,7 +4,7 @@ function M.setup(opts)
   opts = opts or {}
   local keymap = opts.keymap or "<leader>ar"
   vim.api.nvim_set_keymap('n', keymap, '<cmd>FindApiReferences<cr>',
-    { noremap = true, silent = true, desc = "Find API References" })
+    { noremap = true, silent = true, desc = "[FRESH] Find API References" })
 end
 
 function M.find_references()

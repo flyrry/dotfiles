@@ -198,7 +198,7 @@ end
 
 -- Simple setup function to bind the new function to a key.
 M.setup = function()
-    vim.keymap.set("n", "<leader><leader>r", M.find_api_call_references)
+    vim.keymap.set("n", "<leader><leader>r", M.find_api_call_references, { desc = "[NEW] Find API Call References" })
 end
 
 return M

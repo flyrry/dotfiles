@@ -227,10 +227,10 @@ M.lookup = function(opts)
 end
 
 M.setup = function()
-    vim.keymap.set("n", "<leader><leader>c", M.find_api_calls)
+    vim.keymap.set("n", "<leader><leader>c", M.find_api_calls, {desc = "[OLD] Find API Calls"})
     -- vim.keymap.set("n", "<leader><leader>r", M.lsp_find_api_calls)
-    vim.keymap.set("n", "<leader><leader>t", M.quick_test)
-    vim.keymap.set("n", "<leader><leader>l", M.lookup)
+    -- vim.keymap.set("n", "<leader><leader>t", M.quick_test)
+    -- vim.keymap.set("n", "<leader><leader>l", M.lookup)
 end
 
 return M
