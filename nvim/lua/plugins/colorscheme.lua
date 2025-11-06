@@ -1,5 +1,9 @@
 return {
     {
+        "EdenEast/nightfox.nvim",
+        lazy = true
+    },
+    {
         'sainnhe/sonokai',
         lazy = true,
         priority = 1000,
