@@ -63,3 +63,5 @@ vim.keymap.set('n', '<C-j>', '<C-w>j')
 vim.keymap.set('n', '<C-k>', '<C-w>k')
 vim.keymap.set('n', '<C-l>', '<C-w>l')
 vim.keymap.set('v', 'p', '"_dP', { noremap = true, silent = true }) -- paste without replacing the default register
+vim.keymap.set('n', '<leader>q', function() require('quicker').toggle() end, { desc = 'Toggle quickfix' })
+vim.keymap.set('n', '<leader>l', function() require('quicker').toggle({ loclist = true }) end, { desc = 'Toggle loclist' })
