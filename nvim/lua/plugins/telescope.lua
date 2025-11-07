@@ -31,42 +31,34 @@ return {
             local set_scope_and_refine_mappings = function()
                 return vim.tbl_extend('keep', set_bolt_scope(), fuzzy_refine_mappings)
             end
-            require('which-key').add({
-                { '<leader>P',  ':lua require("telescope.builtin").find_files()<CR>',                                     desc = 'Find Files' },
-                {
-                    '<leader>mp',
-                    function()
-                        require("telescope.builtin").find_files({
-                            ---@diagnostic disable-next-line: param-type-mismatch
-                            cwd = vim.fs.joinpath(vim.fn.stdpath("data"), "lazy")
-                        })
-                    end,
-                    desc = 'Find [M]odule files'
-                },
-                { '<leader>fh', ':Telescope help_tags<CR>',                                                               desc = '[F]ind [H]elp' },
-                { '<leader>fg', ':lua require("telescope.builtin").git_files()<CR>',                                      desc = 'Find [G]it Files' },
-                { '<leader>fq', ':lua require("telescope.builtin").quickfix()<CR>',                                       desc = '[Q]uickfix' },
-                { '<leader>fo', ':lua require("telescope.builtin").oldfiles()<CR>',                                       desc = '[O]ld files' },
-                { '<leader>fb', ':lua require("telescope.builtin").buffers()<CR>',                                        desc = '[B]uffers' },
-                { '<leader>fs', function() require("telescope.builtin").live_grep(fuzzy_refine_mappings) end,             desc = '[S]earch Grep' },
-                { '<leader>fc', function() require("telescope.builtin").find_files { cwd = vim.fn.stdpath 'config' } end, desc = '[S]earch [N]eovim files' },
-                { '<leader>Fs', function() require("telescope.builtin").live_grep(set_scope_and_refine_mappings()) end,   desc = '[S]earch Grep in Bolt scope' },
-                { '<leader>fS', function() require("telescope").extensions.dir.live_grep(fuzzy_refine_mappings) end,      desc = '[S]earch Grep in <DIR>' },
-                { '<leader>Fw', function() require("telescope.builtin").grep_string(set_scope_and_refine_mappings()) end, desc = '[W]ord Grep in Bolt scope' },
-                { '<leader>fw', ':lua require("telescope.builtin").grep_string()<CR>',                                    desc = '[W]ord Grep' },
-                -- { '<leader>fw', function() Snacks.picker.grep_word() end,                                                 desc = '[W]ord Grep' },
-                { '<leader>ff', ':lua require("telescope").extensions.file_browser.file_browser({path="%:p:h"})<CR>',     desc = 'File [F]inder' },
-                { '<leader>bc', ':lua require("telescope.builtin").git_bcommits()<CR>',                                   desc = 'Git [C]ommits' },
-                { 'gd',         ':lua require("telescope.builtin").lsp_definitions()<CR>',                                desc = '[D]efinitions' },
-                { 'gt',         ':lua require("telescope.builtin").lsp_type_definitions()<CR>',                           desc = '[T]ype definitions' },
-                { 'gi',         ':lua require("telescope.builtin").lsp_implementations()<CR>',                            desc = '[I]mplementations' },
-                -- { 'gr',         ':lua require("telescope.builtin").lsp_references({include_current_line=true})<CR>',      desc = '[R]eferences' },
-                { 'gr',         function() Snacks.picker.lsp_references() end,                                            desc = '[R]eferences' },
-                { 'gs',         ':lua require("telescope.builtin").lsp_document_symbols()<CR>',                           desc = 'Show document [s]ymbols' },
-                { 'gic',        ':lua require("telescope.builtin").lsp_incoming_calls()<CR>',                             desc = '[I]ncoming [c]alls' },
-                { 'goc',        ':lua require("telescope.builtin").lsp_outgoing_calls()<CR>',                             desc = '[O]utgoing [c]alls' },
-                { 'gD',         ':lua require("telescope.builtin").diagnostics()<CR>',                                    desc = 'Dia[g]nostics' },
-            })
+            vim.keymap.set('n', '<leader>P', ':lua require("telescope.builtin").find_files()<CR>', { desc = 'Find Files' })
+            vim.keymap.set('n', '<leader>fh', ':Telescope help_tags<CR>', { desc = '[F]ind [H]elp' })
+            vim.keymap.set('n', '<leader>fg', ':lua require("telescope.builtin").git_files()<CR>', { desc = 'Find [G]it Files' })
+            vim.keymap.set('n', '<leader>fq', ':lua require("telescope.builtin").quickfix()<CR>', { desc = '[Q]uickfix' })
+            vim.keymap.set('n', '<leader>fo', ':lua require("telescope.builtin").oldfiles()<CR>', { desc = '[O]ld files' })
+            vim.keymap.set('n', '<leader>fb', ':lua require("telescope.builtin").buffers()<CR>', { desc = '[B]uffers' })
+            vim.keymap.set('n', '<leader>fs', function() require("telescope.builtin").live_grep(fuzzy_refine_mappings) end, { desc = '[S]earch Grep' })
+            vim.keymap.set('n', '<leader>fc', function() require("telescope.builtin").find_files { cwd = vim.fn.stdpath 'config' } end, { desc = '[S]earch [N]eovim files' })
+            vim.keymap.set('n', '<leader>Fs', function() require("telescope.builtin").live_grep(set_scope_and_refine_mappings()) end, { desc = '[S]earch Grep in Bolt scope' })
+            vim.keymap.set('n', '<leader>fS', function() require("telescope").extensions.dir.live_grep(fuzzy_refine_mappings) end, { desc = '[S]earch Grep in <DIR>' })
+            vim.keymap.set('n', '<leader>Fw', function() require("telescope.builtin").grep_string(set_scope_and_refine_mappings()) end, { desc = '[W]ord Grep in Bolt scope' })
+            vim.keymap.set('n', '<leader>fw', ':lua require("telescope.builtin").grep_string()<CR>', { desc = '[W]ord Grep' })
+            vim.keymap.set('n', '<leader>ff', ':lua require("telescope").extensions.file_browser.file_browser({path="%:p:h"})<CR>', { desc = 'File [F]inder' })
+            vim.keymap.set('n', '<leader>bc', ':lua require("telescope.builtin").git_bcommits()<CR>', { desc = 'Git [C]ommits' })
+            vim.keymap.set('n', 'gd', ':lua require("telescope.builtin").lsp_definitions()<CR>', { desc = '[D]efinitions' })
+            vim.keymap.set('n', 'gt', ':lua require("telescope.builtin").lsp_type_definitions()<CR>', { desc = '[T]ype definitions' })
+            vim.keymap.set('n', 'gi', ':lua require("telescope.builtin").lsp_implementations()<CR>', { desc = '[I]mplementations' })
+            vim.keymap.set('n', 'gr', function() require('snacks').picker.lsp_references() end, { desc = '[R]eferences' })
+            vim.keymap.set('n', 'gs', ':lua require("telescope.builtin").lsp_document_symbols()<CR>', { desc = 'Show document [s]ymbols' })
+            vim.keymap.set('n', 'gic', ':lua require("telescope.builtin").lsp_incoming_calls()<CR>', { desc = '[I]ncoming [c]alls' })
+            vim.keymap.set('n', 'goc', ':lua require("telescope.builtin").lsp_outgoing_calls()<CR>', { desc = '[O]utgoing [c]alls' })
+            vim.keymap.set('n', 'gD', ':lua require("telescope.builtin").diagnostics()<CR>', { desc = 'Dia[g]nostics' })
+            vim.keymap.set('n', '<leader>mp', function()
+                require("telescope.builtin").find_files({
+                    ---@diagnostic disable-next-line: param-type-mismatch
+                    cwd = vim.fs.joinpath(vim.fn.stdpath("data"), "lazy")
+                })
+            end, { desc = 'Find [M]odule files' })
         end,
         config = function()
             require('telescope').setup({

@@ -3,7 +3,6 @@ return {
         'neovim/nvim-lspconfig',
         dependencies = {
             'nvim-lua/plenary.nvim',
-            'folke/which-key.nvim',
             { 'williamboman/mason.nvim', config = true },
             'williamboman/mason-lspconfig.nvim',
             {
@@ -19,23 +18,21 @@ return {
                 --     client.server_capabilities.documentFormattingProvider = false
                 -- end
 
-                require('which-key').add({
-                    { 'ff',         ':lua vim.lsp.buf.format{async=true}<CR>', desc = 'Format document' },
-                    { '<leader>do', ':lua vim.lsp.buf.code_action()<CR>',      desc = 'Code action' },
-                    { '<leader>rn', ':lua vim.lsp.buf.rename()<CR>',           desc = 'Rename symbol' },
-                    {
-                        '<leader>ih',
-                        function()
-                            vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = bufnr }))
-                        end,
-                        desc = 'Toggle [i]nlay [h]ints'
-                    },
-                    { '<leader>en', ':lua vim.diagnostic.goto_next()<CR>',  desc = 'Next diagnostic' },
-                    { '<leader>ep', ':lua vim.diagnostic.goto_prev()<CR>',  desc = 'Prev diagnostic' },
-                    { '<leader>ee', ':lua vim.diagnostic.open_float()<CR>', desc = 'Show diagnostic' },
-                }, {
-                    buffer = bufnr
-                })
+                vim.keymap.set('n', 'ff', ':lua vim.lsp.buf.format{async=true}<CR>',
+                    { desc = 'Format document', buffer = bufnr })
+                vim.keymap.set('n', '<leader>do', ':lua vim.lsp.buf.code_action()<CR>',
+                    { desc = 'Code action', buffer = bufnr })
+                vim.keymap.set('n', '<leader>rn', ':lua vim.lsp.buf.rename()<CR>',
+                    { desc = 'Rename symbol', buffer = bufnr })
+                vim.keymap.set('n', '<leader>ih',
+                    function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = bufnr })) end,
+                    { desc = 'Toggle [i]nlay [h]ints', buffer = bufnr })
+                vim.keymap.set('n', '<leader>en', ':lua vim.diagnostic.goto_next()<CR>',
+                    { desc = 'Next diagnostic', buffer = bufnr })
+                vim.keymap.set('n', '<leader>ep', ':lua vim.diagnostic.goto_prev()<CR>',
+                    { desc = 'Prev diagnostic', buffer = bufnr })
+                vim.keymap.set('n', '<leader>ee', ':lua vim.diagnostic.open_float()<CR>',
+                    { desc = 'Show diagnostic', buffer = bufnr })
 
                 -- The following two autocommands are used to highlight references of the
                 -- word under your cursor when your cursor rests there for a little while.

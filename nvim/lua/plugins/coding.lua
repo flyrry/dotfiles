@@ -30,7 +30,6 @@ return {
         dependencies = {
             'nvim-treesitter/nvim-treesitter',
             'nvim-telescope/telescope.nvim',
-            'folke/which-key.nvim',
         },
         -- commit = '3d9848f',
         -- cond = function()
@@ -39,23 +38,22 @@ return {
         -- end,
         config = function()
             local bolt = require("bolt-server")
-            require("which-key").add({
-                { "<leader>gs",  bolt.find_service,               desc = "" },
-                { "<Leader>gc",  bolt.find_service_comp_tests,    desc = "" },
-                { "<Leader>gd",  bolt.find_service_db_schema,     desc = "" },
-                { "<Leader>p",   bolt.find_service_files,         desc = "" },
-                { "<Leader>fis", bolt.grep_service_files,         desc = "" },
-                { "<Leader>cs",  bolt.compile_service,            desc = "[C]ompile [S]ervice" },
-                { "<Leader>csf", bolt.compile_service_force,      desc = "[C]ompile [S]ervice ([F]orce)" },
-                { "<Leader>cst", bolt.compile_service_with_tests, desc = "[C]ompile [S]ervice with [T]ests" },
-                { "<Leader>ags", bolt.api_gen_service,            desc = "[A]PI-[G]en [S]ervice" },
-                { "<Leader>xs",  bolt.select_comp_test_to_run,    desc = "E[x]ecute [S]elected test" },
-                { "<Leader>xa",  bolt.run_service_comp_tests,     desc = "E[x]ecute all service tests" },
-                { "<Leader>xf",  bolt.run_buffer_comp_tests,      desc = "E[x]ecute tests in the file" },
-                { "<Leader>xx",  bolt.run_comp_test_under_cursor, desc = "E[x]ecute current test" },
-                { "<Leader>gad", bolt.goto_api_definition,        desc = "" },
-                { "<Leader>gae", bolt.goto_api_endpoint,          desc = "" },
-            })
+            vim.keymap.set('n', "<leader>gs", bolt.find_service, { desc = "" })
+            vim.keymap.set('n', "<Leader>gc", bolt.find_service_comp_tests, { desc = "" })
+            vim.keymap.set('n', "<Leader>gd", bolt.find_service_db_schema, { desc = "" })
+            vim.keymap.set('n', "<Leader>p", bolt.find_service_files, { desc = "" })
+            vim.keymap.set('n', "<Leader>fis", bolt.grep_service_files, { desc = "" })
+            vim.keymap.set('n', "<Leader>cs", bolt.compile_service, { desc = "[C]ompile [S]ervice" })
+            vim.keymap.set('n', "<Leader>csf", bolt.compile_service_force, { desc = "[C]ompile [S]ervice ([F]orce)" })
+            vim.keymap.set('n', "<Leader>cst", bolt.compile_service_with_tests,
+                { desc = "[C]ompile [S]ervice with [T]ests" })
+            vim.keymap.set('n', "<Leader>ags", bolt.api_gen_service, { desc = "[A]PI-[G]en [S]ervice" })
+            vim.keymap.set('n', "<Leader>xs", bolt.select_comp_test_to_run, { desc = "E[x]ecute [S]elected test" })
+            vim.keymap.set('n', "<Leader>xa", bolt.run_service_comp_tests, { desc = "E[x]ecute all service tests" })
+            vim.keymap.set('n', "<Leader>xf", bolt.run_buffer_comp_tests, { desc = "E[x]ecute tests in the file" })
+            vim.keymap.set('n', "<Leader>xx", bolt.run_comp_test_under_cursor, { desc = "E[x]ecute current test" })
+            vim.keymap.set('n', "<Leader>gad", bolt.goto_api_definition, { desc = "" })
+            vim.keymap.set('n', "<Leader>gae", bolt.goto_api_endpoint, { desc = "" })
             local bottomsplit = {
                 config = function()
                     return {
@@ -89,7 +87,6 @@ return {
         dependencies = {
             'nvim-treesitter/nvim-treesitter',
             'nvim-telescope/telescope.nvim',
-            'folke/which-key.nvim',
         },
         cond = function()
             local cwd = vim.fn.getcwd()
@@ -97,11 +94,9 @@ return {
         end,
         config = function()
             local bolt = require("bolt-admin")
-            require("which-key").add({
-                { "<leader>gs", bolt.find_module,       desc = "" },
-                { "<leader>cs", bolt.compile_module,    desc = "" },
-                { "<leader>p",  bolt.find_module_files, desc = "" },
-            })
+            vim.keymap.set('n', "<leader>gs", bolt.find_module, { desc = "" })
+            vim.keymap.set('n', "<leader>cs", bolt.compile_module, { desc = "" })
+            vim.keymap.set('n', "<leader>p", bolt.find_module_files, { desc = "" })
         end
     },
     {

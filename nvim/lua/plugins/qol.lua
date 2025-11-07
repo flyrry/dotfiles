@@ -47,10 +47,9 @@ return {
         -- scope = { enabled = true },
     },
     init = function()
-        require('snacks').toggle.zen():map("<leader>go")
-        require('snacks').toggle.dim():map("<leader>gf")
-        require('which-key').add({
-            { '<C-p>', function() Snacks.picker.files() end, desc = "[F]ind files" },
-        })
+        local snacks = require('snacks')
+        snacks.toggle.zen():map("<leader>go")
+        snacks.toggle.dim():map("<leader>gf")
+        vim.keymap.set("n", "<C-p>", function() snacks.picker.files() end, { desc = "[F]ind files" })
     end
 }
