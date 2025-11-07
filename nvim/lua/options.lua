@@ -36,12 +36,10 @@ vim.o.shiftwidth = 4
 -- change number of spaces that a <Tab> counts for during editing ops
 vim.o.softtabstop = 4
 -- folds expanded on file load
--- vim.o.foldenable = false
+vim.o.foldenable = false
 vim.o.foldmethod = 'expr'
 vim.o.foldexpr = 'v:lua.vim.treesitter.foldexpr()'
 vim.o.foldtext = ""
-vim.o.foldlevelstart = 5
-vim.o.foldnestmax = 10
 -- don't show the mode, since it's already in the status line
 vim.o.showmode = false
 -- do smart autoindenting when starting a new line
