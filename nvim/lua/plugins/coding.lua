@@ -16,16 +16,6 @@ return {
         config = true
     },
     {
-        'CopilotC-Nvim/CopilotChat.nvim',
-        dependencies = {
-            'github/copilot.vim',
-            'nvim-lua/plenary.nvim'
-        },
-        build = "make tiktoken",
-        opts = {
-        }
-    },
-    {
         'bolteu/bolt-server.nvim',
         dependencies = {
             'nvim-treesitter/nvim-treesitter',
