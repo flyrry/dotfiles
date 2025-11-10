@@ -17,22 +17,22 @@ return {
                 -- if client.name == "ts_ls" then
                 --     client.server_capabilities.documentFormattingProvider = false
                 -- end
+                local km = function(key, func, desc)
+                    if desc then
+                        desc = 'LSP: ' .. desc
+                    end
+                    vim.keymap.set('n', key, func, { buffer = bufnr, desc = desc })
+                end
 
-                vim.keymap.set('n', 'ff', ':lua vim.lsp.buf.format{async=true}<CR>',
-                    { desc = 'Format document', buffer = bufnr })
-                vim.keymap.set('n', '<leader>do', ':lua vim.lsp.buf.code_action()<CR>',
-                    { desc = 'Code action', buffer = bufnr })
-                vim.keymap.set('n', '<leader>rn', ':lua vim.lsp.buf.rename()<CR>',
-                    { desc = 'Rename symbol', buffer = bufnr })
-                vim.keymap.set('n', '<leader>ih',
+                km('ff', function() vim.lsp.buf.format({async = true}) end, 'Format document')
+                km('do', vim.lsp.buf.code_action, 'Code action')
+                km('<leader>rn', vim.lsp.buf.rename, 'Rename symbol')
+                km('<leader>en', vim.diagnostic.goto_next, 'Next diagnostic')
+                km('<leader>ep', vim.diagnostic.goto_prev, 'Prev diagnostic')
+                km('<leader>ee', vim.diagnostic.open_float, 'Show diagnostic')
+                km('<leader>ih',
                     function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = bufnr })) end,
-                    { desc = 'Toggle [i]nlay [h]ints', buffer = bufnr })
-                vim.keymap.set('n', '<leader>en', ':lua vim.diagnostic.goto_next()<CR>',
-                    { desc = 'Next diagnostic', buffer = bufnr })
-                vim.keymap.set('n', '<leader>ep', ':lua vim.diagnostic.goto_prev()<CR>',
-                    { desc = 'Prev diagnostic', buffer = bufnr })
-                vim.keymap.set('n', '<leader>ee', ':lua vim.diagnostic.open_float()<CR>',
-                    { desc = 'Show diagnostic', buffer = bufnr })
+                    'Toggle inlay hints')
 
                 -- The following two autocommands are used to highlight references of the
                 -- word under your cursor when your cursor rests there for a little while.
@@ -193,14 +193,14 @@ return {
                 automatic_enable = true,
             }
 
-            local capabilities = vim.lsp.protocol.make_client_capabilities()
+            local capabilities = require('blink.cmp').get_lsp_capabilities(vim.lsp.protocol.make_client_capabilities())
             for server_name, server in pairs(servers) do
                 -- server.capabilities = vim.tbl_deep_extend("force", {}, capabilities, server.capabilities or {})
                 if server_name == "diagnosticls" then
                     vim.lsp.config(server_name, server)
                 else
                     vim.lsp.config(server_name, {
-                        capabilities = require('blink.cmp').get_lsp_capabilities(capabilities),
+                        capabilities = capabilities,
                         on_attach = on_attach,
                         settings = server,
                     })
