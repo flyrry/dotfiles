@@ -183,6 +183,7 @@ return {
                         telemetry = { enable = false },
                     },
                 },
+                -- tsgo = {}
             }
 
             local mason_lspconfig = require('mason-lspconfig')
@@ -206,13 +207,7 @@ return {
                 end
             end
 
-            -- this plugin uses dedicated event loop to talk to tsserver directly
-            -- avoiding extra layer of typescript-language-server
             require('typescript-tools').setup {
-                on_attach = function(client, bufnr)
-                    client.server_capabilities.documentFormattingProvider = false
-                    on_attach(client, bufnr)
-                end,
                 settings = {
                     tsserver_max_memory = 8192,
                     separate_diagnostic_server = false,
@@ -224,6 +219,12 @@ return {
                     -- code_lens = "all",
                 }
             }
+            vim.lsp.config("typescript-tools", {
+                on_attach = function(client, bufnr)
+                    client.server_capabilities.documentFormattingProvider = false
+                    on_attach(client, bufnr)
+                end,
+            })
 
             -- configure diagnostics
             vim.diagnostic.config(
