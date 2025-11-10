@@ -24,5 +24,6 @@ return {
     'nvim-dap', 'nvim-dap-ui', -- debug adaptor protocol
     'overseer', -- running tasks from nvim, including custom ones like 'yarn install'
     'nvim-mini/mini.operators' -- replace / multiply / exchange text
+    folke/sidekick -- nvim 0.12+
 }
 
