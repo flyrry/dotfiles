@@ -1,7 +1,19 @@
 return {
     {
         "EdenEast/nightfox.nvim",
-        lazy = true
+        config = function()
+            require("nightfox").setup({
+                options = {
+                    styles = {
+                        comments = "italic",
+                        keywords = "italic",
+                        operators = "italic",
+                        conditionals = "italic",
+                    },
+                },
+            })
+            vim.cmd.colorscheme("nightfox")
+        end
     },
     {
         'sainnhe/sonokai',
