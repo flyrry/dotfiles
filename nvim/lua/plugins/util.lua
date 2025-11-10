@@ -1,5 +1,15 @@
 return {
   {
+    'nvim-mini/mini.operators',
+    config = function()
+      require('mini.operators').setup({
+        exchange = { prefix = '<leader>gx' },
+        replace = { prefix = '<leader>gr' },
+        sort = { prefix = '<leader>gs' },
+      })
+    end,
+  },
+  {
     'folke/which-key.nvim',
     config = function()
       require('which-key').add({
