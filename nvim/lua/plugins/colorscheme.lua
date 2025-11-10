@@ -1,21 +1,5 @@
 return {
     {
-        "EdenEast/nightfox.nvim",
-        config = function()
-            require("nightfox").setup({
-                options = {
-                    styles = {
-                        comments = "italic",
-                        keywords = "italic",
-                        operators = "italic",
-                        conditionals = "italic",
-                    },
-                },
-            })
-            vim.cmd.colorscheme("nightfox")
-        end
-    },
-    {
         'sainnhe/sonokai',
         lazy = true,
         priority = 1000,
@@ -42,17 +26,9 @@ return {
         end
     },
     {
-        'neanias/everforest-nvim',
-        lazy = true,
-        priority = 1000,
-        config = function()
-            require('everforest').setup({ background = 'hard' })
-            require('everforest').load()
-        end
-    },
-    {
         "folke/tokyonight.nvim",
         name = "tokyonight",
+        lazy = true,
         priority = 1000,
         config = function()
             require('tokyonight').load({
@@ -62,11 +38,18 @@ return {
         end,
     },
     {
-        "olimorris/onedarkpro.nvim",
+        'catppuccin/nvim',
+        name = 'catpuccin',
         priority = 1000,
+        config = function()
+            require('catppuccin').setup({
+                flavour = 'frappe',
+                integrations = {
+                    -- flatten = true,
+                },
+            })
+            vim.cmd.colorscheme('catppuccin')
+        end,
     },
-    {
-        "rebelot/kanagawa.nvim",
-        priority = 1000,
-    }
+    -- 'deparr/tairiki.nvim',
 }
