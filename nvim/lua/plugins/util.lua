@@ -3,9 +3,9 @@ return {
     'nvim-mini/mini.operators',
     config = function()
       require('mini.operators').setup({
-        exchange = { prefix = '<leader>gx' },
-        replace = { prefix = '<leader>gr' },
-        sort = { prefix = '<leader>gs' },
+        exchange = { prefix = '<leader>rx' },
+        replace = { prefix = '<leader>rr' },
+        sort = { prefix = '<leader>rs' },
       })
     end,
   },
