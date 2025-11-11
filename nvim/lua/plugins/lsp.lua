@@ -1,10 +1,9 @@
 return {
+    { 'williamboman/mason.nvim', config = true },
     {
         'neovim/nvim-lspconfig',
         dependencies = {
             'nvim-lua/plenary.nvim',
-            { 'williamboman/mason.nvim', config = true },
-            'williamboman/mason-lspconfig.nvim',
             {
                 'j-hui/fidget.nvim',
                 opts = {},
@@ -24,7 +23,7 @@ return {
                     vim.keymap.set('n', key, func, { buffer = bufnr, desc = desc })
                 end
 
-                km('ff', function() vim.lsp.buf.format({async = true}) end, 'Format document')
+                km('ff', function() vim.lsp.buf.format({ async = true }) end, 'Format document')
                 km('do', vim.lsp.buf.code_action, 'Code action')
                 km('<leader>rn', vim.lsp.buf.rename, 'Rename symbol')
                 km('<leader>en', vim.diagnostic.goto_next, 'Next diagnostic')
@@ -63,150 +62,98 @@ return {
                 end
             end
 
-            -- Enable the following language servers
-            -- Feel free to add/remove any LSPs that you want here. They will automatically be installed.
-            --
-            --  Add any additional override configuration in the following tables. They will be passed to
-            --  the `settings` field of the server config. You must look up that documentation yourself.
-            local servers = {
-                clangd = {},
-                -- ts_ls = {
-                --     typescript = {
-                --         inlayHints = {
-                --             includeInlayEnumMemberValueHints = true,
-                --             includeInlayFunctionLikeReturnTypeHints = true,
-                --             includeInlayFunctionParameterTypeHints = true,
-                --             includeInlayParameterNameHints = "all", -- 'none' | 'literals' | 'all';
-                --             includeInlayParameterNameHintsWhenArgumentMatchesName = true,
-                --             includeInlayPropertyDeclarationTypeHints = true,
-                --             includeInlayVariableTypeHints = false,
-                --         },
-                --     },
-                -- },
-                rust_analyzer = {
-                    -- ['rust-analyzer'] = {
-                    --     imports = {
-                    --         granularity = {
-                    --             group = 'module',
-                    --         },
-                    --         prefix = 'self',
-                    --     },
-                    --     cargo = {
-                    --         buildScripts = {
-                    --             enable = true,
-                    --         },
-                    --     },
-                    --     procMacro = {
-                    --         enable = true
-                    --     },
-                    -- }
-                },
-                -- zk = {},
-                diagnosticls = {
-                    filetypes = {
-                        -- "css",
-                        -- "dockerfile",
-                        -- "fish",
-                        -- "go",
-                        "javascript",
-                        "javascriptreact",
-                        -- "json",
-                        -- "lua",
-                        "markdown",
-                        -- "python",
-                        -- "scss",
-                        -- "sh",
-                        -- "sql",
-                        "typescript",
-                        "typescriptreact",
-                        -- "vim",
-                        -- "yaml",
-                        -- "yaml.ansible",
-                    },
-                    init_options = {
-                        linters = {
-                            eslint = {
-                                sourceName = "eslint",
-                                command = "eslint_d",
-                                rootPatterns = { ".eslintrc.js", "package.json" },
-                                debounce = 100,
-                                args = { "--stdin", "--stdin-filename", "%filepath", "--format", "json" },
-                                parseJson = {
-                                    errorsRoot = "[0].messages",
-                                    line = "line",
-                                    column = "column",
-                                    endLine = "endLine",
-                                    endColumn = "endColumn",
-                                    message = "${message} [${ruleId}]",
-                                    security = "severity"
-                                },
-                                securities = { [2] = "error", [1] = "warning" }
-                            }
-                        },
-                        formatters = {
-                            eslint = {
-                                command = "eslint_d",
-                                args = { "--stdin", "--stdin-filename", "%filename", "--fix-to-stdout" }
-                            },
-                            prettier = { command = "prettier", args = { "--stdin", "--stdin-filepath", "%filepath" } }
-                        },
-                        filetypes = {
-                            javascript = "eslint",
-                            javascriptreact = "eslint",
-                            typescript = "eslint",
-                            typescriptreact = "eslint",
-                        },
-                        formatFiletypes = {
-                            css = "prettier",
-                            javascript = { "prettier", "eslint" },
-                            javascriptreact = { "prettier", "eslint" },
-                            json = "prettier",
-                            scss = "prettier",
-                            less = "prettier",
-                            markdown = "prettier",
-                            typescript = { "prettier", "eslint" },
-                            typescriptreact = { "prettier", "eslint" },
-                        },
-                    },
-                },
-                lua_ls = {
-                    Lua = {
-                        diagnostics = {
-                            -- Get the language server to recognize the `vim` global
-                            globals = { 'vim' },
-                        },
-                        workspace = {
-                            -- Make the server aware of Neovim runtime files
-                            library = vim.api.nvim_get_runtime_file("", true),
-                            checkThirdParty = false,
-                        },
-                        telemetry = { enable = false },
-                    },
-                },
-                -- tsgo = {}
-            }
-
-            local mason_lspconfig = require('mason-lspconfig')
-
-            mason_lspconfig.setup {
-                ensure_installed = vim.tbl_keys(servers),
-                automatic_enable = true,
-            }
-
             local capabilities = require('blink.cmp').get_lsp_capabilities(vim.lsp.protocol.make_client_capabilities())
-            for server_name, server in pairs(servers) do
-                -- server.capabilities = vim.tbl_deep_extend("force", {}, capabilities, server.capabilities or {})
-                if server_name == "diagnosticls" then
-                    vim.lsp.config(server_name, server)
-                else
-                    vim.lsp.config(server_name, {
-                        capabilities = capabilities,
-                        on_attach = on_attach,
-                        settings = server,
-                    })
-                end
+            local init_config = function(lsp_name, settings)
+                local lsp_config = {
+                    capabilities = capabilities,
+                    on_attach = on_attach,
+                    settings = settings or {},
+                }
+                vim.lsp.config(lsp_name, lsp_config)
             end
-
+            init_config('clangd')
+            init_config('rust_analyzer')
+            init_config('lua_ls', {
+                Lua = {
+                    diagnostics = {
+                        -- Get the language server to recognize the `vim` global
+                        globals = { 'vim' },
+                    },
+                    workspace = {
+                        -- Make the server aware of Neovim runtime files
+                        library = vim.api.nvim_get_runtime_file("", true),
+                        checkThirdParty = false,
+                    },
+                    telemetry = { enable = false },
+                },
+            })
+            vim.lsp.config('diagnosticls', {
+                filetypes = {
+                    -- "css",
+                    -- "dockerfile",
+                    -- "fish",
+                    -- "go",
+                    "javascript",
+                    "javascriptreact",
+                    -- "json",
+                    -- "lua",
+                    "markdown",
+                    -- "python",
+                    -- "scss",
+                    -- "sh",
+                    -- "sql",
+                    "typescript",
+                    "typescriptreact",
+                    -- "vim",
+                    -- "yaml",
+                    -- "yaml.ansible",
+                },
+                init_options = {
+                    linters = {
+                        eslint = {
+                            sourceName = "eslint",
+                            command = "eslint_d",
+                            rootPatterns = { ".eslintrc.js", "package.json" },
+                            debounce = 100,
+                            args = { "--stdin", "--stdin-filename", "%filepath", "--format", "json" },
+                            parseJson = {
+                                errorsRoot = "[0].messages",
+                                line = "line",
+                                column = "column",
+                                endLine = "endLine",
+                                endColumn = "endColumn",
+                                message = "${message} [${ruleId}]",
+                                security = "severity"
+                            },
+                            securities = { [2] = "error", [1] = "warning" }
+                        }
+                    },
+                    formatters = {
+                        eslint = {
+                            command = "eslint_d",
+                            args = { "--stdin", "--stdin-filename", "%filename", "--fix-to-stdout" }
+                        },
+                        prettier = { command = "prettier", args = { "--stdin", "--stdin-filepath", "%filepath" } }
+                    },
+                    filetypes = {
+                        javascript = "eslint",
+                        javascriptreact = "eslint",
+                        typescript = "eslint",
+                        typescriptreact = "eslint",
+                    },
+                    formatFiletypes = {
+                        css = "prettier",
+                        javascript = { "prettier", "eslint" },
+                        javascriptreact = { "prettier", "eslint" },
+                        json = "prettier",
+                        scss = "prettier",
+                        less = "prettier",
+                        markdown = "prettier",
+                        typescript = { "prettier", "eslint" },
+                        typescriptreact = { "prettier", "eslint" },
+                    },
+                },
+            })
             require('typescript-tools').setup {
                 settings = {
                     tsserver_max_memory = 8192,
@@ -219,12 +166,15 @@ return {
                     -- code_lens = "all",
                 }
             }
-            vim.lsp.config("typescript-tools", {
+            vim.lsp.config('typescript-tools', {
+                capabilities = capabilities,
                 on_attach = function(client, bufnr)
                     client.server_capabilities.documentFormattingProvider = false
                     on_attach(client, bufnr)
                 end,
             })
+
+            vim.lsp.enable({ 'clangd', 'rust_analyzer', 'lua_ls', 'diagnosticls', 'typescript-tools' })
 
             -- configure diagnostics
             vim.diagnostic.config(
