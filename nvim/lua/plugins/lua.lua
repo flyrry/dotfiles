@@ -6,9 +6,9 @@ return {
         ft = 'lua',
         config = function()
             -- unrelated to `lazydev` but useful for Lua development
-            vim.keymap.set("n", "<leader><leader>x", "<cmd>source %<cr>")
-            vim.keymap.set("n", "<leader>x", ":lua<cr>")
-            vim.keymap.set("v", "<leader>x", ":lua<cr>")
+            vim.keymap.set('n', '<leader><leader>x', '<cmd>source %<cr>')
+            vim.keymap.set('n', '<leader>x', ':lua<cr>')
+            vim.keymap.set('v', '<leader>x', ':lua<cr>')
 
             require("lazydev").setup({
                 library = {
