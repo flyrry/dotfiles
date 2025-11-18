@@ -16,6 +16,7 @@ return {
                 -- if client.name == "ts_ls" then
                 --     client.server_capabilities.documentFormattingProvider = false
                 -- end
+
                 local km = function(key, func, desc)
                     if desc then
                         desc = 'LSP: ' .. desc
@@ -24,7 +25,7 @@ return {
                 end
 
                 km('ff', function() vim.lsp.buf.format({ async = true }) end, 'Format document')
-                km('do', vim.lsp.buf.code_action, 'Code action')
+                km('<leader>do', vim.lsp.buf.code_action, 'Code action')
                 km('<leader>rn', vim.lsp.buf.rename, 'Rename symbol')
                 km('<leader>en', vim.diagnostic.goto_next, 'Next diagnostic')
                 km('<leader>ep', vim.diagnostic.goto_prev, 'Prev diagnostic')

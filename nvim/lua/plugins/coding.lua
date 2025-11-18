@@ -2,7 +2,6 @@ return {
     { 'echasnovski/mini.splitjoin', opts = {} },
     { 'tpope/vim-fugitive' },
     { 'tpope/vim-rhubarb' },
-    { 'tpope/vim-unimpaired' },
     { 'tpope/vim-sleuth' }, -- auto-adjust 'shiftwidth' and 'expandtab'
     {
         'folke/todo-comments.nvim',
