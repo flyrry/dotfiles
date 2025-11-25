@@ -156,6 +156,11 @@ return {
                 },
             })
             require('typescript-tools').setup {
+                on_attach = function(client, bufnr)
+                    client.server_capabilities.documentFormattingProvider = false
+                    on_attach(client, bufnr)
+                end,
+                capabilities = capabilities,
                 settings = {
                     tsserver_max_memory = 8192,
                     separate_diagnostic_server = false,
@@ -167,15 +172,8 @@ return {
                     -- code_lens = "all",
                 }
             }
-            vim.lsp.config('typescript-tools', {
-                capabilities = capabilities,
-                on_attach = function(client, bufnr)
-                    client.server_capabilities.documentFormattingProvider = false
-                    on_attach(client, bufnr)
-                end,
-            })
 
-            vim.lsp.enable({ 'clangd', 'rust_analyzer', 'lua_ls', 'diagnosticls', 'typescript-tools' })
+            vim.lsp.enable({ 'clangd', 'rust_analyzer', 'lua_ls', 'diagnosticls' })
 
             -- configure diagnostics
             vim.diagnostic.config(

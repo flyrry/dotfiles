@@ -18,6 +18,14 @@ return {
                 -- { icon = "", key = "q", desc = "Quit", action = ":qa", padding = 1 },
                 { section = "keys" },
                 { section = "startup" },
+                {
+                    text = {
+                        { "C-S\t\t\tsignature help\n"},
+                        { "C-]\t\t\tgo to definition\n" },
+                        { "gq\t\t\tformat using formatexpr (typically LSP)\n" },
+                        { "<leader>ctn\t\ttoggle no-compile\n" },
+                    }
+                }
             },
         },
         -- explorer = { enabled = true }, -- ,ff
