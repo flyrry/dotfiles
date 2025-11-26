@@ -10,7 +10,6 @@ return {
             'princejoogie/dir-telescope.nvim',
             'nvim-telescope/telescope-file-browser.nvim',
             'bolteu/bolt-server.nvim',
-            'nvim-telescope/telescope-ui-select.nvim'
         },
         init = function()
             local fuzzy_refine_mappings = {
@@ -32,11 +31,11 @@ return {
                 return vim.tbl_extend('keep', set_bolt_scope(), fuzzy_refine_mappings)
             end
             vim.keymap.set('n', '<leader>P', function() require("telescope.builtin").find_files() end, { desc = 'Find Files' })
-            vim.keymap.set('n', '<leader>fh', function() require('telescope.builtin').help_tags() end, { desc = '[F]ind [H]elp' })
-            vim.keymap.set('n', '<leader>fg', function() require("telescope.builtin").git_files() end, { desc = 'Find [G]it Files' })
-            vim.keymap.set('n', '<leader>fq', function() require("telescope.builtin").quickfix() end, { desc = '[Q]uickfix' })
-            vim.keymap.set('n', '<leader>fo', function() require("telescope.builtin").oldfiles() end, { desc = '[O]ld files' })
-            vim.keymap.set('n', '<leader>fb', function() require("telescope.builtin").buffers() end, { desc = '[B]uffers' })
+            -- vim.keymap.set('n', '<leader>fh', function() require('telescope.builtin').help_tags() end, { desc = '[F]ind [H]elp' })
+            -- vim.keymap.set('n', '<leader>fg', function() require("telescope.builtin").git_files() end, { desc = 'Find [G]it Files' })
+            -- vim.keymap.set('n', '<leader>fq', function() require("telescope.builtin").quickfix() end, { desc = '[Q]uickfix' })
+            -- vim.keymap.set('n', '<leader>fo', function() require("telescope.builtin").oldfiles() end, { desc = '[O]ld files' })
+            -- vim.keymap.set('n', '<leader>fb', function() require("telescope.builtin").buffers() end, { desc = '[B]uffers' })
             vim.keymap.set('n', '<leader>fs', function() require("telescope.builtin").live_grep(fuzzy_refine_mappings) end, { desc = '[S]earch Grep' })
             vim.keymap.set('n', '<leader>fc', function() require("telescope.builtin").find_files { cwd = vim.fn.stdpath 'config' } end, { desc = '[S]earch [N]eovim files' })
             vim.keymap.set('n', '<leader>Fs', function() require("telescope.builtin").live_grep(set_scope_and_refine_mappings()) end, { desc = '[S]earch Grep in Bolt scope' })
@@ -44,15 +43,15 @@ return {
             vim.keymap.set('n', '<leader>Fw', function() require("telescope.builtin").grep_string(set_scope_and_refine_mappings()) end, { desc = '[W]ord Grep in Bolt scope' })
             vim.keymap.set('n', '<leader>fw', function() require("telescope.builtin").grep_string() end, { desc = '[W]ord Grep' })
             vim.keymap.set('n', '<leader>ff', function() require("telescope").extensions.file_browser.file_browser({path="%:p:h"}) end, { desc = 'File [F]inder' })
-            vim.keymap.set('n', '<leader>bc', function() require("telescope.builtin").git_bcommits() end, { desc = 'Git [C]ommits' })
-            vim.keymap.set('n', 'gd', function() require("telescope.builtin").lsp_definitions() end, { desc = '[D]efinitions' })
-            vim.keymap.set('n', 'gt', function() require("telescope.builtin").lsp_type_definitions() end, { desc = '[T]ype definitions' })
-            vim.keymap.set('n', 'gi', function() require("telescope.builtin").lsp_implementations() end, { desc = '[I]mplementations' })
-            vim.keymap.set('n', 'gr', function() require('snacks').picker.lsp_references() end, { desc = '[R]eferences' })
-            vim.keymap.set('n', 'gs', function() require("telescope.builtin").lsp_document_symbols() end, { desc = 'Show document [s]ymbols' })
-            vim.keymap.set('n', 'gic', function() require("telescope.builtin").lsp_incoming_calls() end, { desc = '[I]ncoming [c]alls' })
-            vim.keymap.set('n', 'goc', function() require("telescope.builtin").lsp_outgoing_calls() end, { desc = '[O]utgoing [c]alls' })
-            vim.keymap.set('n', 'gD', function() require("telescope.builtin").diagnostics() end, { desc = 'Dia[g]nostics' })
+            -- vim.keymap.set('n', '<leader>bc', function() require("telescope.builtin").git_bcommits() end, { desc = 'Git [C]ommits' })
+            -- vim.keymap.set('n', 'gd', function() require("telescope.builtin").lsp_definitions() end, { desc = '[D]efinitions' })
+            -- vim.keymap.set('n', 'gt', function() require("telescope.builtin").lsp_type_definitions() end, { desc = '[T]ype definitions' })
+            -- vim.keymap.set('n', 'gi', function() require("telescope.builtin").lsp_implementations() end, { desc = '[I]mplementations' })
+            -- vim.keymap.set('n', 'gr', function() require('snacks').picker.lsp_references() end, { desc = '[R]eferences' })
+            -- vim.keymap.set('n', 'gs', function() require("telescope.builtin").lsp_document_symbols() end, { desc = 'Show document [s]ymbols' })
+            -- vim.keymap.set('n', 'gic', function() require("telescope.builtin").lsp_incoming_calls() end, { desc = '[I]ncoming [c]alls' })
+            -- vim.keymap.set('n', 'goc', function() require("telescope.builtin").lsp_outgoing_calls() end, { desc = '[O]utgoing [c]alls' })
+            -- vim.keymap.set('n', 'gD', function() require("telescope.builtin").diagnostics() end, { desc = 'Dia[g]nostics' })
             vim.keymap.set('n', '<leader>mp', function()
                 require("telescope.builtin").find_files({
                     ---@diagnostic disable-next-line: param-type-mismatch
@@ -117,16 +116,12 @@ return {
                     -- --     override_generic_sorter = false,
                     -- --     override_file_sorter = true,
                     -- },
-                    ["ui-select"] = {
-                        require("telescope.themes").get_dropdown({})
-                    },
                 },
             })
 
             require('telescope').load_extension('fzf')
             require('telescope').load_extension('dir')
             require('telescope').load_extension('file_browser')
-            require('telescope').load_extension('ui-select')
         end,
     },
 }
