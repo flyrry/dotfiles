@@ -72,6 +72,7 @@ return {
                 }
                 vim.lsp.config(lsp_name, lsp_config)
             end
+            init_config('marksman')
             init_config('clangd')
             init_config('rust_analyzer')
             init_config('lua_ls', {
@@ -173,7 +174,7 @@ return {
                 }
             }
 
-            vim.lsp.enable({ 'clangd', 'rust_analyzer', 'lua_ls', 'diagnosticls' })
+            vim.lsp.enable({ 'clangd', 'rust_analyzer', 'lua_ls', 'diagnosticls', 'marksman' })
 
             -- configure diagnostics
             vim.diagnostic.config(
