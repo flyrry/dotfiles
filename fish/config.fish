@@ -13,12 +13,12 @@ if status is-interactive
     # Commands to run in interactive sessions can go here
     alias gl="GITHUB_TOKEN=(security find-generic-password -s hub -a sergei -w) gh"
     alias e=nvim
-    alias jj="yarn jenkins-job"
+    alias jj="pnpm jenkins-job"
     alias ke="NVIM_APPNAME='kickstart-nvim' nvim"
     # alias s="kitty +kitten ssh"
 
     # abbr -a e nvim
-    # abbr -a jj 'yarn jenkins-job'
+    # abbr -a jj 'pnpm jenkins-job'
     abbr -a s 'kitty +kitten ssh'
     abbr -a dotdot --regex '^\\.\\.+$' --function multicd
     abbr -a jira-issue --regex '[A-Z]{3,5}-[0-9]{1,6}' --function openjira
