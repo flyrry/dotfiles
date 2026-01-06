@@ -18,7 +18,8 @@ return {
         'bolteu/bolt-server.nvim',
         dependencies = {
             'nvim-treesitter/nvim-treesitter',
-            'nvim-telescope/telescope.nvim',
+            -- 'nvim-telescope/telescope.nvim',
+            'folke/snacks.nvim'
         },
         -- commit = '3d9848f',
         -- cond = function()
