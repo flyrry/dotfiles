@@ -5,6 +5,8 @@ set PATH /opt/homebrew/bin $PATH
 set PATH $HOME/.cargo/bin $PATH
 set PATH $HOME/.local/bin $PATH
 
+set -gx DOCKER_API_VERSION 1.43
+
 export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude ".git"'
 
 fzf --fish | source
