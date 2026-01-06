@@ -9,4 +9,8 @@ return {
         opts = {
         }
     },
+    {
+        'carlos-algms/agentic.nvim',
+        event = 'VeryLazy',
+    }
 }
