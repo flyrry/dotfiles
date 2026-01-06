@@ -28,7 +28,6 @@ return {
     {
         "folke/tokyonight.nvim",
         name = "tokyonight",
-        lazy = true,
         priority = 1000,
         config = function()
             require('tokyonight').load({
@@ -40,6 +39,7 @@ return {
     {
         'catppuccin/nvim',
         name = 'catpuccin',
+        lazy = true,
         priority = 1000,
         config = function()
             require('catppuccin').setup({
