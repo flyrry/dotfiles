@@ -5,7 +5,11 @@ return {
             options = {
                 component_separators = '',
                 section_separators = '',
-                disabled_filetypes = { 'startify' },
+                disabled_filetypes = {
+                    'startify',
+                    statusline = { 'AgenticChat', 'AgenticInput', 'AgenticCode', 'AgenticFiles' },
+                    winbar = { 'AgenticChat', 'AgenticInput', 'AgenticCode', 'AgenticFiles' },
+                },
                 -- theme = 'tokyonight',
             },
             sections = {
