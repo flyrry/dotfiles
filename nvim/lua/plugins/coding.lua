@@ -76,7 +76,8 @@ return {
         "bolteu/bolt-admin.nvim",
         dependencies = {
             'nvim-treesitter/nvim-treesitter',
-            'nvim-telescope/telescope.nvim',
+            -- 'nvim-telescope/telescope.nvim',
+            'folke/snacks.nvim'
         },
         cond = function()
             local cwd = vim.fn.getcwd()
