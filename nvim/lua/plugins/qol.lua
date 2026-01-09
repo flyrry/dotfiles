@@ -91,7 +91,7 @@ return {
         vim.keymap.set('n', '<leader>Fw', function() snacks.picker.grep_word(set_bolt_scope()) end, { desc = 'Word grep in Bolt scope' })
 
         vim.keymap.set('n', '<leader>FF', function() snacks.picker.explorer() end, { desc = 'Directory explorer' })
-        vim.keymap.set('n', '<leader>ff', ':Ex<CR>', { desc = 'Directory explorer' })
+        vim.keymap.set('n', '<leader>ff', ':Oil<CR>', { desc = 'Directory explorer' })
         vim.keymap.set('n', '<leader>fg', function() snacks.picker.git_files() end, { desc = 'Find git files' })
         vim.keymap.set('n', '<leader>bc', function() snacks.picker.git_log_file() end, { desc = 'Git commits' })
         vim.keymap.set('n', '<leader>fc', function() snacks.picker.files({ cwd = vim.fn.stdpath('config')}) end, { desc = 'Find config files' })
