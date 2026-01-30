@@ -25,6 +25,7 @@ return {
                         { "C-]\t\t\tgo to definition\n" },
                         { "gq\t\t\tformat using formatexpr (typically LSP)\n" },
                         { "<leader>ctn\t\ttoggle no-compile\n" },
+                        { "<C-w> f\t\t\topen file in new split\n" },
                     }
                 }
             },

@@ -17,6 +17,8 @@ if status is-interactive
     alias e=nvim
     alias jj="pnpm jenkins-job"
     alias ke="NVIM_APPNAME='kickstart-nvim' nvim"
+    alias ls eza
+    alias j='aerospace list-windows --all --format "%{window-id} | %{workspace} | %{app-name}" | fzf --bind "enter:execute(aerospace focus --window-id {1})+abort"'
     # alias s="kitty +kitten ssh"
 
     # abbr -a e nvim
