@@ -3,65 +3,30 @@ return {
     {
         'neovim/nvim-lspconfig',
         dependencies = {
-            'nvim-lua/plenary.nvim',
-            {
-                'j-hui/fidget.nvim',
-                opts = {},
-            },
+            { 'j-hui/fidget.nvim', opts = {} },
             'saghen/blink.cmp',
-            -- 'pmizio/typescript-tools.nvim',
         },
         config = function()
+            local ts_servers = { 'tsgo', 'ts_ls', 'vtsls' }
+            local current_ts_server = 'tsgo'
+
             local on_attach = function(client, bufnr)
-                local disable_formatting = { tsgo = true, ts_ls = true, vtsls = true }
-                if disable_formatting[client.name] then
+                if vim.tbl_contains(ts_servers, client.name) then
                     client.server_capabilities.documentFormattingProvider = false
                 end
 
                 local km = function(key, func, desc)
-                    if desc then
-                        desc = 'LSP: ' .. desc
-                    end
-                    vim.keymap.set('n', key, func, { buffer = bufnr, desc = desc })
+                    vim.keymap.set('n', key, func, { buffer = bufnr, desc = 'LSP: ' .. desc })
                 end
 
-                km('ff', function() vim.lsp.buf.format({ async = true }) end, 'Format document')
                 km('<leader>do', vim.lsp.buf.code_action, 'Code action')
                 km('<leader>rn', vim.lsp.buf.rename, 'Rename symbol')
-                km('<leader>en', vim.diagnostic.goto_next, 'Next diagnostic')
-                km('<leader>ep', vim.diagnostic.goto_prev, 'Prev diagnostic')
+                km('<leader>en', function() vim.diagnostic.jump({ count = 1, float = true }) end, 'Next diagnostic')
+                km('<leader>ep', function() vim.diagnostic.jump({ count = -1, float = true }) end, 'Prev diagnostic')
                 km('<leader>ee', vim.diagnostic.open_float, 'Show diagnostic')
                 km('<leader>ih',
                     function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = bufnr })) end,
                     'Toggle inlay hints')
-
-                -- The following two autocommands are used to highlight references of the
-                -- word under your cursor when your cursor rests there for a little while.
-                --    See `:help CursorHold` for information about when this is executed
-                --
-                -- When you move your cursor, the highlights will be cleared (the second autocommand).
-                if client and client:supports_method(vim.lsp.protocol.Methods.textDocument_documentHighlight) then
-                    local highlight_augroup = vim.api.nvim_create_augroup('cursor-hold-lsp-highlight', { clear = false })
-                    vim.api.nvim_create_autocmd({ 'CursorHold', 'CursorHoldI' }, {
-                        buffer = bufnr,
-                        group = highlight_augroup,
-                        callback = vim.lsp.buf.document_highlight,
-                    })
-
-                    vim.api.nvim_create_autocmd({ 'CursorMoved', 'CursorMovedI' }, {
-                        buffer = bufnr,
-                        group = highlight_augroup,
-                        callback = vim.lsp.buf.clear_references,
-                    })
-
-                    vim.api.nvim_create_autocmd('LspDetach', {
-                        group = vim.api.nvim_create_augroup('cursor-hold-lsp-detach', { clear = true }),
-                        callback = function(event)
-                            vim.lsp.buf.clear_references()
-                            vim.api.nvim_clear_autocmds { group = 'cursor-hold-lsp-highlight', buffer = event.buf }
-                        end,
-                    })
-                end
             end
 
             local capabilities = require('blink.cmp').get_lsp_capabilities(vim.lsp.protocol.make_client_capabilities())
@@ -73,113 +38,44 @@ return {
                 }
                 vim.lsp.config(lsp_name, lsp_config)
             end
-            init_config('marksman')
-            init_config('clangd')
-            init_config('rust_analyzer')
-            init_config('basedpyright')
-            init_config('tsgo')
-            -- init_config('ts_ls')
-            -- init_config('vtsls')
-            init_config('lua_ls', {
-                Lua = {
-                    diagnostics = {
-                        -- Get the language server to recognize the `vim` global
-                        globals = { 'vim' },
-                    },
-                    workspace = {
-                        -- Make the server aware of Neovim runtime files
-                        library = vim.api.nvim_get_runtime_file("", true),
-                        checkThirdParty = false,
-                    },
-                    telemetry = { enable = false },
-                },
-            })
-            vim.lsp.config('diagnosticls', {
-                filetypes = {
-                    -- "css",
-                    -- "dockerfile",
-                    -- "fish",
-                    -- "go",
-                    "javascript",
-                    "javascriptreact",
-                    -- "json",
-                    -- "lua",
-                    "markdown",
-                    -- "python",
-                    -- "scss",
-                    -- "sh",
-                    -- "sql",
-                    "typescript",
-                    "typescriptreact",
-                    -- "vim",
-                    -- "yaml",
-                    -- "yaml.ansible",
-                },
-                init_options = {
-                    linters = {
-                        eslint = {
-                            sourceName = "eslint",
-                            command = "eslint_d",
-                            rootPatterns = { ".eslintrc.js", "package.json" },
-                            debounce = 100,
-                            args = { "--stdin", "--stdin-filename", "%filepath", "--format", "json" },
-                            parseJson = {
-                                errorsRoot = "[0].messages",
-                                line = "line",
-                                column = "column",
-                                endLine = "endLine",
-                                endColumn = "endColumn",
-                                message = "${message} [${ruleId}]",
-                                security = "severity"
-                            },
-                            securities = { [2] = "error", [1] = "warning" }
-                        }
-                    },
-                    formatters = {
-                        eslint = {
-                            command = "eslint_d",
-                            args = { "--stdin", "--stdin-filename", "%filename", "--fix-to-stdout" }
-                        },
-                        prettier = { command = "prettier", args = { "--stdin", "--stdin-filepath", "%filepath" } }
-                    },
-                    filetypes = {
-                        javascript = "eslint",
-                        javascriptreact = "eslint",
-                        typescript = "eslint",
-                        typescriptreact = "eslint",
-                    },
-                    formatFiletypes = {
-                        css = "prettier",
-                        javascript = { "prettier", "eslint" },
-                        javascriptreact = { "prettier", "eslint" },
-                        json = "prettier",
-                        scss = "prettier",
-                        less = "prettier",
-                        markdown = "prettier",
-                        typescript = { "prettier", "eslint" },
-                        typescriptreact = { "prettier", "eslint" },
-                    },
-                },
-            })
-            -- require('typescript-tools').setup {
-            --     on_attach = function(client, bufnr)
-            --         client.server_capabilities.documentFormattingProvider = false
-            --         on_attach(client, bufnr)
-            --     end,
-            --     capabilities = capabilities,
-            --     settings = {
-            --         tsserver_max_memory = 8192,
-            --         separate_diagnostic_server = false,
-            --         tsserver_file_preferences = {
-            --             includeInlayEnumMemberValueHints = true,
-            --             includeInlayFunctionLikeReturnTypeHints = true,
-            --             includeInlayVariableTypeHints = true,
-            --         },
-            --         -- code_lens = "all",
-            --     }
-            -- }
 
-            vim.lsp.enable({ 'clangd', 'rust_analyzer', 'lua_ls', 'diagnosticls', 'marksman', 'basedpyright', 'tsgo' })
+            local base_servers = { 'marksman', 'clangd', 'rust_analyzer', 'basedpyright', 'lua_ls' }
+            for _, server in ipairs(vim.list_extend(vim.list_extend({}, base_servers), ts_servers)) do
+                init_config(server)
+            end
+
+            vim.api.nvim_create_user_command('TSSwitch', function(opts)
+                local new_server = opts.args
+                if not vim.tbl_contains(ts_servers, new_server) then
+                    vim.notify('Invalid server. Choose: ' .. table.concat(ts_servers, ', '), vim.log.levels.ERROR)
+                    return
+                end
+
+                for _, client in ipairs(vim.lsp.get_clients({ name = current_ts_server })) do
+                    client:stop()
+                end
+
+                current_ts_server = new_server
+                vim.lsp.enable(new_server)
+                vim.cmd('edit') -- reload buffer to trigger LSP attach
+                vim.notify('Switched to ' .. new_server, vim.log.levels.INFO)
+            end, {
+                nargs = 1,
+                complete = function() return ts_servers end,
+            })
+
+            vim.api.nvim_create_user_command('TSCurrent', function()
+                local clients = vim.lsp.get_clients({ bufnr = 0 })
+                for _, client in ipairs(clients) do
+                    if vim.tbl_contains(ts_servers, client.name) then
+                        vim.notify('Current TS server: ' .. client.name, vim.log.levels.INFO)
+                        return
+                    end
+                end
+                vim.notify('No TS server attached', vim.log.levels.WARN)
+            end, {})
+
+            vim.lsp.enable(vim.list_extend({ current_ts_server }, base_servers))
 
             -- configure diagnostics
             vim.diagnostic.config(

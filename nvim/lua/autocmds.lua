@@ -31,3 +31,38 @@ vim.api.nvim_create_autocmd("FileType", {
     vim.opt_local.spell = true
   end,
 })
+
+-- Highlight references of word under cursor on CursorHold
+vim.api.nvim_create_autocmd("LspAttach", {
+  group = augroup("lsp_cursor_hold_highlight"),
+  callback = function(event)
+    local client = vim.lsp.get_client_by_id(event.data.client_id)
+    if not client or not client:supports_method(vim.lsp.protocol.Methods.textDocument_documentHighlight) then
+      return
+    end
+
+    local bufnr = event.buf
+    local buf_augroup = vim.api.nvim_create_augroup("lsp_cursor_hold_highlight_buf_" .. bufnr, { clear = true })
+
+    vim.api.nvim_create_autocmd({ "CursorHold", "CursorHoldI" }, {
+      buffer = bufnr,
+      group = buf_augroup,
+      callback = vim.lsp.buf.document_highlight,
+    })
+
+    vim.api.nvim_create_autocmd({ "CursorMoved", "CursorMovedI" }, {
+      buffer = bufnr,
+      group = buf_augroup,
+      callback = vim.lsp.buf.clear_references,
+    })
+
+    vim.api.nvim_create_autocmd("LspDetach", {
+      buffer = bufnr,
+      group = buf_augroup,
+      callback = function()
+        vim.lsp.buf.clear_references()
+        pcall(vim.api.nvim_del_augroup_by_id, buf_augroup)
+      end,
+    })
+  end,
+})
