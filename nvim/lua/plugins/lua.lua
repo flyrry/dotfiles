@@ -13,10 +13,9 @@ return {
             require("lazydev").setup({
                 library = {
                     -- Load luvit types when the `vim.uv` word is found
-                    { path = 'luvit-meta/library', words = { 'vim%.uv' } },
+                    { path = '${3rd}/luv/library', words = { 'vim%.uv' } },
                 },
             })
         end
     },
-    { 'Bilal2453/luvit-meta', lazy = true },
 }
