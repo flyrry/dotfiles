@@ -9,13 +9,14 @@ return {
                 opts = {},
             },
             'saghen/blink.cmp',
-            'pmizio/typescript-tools.nvim',
+            -- 'pmizio/typescript-tools.nvim',
         },
         config = function()
             local on_attach = function(client, bufnr)
-                -- if client.name == "ts_ls" then
-                --     client.server_capabilities.documentFormattingProvider = false
-                -- end
+                local disable_formatting = { tsgo = true, ts_ls = true, vtsls = true }
+                if disable_formatting[client.name] then
+                    client.server_capabilities.documentFormattingProvider = false
+                end
 
                 local km = function(key, func, desc)
                     if desc then
@@ -76,6 +77,9 @@ return {
             init_config('clangd')
             init_config('rust_analyzer')
             init_config('basedpyright')
+            init_config('tsgo')
+            -- init_config('ts_ls')
+            -- init_config('vtsls')
             init_config('lua_ls', {
                 Lua = {
                     diagnostics = {
@@ -157,25 +161,25 @@ return {
                     },
                 },
             })
-            require('typescript-tools').setup {
-                on_attach = function(client, bufnr)
-                    client.server_capabilities.documentFormattingProvider = false
-                    on_attach(client, bufnr)
-                end,
-                capabilities = capabilities,
-                settings = {
-                    tsserver_max_memory = 8192,
-                    separate_diagnostic_server = false,
-                    tsserver_file_preferences = {
-                        includeInlayEnumMemberValueHints = true,
-                        includeInlayFunctionLikeReturnTypeHints = true,
-                        includeInlayVariableTypeHints = true,
-                    },
-                    -- code_lens = "all",
-                }
-            }
+            -- require('typescript-tools').setup {
+            --     on_attach = function(client, bufnr)
+            --         client.server_capabilities.documentFormattingProvider = false
+            --         on_attach(client, bufnr)
+            --     end,
+            --     capabilities = capabilities,
+            --     settings = {
+            --         tsserver_max_memory = 8192,
+            --         separate_diagnostic_server = false,
+            --         tsserver_file_preferences = {
+            --             includeInlayEnumMemberValueHints = true,
+            --             includeInlayFunctionLikeReturnTypeHints = true,
+            --             includeInlayVariableTypeHints = true,
+            --         },
+            --         -- code_lens = "all",
+            --     }
+            -- }
 
-            vim.lsp.enable({ 'clangd', 'rust_analyzer', 'lua_ls', 'diagnosticls', 'marksman', 'basedpyright' })
+            vim.lsp.enable({ 'clangd', 'rust_analyzer', 'lua_ls', 'diagnosticls', 'marksman', 'basedpyright', 'tsgo' })
 
             -- configure diagnostics
             vim.diagnostic.config(
