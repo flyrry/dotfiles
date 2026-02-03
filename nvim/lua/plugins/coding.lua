@@ -91,16 +91,23 @@ return {
         end
     },
     {
-        dir = "~/.config/nvim/lua/jump-to-function",
+        "flyrry/jump-to-function.nvim",
+        dev = true,
         config = function()
             require("jump-to-function").setup({})
         end
     },
     {
-        dir = "~/.config/nvim/lua/api-lens.nvim",
-        dependencies = { "nvim-telescope/telescope.nvim" },
+        "flyrry/bolt-api-lens.nvim",
+        dependencies = { "folke/snacks.nvim" },
+        dev = true,
         config = function()
-            require("api-lens").setup()
+            require("api-lens").setup({
+                -- keymap_lsp = "<leader>ar",  -- LSP-based references (default)
+                -- keymap_grep = "<leader>ac", -- Grep-based search (default)
+                -- exclude_patterns = { "common/**" }, -- Exclude patterns (default)
+                -- debug = false,              -- Debug logging (default: false)
+            })
         end,
     },
 }

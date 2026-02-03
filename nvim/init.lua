@@ -18,8 +18,6 @@ require('lazy').setup(
     {
         change_detection = { notify = false },
         rocks = { enabled = false },
+        dev = { path = '~/sandbox/neovim-plugins/' }
     }
 )
--- Legacy grep-based API call search (<leader><leader>c)
--- Kept alongside api-lens for finding in comments
--- require('find-calls.old').setup()
