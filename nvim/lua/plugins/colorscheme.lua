@@ -1,163 +1,94 @@
-return {
-    {
+-- Change this single line to switch colorschemes
+local active = 'onenord'
+
+local colorschemes = {
+    sonokai = {
         'sainnhe/sonokai',
-        lazy = true,
-        priority = 1000,
         config = function()
-            --vim.cmd[[let g:sonokai_style = 'atlantis']]
-            --vim.cmd[[let g:sonokai_style = 'andromeda']]
-            --vim.cmd[[let g:sonokai_style = 'shusia']]
-            --vim.cmd[[let g:sonokai_style = 'maia']]
-            --vim.cmd[[let g:sonokai_style = 'espresso']]
-            vim.cmd([[let g:sonokai_enable_italic=1]])
-            vim.cmd([[colorscheme sonokai]])
-        end
+            -- styles: 'default', 'atlantis', 'andromeda', 'shusia', 'maia', 'espresso'
+            vim.g.sonokai_enable_italic = 1
+            vim.cmd.colorscheme('sonokai')
+        end,
     },
-    {
+    ['gruvbox-material'] = {
         'sainnhe/gruvbox-material',
-        priority = 1000,
-        lazy = true,
         config = function()
             vim.g.gruvbox_material_enable_italic = 1
             vim.g.gruvbox_material_background = 'hard'
             vim.g.gruvbox_material_foreground = 'original'
             vim.g.gruvbox_material_diagnostic_virtual_text = 'colored'
             vim.cmd.colorscheme('gruvbox-material')
-        end
+        end,
     },
-    {
-        "folke/tokyonight.nvim",
-        name = "tokyonight",
-        priority = 1000,
-        lazy = true,
+    tokyonight = {
+        'folke/tokyonight.nvim',
         config = function()
             require('tokyonight').load({
-                style = 'storm',
-                -- dim_inactive = true,
+                style = 'storm', -- storm, moon, night, day
             })
         end,
     },
-    {
+    catppuccin = {
         'catppuccin/nvim',
-        name = 'catpuccin',
-        lazy = true,
-        priority = 1000,
+        name = 'catppuccin',
         config = function()
             require('catppuccin').setup({
-                flavour = 'frappe',
-                integrations = {
-                    -- flatten = true,
-                },
+                flavour = 'frappe', -- latte, frappe, macchiato, mocha
             })
             vim.cmd.colorscheme('catppuccin')
         end,
     },
-    {
-        "EdenEast/nightfox.nvim",
-        lazy = true,
-        priority = 1000,
+    nightfox = {
+        'EdenEast/nightfox.nvim',
         config = function()
-            vim.cmd("colorscheme nordfox") -- duskfox is an option
+            vim.cmd.colorscheme('nordfox') -- nightfox, dayfox, dawnfox, duskfox, nordfox, terafox, carbonfox
         end,
     },
-    {
+    nordic = {
         'AlexvZyl/nordic.nvim',
-        lazy = true,
-        priority = 1000,
         config = function()
-            vim.cmd("colorscheme nordic")
-        end
+            vim.cmd.colorscheme('nordic')
+        end,
     },
-    {
+    onenord = {
         'rmehri01/onenord.nvim',
-        name = 'onenord',
-        lazy = false,
-        priority = 1000,
         config = function()
-            vim.cmd("colorscheme onenord")
+            vim.cmd.colorscheme('onenord')
         end,
     },
-    {
+    nord = {
         'shaunsingh/nord.nvim',
-        name = 'nord',
-        lazy = true,
-        priority = 1000,
         config = function()
-            vim.cmd("colorscheme nord")
+            vim.cmd.colorscheme('nord')
         end,
     },
-    {
+    oceanicnext = {
         'mhartington/oceanic-next',
-        name = 'oceanicnext',
-        lazy = true,
-        priority = 1000,
         config = function()
-            vim.cmd("colorscheme oceanicnext")
+            vim.cmd.colorscheme('OceanicNext')
         end,
     },
-    {
+    bamboo = {
         'ribru17/bamboo.nvim',
-        lazy = true,
-        priority = 1000,
         config = function()
-            require('bamboo').setup {
-                -- optional configuration here
-            }
+            require('bamboo').setup({})
             require('bamboo').load()
         end,
     },
-    {
+    edge = {
         'sainnhe/edge',
-        lazy = true,
-        priority = 1000,
         config = function()
-            vim.cmd("colorscheme edge")
+            vim.cmd.colorscheme('edge')
         end,
     },
-    -- -- poor contrast
-    -- {
-    --     "xeind/nightingale.nvim",
-    --     lazy = true,
-    --     priority = 1000,
-    --     config = function()
-    --         require("nightingale").setup({
-    --             transparent = false, -- set to true for transparent background
-    --         })
-    --         vim.cmd("colorscheme nightingale")
-    --     end,
-    -- },
-    -- {
-    --     'rebelot/kanagawa.nvim',
-    --     name = 'kanagawa',
-    --     lazy = true,
-    --     priority = 1000,
-    --     config = function()
-    --         vim.cmd.colorscheme('kanagawa-wave')
-    --     end,
-    -- },
-    -- {
-    --     "vague-theme/vague.nvim",
-    --     lazy = true,
-    --     priority = 1000,
-    --     config = function()
-    --         vim.cmd("colorscheme vague")
-    --     end
-    -- },
-    -- {
-    --     'rose-pine/neovim',
-    --     name = 'rose-pine',
-    --     lazy = true,
-    --     priority = 1000,
-    --     config = function()
-    --         vim.cmd.colorscheme('rose-pine-moon')
-    --     end,
-    -- },
-    -- {
-    --     'olimorris/onedarkpro.nvim',
-    --     lazy = true,
-    --     priority = 1000,
-    --     config = function()
-    --         vim.cmd("colorscheme onedark")
-    --     end,
-    -- },
 }
+
+-- Build the plugin specs with proper lazy/priority settings
+local specs = {}
+for name, spec in pairs(colorschemes) do
+    spec.lazy = (name ~= active)
+    spec.priority = 1000
+    table.insert(specs, spec)
+end
+
+return specs
