@@ -8,7 +8,7 @@ return {
         },
         config = function()
             local ts_servers = { 'tsgo', 'ts_ls', 'vtsls' }
-            local current_ts_server = 'tsgo'
+            local current_ts_server = 'vtsls'
 
             local on_attach = function(client, bufnr)
                 if vim.tbl_contains(ts_servers, client.name) then
