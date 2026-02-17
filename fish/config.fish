@@ -47,8 +47,6 @@ if status is-interactive
     abbr -a gsc 'git sco'
 end
 
-nvm use 22 --silent
-
 # pnpm
 set -gx PNPM_HOME "/Users/sergei/Library/pnpm"
 set -gx PATH "$PNPM_HOME" $PATH
