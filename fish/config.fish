@@ -1,9 +1,9 @@
 set -gx EDITOR nvim
 set -gx MANPAGER "sh -c 'col -bx | bat --theme \"Monokai Extended\" -l man -p'"
 
-set PATH /opt/homebrew/bin $PATH
-set PATH $HOME/.cargo/bin $PATH
-set PATH $HOME/.local/bin $PATH
+# set PATH /opt/homebrew/bin $PATH
+# set PATH $HOME/.cargo/bin $PATH
+# set PATH $HOME/.local/bin $PATH
 
 set -gx DOCKER_API_VERSION 1.43
 
