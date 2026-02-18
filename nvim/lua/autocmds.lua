@@ -66,3 +66,7 @@ vim.api.nvim_create_autocmd("LspAttach", {
     })
   end,
 })
+-- -- make CursorHold highlights standout even more
+-- vim.api.nvim_set_hl(0, 'LspReferenceRead', { standout = true })
+-- vim.api.nvim_set_hl(0, 'LspReferenceWrite', { standout = true })
+-- vim.api.nvim_set_hl(0, 'LspReferenceText', { standout = true })

@@ -101,12 +101,12 @@ return {
             cwd = vim.fs.joinpath(vim.fn.stdpath("data"), "lazy")
         }) end, { desc = 'Find module files' })
 
-        vim.keymap.set('n', 'gd', function() snacks.picker.lsp_definitions() end, { desc = 'LSP: definitions' })
-        vim.keymap.set('n', 'gt', function() snacks.picker.lsp_type_definitions() end, { desc = 'LSP: type definitions' })
-        vim.keymap.set('n', 'gi', function() snacks.picker.lsp_implementations() end, { desc = 'LSP: implementations' })
-        vim.keymap.set('n', 'gr', function() snacks.picker.lsp_references() end, { desc = 'LSP: references' })
+        vim.keymap.set('n', 'gd', function() snacks.picker.lsp_definitions({ jump = { reuse_win = false } }) end, { desc = 'LSP: definitions' })
+        vim.keymap.set('n', 'gt', function() snacks.picker.lsp_type_definitions({ jump = { reuse_win = false } }) end, { desc = 'LSP: type definitions' })
+        vim.keymap.set('n', 'gi', function() snacks.picker.lsp_implementations({ jump = { reuse_win = false } }) end, { desc = 'LSP: implementations' })
+        vim.keymap.set('n', 'gr', function() snacks.picker.lsp_references({ jump = { reuse_win = false } }) end, { desc = 'LSP: references' })
         vim.keymap.set('n', 'gs', function() snacks.picker.lsp_symbols() end, { desc = 'LSP: symbols' })
-        vim.keymap.set('n', 'gic', function() snacks.picker.lsp_incoming_calls() end, { desc = 'LSP: incoming calls' })
-        vim.keymap.set('n', 'goc', function() snacks.picker.lsp_outgoing_calls() end, { desc = 'LSP: outgoing calls' })
+        vim.keymap.set('n', 'gic', function() snacks.picker.lsp_incoming_calls({ jump = { reuse_win = false } }) end, { desc = 'LSP: incoming calls' })
+        vim.keymap.set('n', 'goc', function() snacks.picker.lsp_outgoing_calls({ jump = { reuse_win = false } }) end, { desc = 'LSP: outgoing calls' })
     end
 }

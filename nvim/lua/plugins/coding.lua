@@ -28,11 +28,11 @@ return {
         -- end,
         config = function()
             local bolt = require("bolt-server")
-            vim.keymap.set('n', "<leader>gs", bolt.find_service, { desc = "" })
-            vim.keymap.set('n', "<Leader>gc", bolt.find_service_comp_tests, { desc = "" })
-            vim.keymap.set('n', "<Leader>gd", bolt.find_service_db_schema, { desc = "" })
-            vim.keymap.set('n', "<Leader>p", bolt.find_service_files, { desc = "" })
-            vim.keymap.set('n', "<Leader>fis", bolt.grep_service_files, { desc = "" })
+            vim.keymap.set('n', "<leader>gs", bolt.find_service, { desc = "[G]o to [S]ervice" })
+            vim.keymap.set('n', "<Leader>gc", bolt.find_service_comp_tests, { desc = "[G]o to [c]omp tests" })
+            vim.keymap.set('n', "<Leader>gd", bolt.find_service_db_schema, { desc = "[G] to [d]b schema" })
+            vim.keymap.set('n', "<Leader>p", bolt.find_service_files, { desc = "find files within current service" })
+            vim.keymap.set('n', "<Leader>fis", bolt.grep_service_files, { desc = "grep files within current service" })
             vim.keymap.set('n', "<Leader>cs", bolt.compile_service, { desc = "[C]ompile [S]ervice" })
             vim.keymap.set('n', "<Leader>csf", bolt.compile_service_force, { desc = "[C]ompile [S]ervice ([F]orce)" })
             vim.keymap.set('n', "<Leader>cst", bolt.compile_service_with_tests,
@@ -42,8 +42,8 @@ return {
             vim.keymap.set('n', "<Leader>xa", bolt.run_service_comp_tests, { desc = "E[x]ecute all service tests" })
             vim.keymap.set('n', "<Leader>xf", bolt.run_buffer_comp_tests, { desc = "E[x]ecute tests in the file" })
             vim.keymap.set('n', "<Leader>xx", bolt.run_comp_test_under_cursor, { desc = "E[x]ecute current test" })
-            vim.keymap.set('n', "<Leader>gad", bolt.goto_api_definition, { desc = "" })
-            vim.keymap.set('n', "<Leader>gae", bolt.goto_api_endpoint, { desc = "" })
+            vim.keymap.set('n', "<Leader>gad", bolt.goto_api_definition, { desc = "[G]o to [A]PI [D]efinition" })
+            vim.keymap.set('n', "<Leader>gae", bolt.goto_api_endpoint, { desc = "[G]o to [A]PI [E]ndpoint" })
             local bottomsplit = {
                 config = function()
                     return {
@@ -85,9 +85,9 @@ return {
         end,
         config = function()
             local bolt = require("bolt-admin")
-            vim.keymap.set('n', "<leader>gs", bolt.find_module, { desc = "" })
-            vim.keymap.set('n', "<leader>cs", bolt.compile_module, { desc = "" })
-            vim.keymap.set('n', "<leader>p", bolt.find_module_files, { desc = "" })
+            vim.keymap.set('n', "<leader>gs", bolt.find_module, { desc = "Go to module" })
+            vim.keymap.set('n', "<leader>cs", bolt.compile_module, { desc = "Compile module" })
+            vim.keymap.set('n', "<leader>p", bolt.find_module_files, { desc = "find module files" })
         end
     },
     {
