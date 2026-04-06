@@ -10,26 +10,15 @@ return {
                     statusline = { 'AgenticChat', 'AgenticInput', 'AgenticCode', 'AgenticFiles' },
                     winbar = { 'AgenticChat', 'AgenticInput', 'AgenticCode', 'AgenticFiles' },
                 },
-                -- theme = 'tokyonight',
             },
             sections = {
                 lualine_a = { 'mode' },
                 lualine_b = { 'diff', 'diagnostics' },
                 lualine_c = { { 'filename', path = 1 } },
-                lualine_x = { {
-                    function()
-                        local clients = vim.lsp.get_clients({ bufnr = 0 })
-                        local servers = {}
-                        for _, client in ipairs(clients) do
-                            table.insert(servers, client.name)
-                        end
-                        table.sort(servers)
-                        return table.concat(servers, '  ')
-                    end,
-                    icon = '',
-                } },
-                lualine_y = { 'encoding', 'progress', 'location' },
-                lualine_z = {},
+                lualine_x = { { 'lsp_status', icon = '', symbols = { separator = '  ', done = '' } },
+                },
+                lualine_y = { 'branch', 'encoding', 'progress', 'location' },
+                lualine_z = { { 'datetime', style = '%H:%M' } },
             },
             winbar = {
                 lualine_x = { { 'filename' } },
@@ -40,7 +29,6 @@ return {
                 lualine_y = { 'progress' },
             },
             extensions = { 'quickfix', 'fugitive' },
-            -- extensions = { 'quickfix', 'fugitive', 'nvim-tree' },
         },
     },
     {
@@ -69,7 +57,7 @@ return {
         opts = {
             keys = {
                 { '>', function() require('quicker').expand({ before = 2, after = 2, add_to_existing = true }) end, desc = 'Expand context' },
-                { '<', function() require('quicker').collapse() end,                                              desc = 'Collapse context' },
+                { '<', function() require('quicker').collapse() end,                                                desc = 'Collapse context' },
             },
         },
     }
