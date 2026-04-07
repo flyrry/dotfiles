@@ -17,6 +17,15 @@ return {
                 { icon = "", title = "Projects", section = "projects", indent = 2, padding = 1 },
                 -- { icon = "󰒲", key = "L", desc = "Lazy", action = ":Lazy", enabled = package.loaded.lazy ~= nil },
                 -- { icon = "", key = "q", desc = "Quit", action = ":qa", padding = 1 },
+                {
+                    icon = "",
+                    key = "G",
+                    desc = "Git",
+                    action = function(self)
+                        vim.cmd("bdelete " .. self.buf)
+                        vim.cmd("G")
+                    end
+                },
                 { section = "keys" },
                 { section = "startup" },
                 {
@@ -26,6 +35,15 @@ return {
                         { "gq\t\t\tformat using formatexpr (typically LSP)\n" },
                         { "<leader>ctn\t\ttoggle no-compile\n" },
                         { "<C-w> f\t\t\topen file in new split\n" },
+                    }
+                },
+                {
+                    text = {
+                        { "'wild\texact match\n" },
+                        { "'wild'\t exact boundary match\n" },
+                        { "^music\tprefix exact match\n" },
+                        { ".mp3$\tsuffix exact match\n" },
+                        { "!fire\tinverse match\n" },
                     }
                 }
             },
@@ -88,25 +106,36 @@ return {
 
         vim.keymap.set('n', '<leader>fw', function() snacks.picker.grep_word() end, { desc = 'Word grep' })
         vim.keymap.set('n', '<leader>fs', function() snacks.picker.grep() end, { desc = 'Live grep' })
-        vim.keymap.set('n', '<leader>Fs', function() snacks.picker.grep(set_bolt_scope()) end, { desc = 'Live grep in Bolt scope' })
-        vim.keymap.set('n', '<leader>Fw', function() snacks.picker.grep_word(set_bolt_scope()) end, { desc = 'Word grep in Bolt scope' })
+        vim.keymap.set('n', '<leader>Fs', function() snacks.picker.grep(set_bolt_scope()) end,
+            { desc = 'Live grep in Bolt scope' })
+        vim.keymap.set('n', '<leader>Fw', function() snacks.picker.grep_word(set_bolt_scope()) end,
+            { desc = 'Word grep in Bolt scope' })
 
         vim.keymap.set('n', '<leader>FF', function() snacks.picker.explorer() end, { desc = 'Directory explorer' })
         vim.keymap.set('n', '<leader>ff', ':Oil<CR>', { desc = 'Directory explorer' })
         vim.keymap.set('n', '<leader>fg', function() snacks.picker.git_files() end, { desc = 'Find git files' })
         vim.keymap.set('n', '<leader>bc', function() snacks.picker.git_log_file() end, { desc = 'Git commits' })
-        vim.keymap.set('n', '<leader>fc', function() snacks.picker.files({ cwd = vim.fn.stdpath('config')}) end, { desc = 'Find config files' })
-        vim.keymap.set('n', '<leader>fm', function() snacks.picker.files({
-            ---@diagnostic disable-next-line: param-type-mismatch
-            cwd = vim.fs.joinpath(vim.fn.stdpath("data"), "lazy")
-        }) end, { desc = 'Find module files' })
+        vim.keymap.set('n', '<leader>fc', function() snacks.picker.files({ cwd = vim.fn.stdpath('config') }) end,
+            { desc = 'Find config files' })
+        vim.keymap.set('n', '<leader>fm', function()
+            snacks.picker.files({
+                ---@diagnostic disable-next-line: param-type-mismatch
+                cwd = vim.fs.joinpath(vim.fn.stdpath("data"), "lazy")
+            })
+        end, { desc = 'Find module files' })
 
-        vim.keymap.set('n', 'gd', function() snacks.picker.lsp_definitions({ jump = { reuse_win = false } }) end, { desc = 'LSP: definitions' })
-        vim.keymap.set('n', 'gt', function() snacks.picker.lsp_type_definitions({ jump = { reuse_win = false } }) end, { desc = 'LSP: type definitions' })
-        vim.keymap.set('n', 'gi', function() snacks.picker.lsp_implementations({ jump = { reuse_win = false } }) end, { desc = 'LSP: implementations' })
-        vim.keymap.set('n', 'gr', function() snacks.picker.lsp_references({ jump = { reuse_win = false } }) end, { desc = 'LSP: references' })
+        vim.keymap.set('n', 'gd', function() snacks.picker.lsp_definitions({ jump = { reuse_win = false } }) end,
+            { desc = 'LSP: definitions' })
+        vim.keymap.set('n', 'gt', function() snacks.picker.lsp_type_definitions({ jump = { reuse_win = false } }) end,
+            { desc = 'LSP: type definitions' })
+        vim.keymap.set('n', 'gi', function() snacks.picker.lsp_implementations({ jump = { reuse_win = false } }) end,
+            { desc = 'LSP: implementations' })
+        vim.keymap.set('n', 'gr', function() snacks.picker.lsp_references({ jump = { reuse_win = false } }) end,
+            { desc = 'LSP: references' })
         vim.keymap.set('n', 'gs', function() snacks.picker.lsp_symbols() end, { desc = 'LSP: symbols' })
-        vim.keymap.set('n', 'gic', function() snacks.picker.lsp_incoming_calls({ jump = { reuse_win = false } }) end, { desc = 'LSP: incoming calls' })
-        vim.keymap.set('n', 'goc', function() snacks.picker.lsp_outgoing_calls({ jump = { reuse_win = false } }) end, { desc = 'LSP: outgoing calls' })
+        vim.keymap.set('n', 'gic', function() snacks.picker.lsp_incoming_calls({ jump = { reuse_win = false } }) end,
+            { desc = 'LSP: incoming calls' })
+        vim.keymap.set('n', 'goc', function() snacks.picker.lsp_outgoing_calls({ jump = { reuse_win = false } }) end,
+            { desc = 'LSP: outgoing calls' })
     end
 }
