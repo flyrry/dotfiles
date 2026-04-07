@@ -23,6 +23,11 @@ return {
                 default = { 'lsp', 'path', 'snippets', 'buffer' },
             },
             completion = {
+                accept = {
+                    auto_brackets = {
+                        enabled = false,
+                    },
+                },
                 list = {
                     selection = {
                         preselect = true,
