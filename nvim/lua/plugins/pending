@@ -2,22 +2,11 @@ return {
     {
         "tpope/vim-dadbod"
     },
-    {
-        'lewis6991/gitsigns.nvim',
-        dependencies = {'nvim-lua/plenary.nvim'},
-        config = function()
-            require('gitsigns').setup({current_line_blame = true})
-            require('which-key').register({
-                ['<leader>gb'] = {':Gitsigns toggle_current_line_blame<CR>', 'Toggle inline git-blame'},
-            })
-        end
-    },
     'tpope/vim-surround',
     'AndrewRadev/splitjoin.vim',
     'ntpeters/vim-better-whitespace',
     'folke/todo-comments.nvim',
     'tpope/vim-dispatch',
-    'sindrets/diffview.nvim',
     'folke/trouble.nvim',
     'pwntester/octo.nvim',
     'wellle/targets.vim', -- more vim-like targets to operate on
