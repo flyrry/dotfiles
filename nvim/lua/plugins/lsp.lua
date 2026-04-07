@@ -15,14 +15,18 @@ return {
                     client.server_capabilities.documentFormattingProvider = false
                 end
 
+                if client:supports_method(vim.lsp.protocol.Methods.textDocument_linkedEditingRange) then
+                    vim.lsp.linked_editing_range.enable(true, { client_id = client.id })
+                end
+
                 local km = function(key, func, desc)
-                    vim.keymap.set('n', key, func, { buffer = bufnr, desc = 'LSP: ' .. desc })
+                    vim.keymap.set('n', key, func, { buf = bufnr, desc = 'LSP: ' .. desc })
                 end
 
                 km('<leader>do', vim.lsp.buf.code_action, 'Code action')
                 km('<leader>rn', vim.lsp.buf.rename, 'Rename symbol')
-                km('<leader>en', function() vim.diagnostic.jump({ count = 1, float = true }) end, 'Next diagnostic')
-                km('<leader>ep', function() vim.diagnostic.jump({ count = -1, float = true }) end, 'Prev diagnostic')
+                km('<leader>en', function() vim.diagnostic.jump({ count = 1 }) end, 'Next diagnostic')
+                km('<leader>ep', function() vim.diagnostic.jump({ count = -1 }) end, 'Prev diagnostic')
                 km('<leader>ee', vim.diagnostic.open_float, 'Show diagnostic')
                 km('<leader>ih',
                     function() vim.lsp.inlay_hint.enable(not vim.lsp.inlay_hint.is_enabled({ bufnr = bufnr })) end,
@@ -40,9 +44,15 @@ return {
             end
 
             local base_servers = { 'marksman', 'clangd', 'rust_analyzer', 'basedpyright', 'lua_ls' }
-            for _, server in ipairs(vim.list_extend(vim.list_extend({}, base_servers), ts_servers)) do
+            for _, server in ipairs(base_servers) do
                 init_config(server)
             end
+
+            init_config('vtsls', {
+                vtsls = { autoUseWorkspaceTsdk = true },
+            })
+            init_config('ts_ls')
+            init_config('tsgo')
 
             vim.api.nvim_create_user_command('TSSwitch', function(opts)
                 local new_server = opts.args
