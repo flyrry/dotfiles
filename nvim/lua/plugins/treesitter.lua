@@ -1,10 +1,10 @@
 return {
     {
         'nvim-treesitter/nvim-treesitter',
+        lazy = false,
         build = ':TSUpdate',
-        main = 'nvim-treesitter.configs',
-        opts = {
-            ensure_installed = {
+        config = function()
+            require('nvim-treesitter').install({
                 'bash',
                 'cpp',
                 'diff',
@@ -17,15 +17,22 @@ return {
                 'markdown',
                 'regex',
                 'rust',
+                'swift',
                 'tsx',
                 'typescript',
                 'query',
                 'vim',
                 'vimdoc',
-            },
-            auto_install = true,
-            highlight = { enable = true },
-            indent = { enable = true },
-        }
+            })
+            vim.api.nvim_create_autocmd("FileType", {
+                pattern = "*",
+                callback = function()
+                    local filetype = vim.bo.filetype
+                    if filetype and filetype ~= "" then
+                        pcall(vim.treesitter.start)
+                    end
+                end,
+            })
+        end,
     },
 }
