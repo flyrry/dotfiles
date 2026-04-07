@@ -31,6 +31,7 @@ vim.o.re = 0 -- turn off old regexp engine
 vim.o.mouse = ''
 
 vim.o.winborder = 'rounded'
+vim.o.pumborder = 'rounded'
 -- indentation amount for < and > commands.
 vim.o.shiftwidth = 4
 -- change number of spaces that a <Tab> counts for during editing ops
@@ -44,6 +45,7 @@ vim.o.foldtext = ""
 vim.o.showmode = false
 -- do smart autoindenting when starting a new line
 vim.o.smartindent = true
+vim.o.indentexpr = 'v:lua.vim.treesitter.indentexpr()'
 -- always show status line
 vim.o.laststatus = 3
 vim.o.encoding = 'utf-8'
@@ -55,6 +57,7 @@ vim.o.grepprg = 'rg --vimgrep'
 vim.o.breakindent = true
 vim.o.inccommand = 'split'
 vim.o.updatetime = 300
+vim.opt.diffopt:append({ 'algorithm:histogram' })
 
 vim.keymap.set('n', '<C-h>', '<C-w>h')
 vim.keymap.set('n', '<C-j>', '<C-w>j')
