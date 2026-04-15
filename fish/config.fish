@@ -6,6 +6,7 @@ set -gx MANPAGER "sh -c 'col -bx | bat --theme \"Monokai Extended\" -l man -p'"
 # set PATH $HOME/.local/bin $PATH
 
 set -gx DOCKER_API_VERSION 1.43
+set -gx USE_TSGO 1
 
 export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude ".git"'
 
