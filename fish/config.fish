@@ -11,6 +11,7 @@ set -gx USE_TSGO 1
 export FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude ".git"'
 
 fzf --fish | source
+starship init fish | source
 
 if status is-interactive
     # Commands to run in interactive sessions can go here
