@@ -102,7 +102,7 @@ return {
                         prefix = ''
                     },
                     severity_sort = true,
-                    update_in_insert = true,
+                    update_in_insert = false,
                     float = { border = 'rounded' }
                 }
             )

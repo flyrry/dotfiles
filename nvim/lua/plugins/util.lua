@@ -16,6 +16,18 @@ return {
         { "<leader>/", ':nohlsearch<CR>', desc = "Clear highlighted search terms" },
         { '<leader>s', ':split<CR>',      desc = "horizontal [s]plit" },
         { '<leader>v', ':vsplit<CR>',     desc = "[v]ertical split" },
+
+        -- group labels
+        { '<leader>f', group = 'Find' },
+        { '<leader>F', group = 'Find (Bolt scope)' },
+        { '<leader>h', group = 'Hunk' },
+        { '<leader>e', group = 'Diagnostic' },
+        { '<leader>r', group = 'Refactor' },
+        { '<leader>g', group = 'Go/Git' },
+        { '<leader>c', group = 'Compile' },
+        { '<leader>x', group = 'Execute test' },
+        { '<leader>a', group = 'AI' },
+        { '<leader>t', group = 'Toggle' },
       })
     end,
   },
