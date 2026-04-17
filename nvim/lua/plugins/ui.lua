@@ -60,5 +60,21 @@ return {
                 { '<', function() require('quicker').collapse() end,                                                desc = 'Collapse context' },
             },
         },
+    },
+    {
+        "nvim-zh/colorful-winsep.nvim",
+        event = { "WinLeave" },
+        config = function()
+            require("colorful-winsep").setup({
+                animate = { enabled = false },
+                highlight = function()
+                    local search = vim.api.nvim_get_hl(0, { name = "Comment" })
+                    vim.api.nvim_set_hl(0, "ColorfulWinSep", {
+                        fg = search.bg or search.fg,
+                        bg = vim.api.nvim_get_hl(0, { name = "Normal" }).bg,
+                    })
+                end,
+            })
+        end
     }
 }
