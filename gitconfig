@@ -1,23 +1,17 @@
-[user]
-    ; name = Name Name
-    ; email = Email
+[include]
+    path = ~/.gitconfig.local
 [alias]
     amend = commit --amend --reuse-message=HEAD
     b = branch
-    ; cm = commit -m
     cma = commit -a -m
     co = checkout
     cob = checkout -b
     p = pull
     pf = push --force-with-lease
-    ; rd = rebase origin/develop
-    ; rc = rebase --continue
-    ; s = status -s
     l = log --oneline -n 10
     ll = log --oneline
-    ; files = show --stat --oneline
-    ; remotes = remote -v
     cleanup = "!git branch --merged | grep  -v '\\*\\|master\\|\\+\\|develop' | xargs -n 1 git branch -d"
+    fixup = "!f() { TARGET=$(git rev-parse \"$1\"); git commit --fixup=$TARGET ${@:2} && EDITOR=true git rebase -i --autostash --autosquash $TARGET^; }; f"
     branch-name = "!git rev-parse --abbrev-ref HEAD"
     publish = "!git push -u origin $(git branch-name)"
     stashread = "!f() { git stash show -p stash@{$1};}; f"
@@ -51,6 +45,9 @@
         done;\
         exit 1;\
         }; f"
+    wta = "!f() { git worktree add -b \"$1\" \"../$1\"; }; f"
+    wtr = "!f() { git worktree remove \"../$1\"; }; f"
+    wtl = "!f() { git worktree list; }; f"
 [push]
     autoSetupRemote = true
 [difftool]
@@ -60,4 +57,10 @@
 [difftool "nvimdiff"]
     cmd = nvim -d \"$LOCAL\" \"$REMOTE\"
 [url "git@github.com:"]
-	insteadOf = https://github.com/
+    insteadOf = https://github.com/
+[gpg]
+    format = ssh
+[rebase]
+    updateRefs = true
+[core]
+    excludesfile = ~/.gitignore_global
