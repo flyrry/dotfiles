@@ -1,7 +1,8 @@
 # dotfiles
 
 ```
-ln -s ~/.config/dotfiles/nvim/ ~/.config/nvim
-ln -s ~/.config/dotfiles/fish/ ~/.config/fish
-ln -s ~/.config/dotfiles/gitconfig ~/.gitconfig
+git clone <repo> ~/.config/dotfiles
+~/.config/dotfiles/install.sh
 ```
+
+Machine-specific git config (name, email, signing key) goes in `~/.gitconfig.local`.
