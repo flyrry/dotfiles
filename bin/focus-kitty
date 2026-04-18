@@ -1,0 +1,25 @@
+#!/bin/bash
+
+# Find and focus Kitty terminal window using AeroSpace
+
+window_id=$(aerospace list-windows --all | grep -i kitty | head -1 | awk '{print $1}')
+
+if [[ -z "$window_id" ]]; then
+    open -a kitty
+    sleep 0.5
+    window_id=$(aerospace list-windows --all | grep -i kitty | head -1 | awk '{print $1}')
+fi
+
+monitor_count=$(aerospace list-monitors | wc -l | tr -d ' ')
+if [[ "$monitor_count" -gt 1 && -n "$window_id" ]]; then
+    # Find the other monitor (not the currently focused one)
+    focused_monitor=$(aerospace list-monitors --focused | awk '{print $1}')
+    other_monitor=$(aerospace list-monitors | awk '{print $1}' | grep -v "^${focused_monitor}$" | head -1)
+    if [[ -n "$other_monitor" ]]; then
+        aerospace move-node-to-monitor --window-id "$window_id" "$other_monitor"
+    fi
+fi
+
+if [[ -n "$window_id" ]]; then
+    aerospace focus --window-id "$window_id"
+fi

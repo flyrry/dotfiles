@@ -43,5 +43,9 @@ link aerospace.toml  "$HOME/.aerospace.toml"
 link gitconfig       "$HOME/.gitconfig"
 link gitignore_global "$HOME/.gitignore_global"
 
+# ~/. local/bin scripts
+link bin/focus-kitty "$HOME/.local/bin/focus-kitty"
+link bin/bump        "$HOME/.local/bin/bump"
+
 echo
 echo "Done. Machine-specific git config goes in ~/.gitconfig.local"

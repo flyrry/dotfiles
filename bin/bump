@@ -1,0 +1,47 @@
+#!/bin/bash
+set -euo pipefail
+
+ALWAYS_UPGRADE=(
+  # formulae
+  opencode
+  fish
+  neovim
+  gemini-cli
+  # casks
+  claude-code
+  codex
+  kitty
+)
+
+brew update
+
+echo "==> Checking for outdated packages..."
+outdated=$(brew outdated --verbose 2>/dev/null || true)
+
+if [[ -z "$outdated" ]]; then
+  echo "Everything is up to date."
+  exit 0
+fi
+
+# Build comma-separated list of pinned packages that are actually outdated
+always_re=$(printf '%s\n' "${ALWAYS_UPGRADE[@]}" | paste -sd'|' -)
+preselected=$(echo "$outdated" | grep -oE "^($always_re)\b" | paste -sd',' - || true)
+
+# Extract just package names for the picker
+packages=$(echo "$outdated" | awk '{print $1}')
+n_packages=$(echo "$packages" | wc -l | tr -d ' ')
+
+selected=$(echo "$packages" \
+  | gum choose --no-limit \
+        --header="Space to toggle, Enter to upgrade" \
+        --height="$((n_packages + 1))" \
+        ${preselected:+--selected="$preselected"} \
+  || true)
+
+if [[ -z "$selected" ]]; then
+  echo "Nothing selected, skipping."
+  exit 0
+fi
+
+echo "==> Upgrading..."
+echo "$selected" | xargs brew upgrade
