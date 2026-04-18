@@ -39,6 +39,7 @@ link karabiner   "$HOME/.config/karabiner"
 link starship.toml "$HOME/.config/starship.toml"
 
 # Home directory symlinks
+link aerospace.toml  "$HOME/.aerospace.toml"
 link gitconfig       "$HOME/.gitconfig"
 link gitignore_global "$HOME/.gitignore_global"
 
