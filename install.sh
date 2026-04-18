@@ -35,6 +35,7 @@ link fish        "$HOME/.config/fish"
 link nvim        "$HOME/.config/nvim"
 link kitty       "$HOME/.config/kitty"
 link tmux        "$HOME/.config/tmux"
+link karabiner   "$HOME/.config/karabiner"
 link starship.toml "$HOME/.config/starship.toml"
 
 # Home directory symlinks
