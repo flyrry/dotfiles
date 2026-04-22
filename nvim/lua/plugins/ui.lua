@@ -19,7 +19,14 @@ return {
                 lualine_c = { { 'filename', path = 1 } },
                 lualine_x = { { 'lsp_status', icon = '', symbols = { separator = '  ', done = '' } },
                 },
-                lualine_y = { 'branch', 'encoding', 'progress', 'location' },
+                lualine_y = { 'branch', { function()
+                    local encoding = vim.opt.fileencoding:get()
+
+                    if encoding == 'utf-8' then
+                        return ''
+                    end
+                    return encoding
+                end }, 'progress', 'location' },
                 lualine_z = { { 'datetime', style = '%H:%M' } },
             },
             winbar = {
