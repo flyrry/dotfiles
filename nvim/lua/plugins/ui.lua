@@ -59,6 +59,14 @@ return {
         config = true,
     },
     {
+        'MeanderingProgrammer/render-markdown.nvim',
+        config = function()
+            require('render-markdown').setup({
+                completions = { lsp = { enabled = true } },
+            })
+        end
+    },
+    {
         'stevearc/quicker.nvim',
         ft = "qf",
         ---@module "quicker"
