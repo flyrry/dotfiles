@@ -106,6 +106,7 @@ return {
         vim.keymap.set('n', '<leader>fl', function() snacks.picker.lines() end, { desc = 'Lines' })
 
         vim.keymap.set('n', '<leader>fw', function() snacks.picker.grep_word() end, { desc = 'Word grep' })
+        vim.keymap.set('x', '<leader>fw', function() snacks.picker.grep_word() end, { desc = 'Grep selection' })
         vim.keymap.set('n', '<leader>fs', function() snacks.picker.grep() end, { desc = 'Live grep' })
         vim.keymap.set('n', '<leader>Fs', function() snacks.picker.grep(set_bolt_scope()) end,
             { desc = 'Live grep in Bolt scope' })
@@ -128,6 +129,7 @@ return {
         vim.keymap.set('n', 'gd', function() snacks.picker.lsp_definitions({ jump = { reuse_win = false } }) end, { desc = 'LSP: definitions' })
         vim.keymap.set('n', 'gr', function() snacks.picker.lsp_references({ jump = { reuse_win = false } }) end, { desc = 'LSP: references' })
         vim.keymap.set('n', 'gs', function() snacks.picker.lsp_symbols() end, { desc = 'LSP: symbols' })
+        vim.keymap.set('n', 'gws', function() snacks.picker.lsp_workspace_symbols() end, { desc = 'LSP: workspace symbols' })
         vim.keymap.set('n', 'gic', function() snacks.picker.lsp_incoming_calls({ jump = { reuse_win = false } }) end, { desc = 'LSP: incoming calls' })
         vim.keymap.set('n', 'goc', function() snacks.picker.lsp_outgoing_calls({ jump = { reuse_win = false } }) end, { desc = 'LSP: outgoing calls' })
     end
