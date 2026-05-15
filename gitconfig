@@ -21,16 +21,21 @@
         }; f"
     sco = "!f() { \
         [ ${#} -ne 1 ] && { echo \"Please provide one search string\" ; exit 1 ; };\
-        MATCHES=( $(git branch -a --color=never | grep -v remotes | grep -v '*' | grep $1) );\
-        case ${#MATCHES[@]} in\
+        CURRENT=$(git symbolic-ref --quiet --short HEAD);\
+        MATCHES=$(git branch --format='%(refname:short)' | grep -v -x \"$CURRENT\" | grep -- \"$1\");\
+        COUNT=$(printf '%s\\n' \"$MATCHES\" | grep -c .);\
+        case $COUNT in\
         ( 0 ) echo \"No branches matched '${1}'\"; exit 1 ;;\
-        ( 1 ) git checkout \"${MATCHES[0]}\"     ; exit $? ;;\
+        ( 1 ) git switch \"$MATCHES\"     ; exit $? ;;\
         esac;\
-        echo \"Ambiguous search '${1}'; returned ${#MATCHES[@]} matches:\";\
-        for ITEM in \"${MATCHES[@]}\" ; do\
-        echo \"  ${ITEM}\";\
-        done;\
+        echo \"Ambiguous search '${1}'; returned ${COUNT} matches:\";\
+        printf '  %s\\n' $MATCHES;\
         exit 1;\
+        }; f"
+    sw = "!f() { \
+        git branch --format='%(refname:short)' \
+            | fzf --select-1 --exit-0 --height=40% --reverse --query=\"${1:-}\" \
+            | xargs -r git switch; \
         }; f"
     rsco = "!f() { \
         [ ${#} -ne 1 ] && { echo \"Please provide one search string\" ; exit 1 ; };\
