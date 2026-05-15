@@ -9,6 +9,7 @@ ALWAYS_UPGRADE=(
   gemini-cli
   # casks
   claude-code
+  claude-code@latest
   codex
   kitty
 )
